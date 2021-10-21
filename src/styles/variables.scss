@@ -1,0 +1,63 @@
+// base color
+$blue:#324157;
+$light-blue:#3A71A8;
+$red:#C03639;
+$pink: #E65D6E;
+$green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow:#FEC171;
+$panGreen: #30B08F;
+
+// sidebar
+$menuText:#000;
+$headerMenuText:#fff;
+$menuActiveText:#409EFF;
+$subMenuActiveText:#1890ff; // https://github.com/ElemeFE/element/issues/12951
+
+$menuBg:#FFF;
+$menuHover:inherit;
+
+$subMenuBg:inherit;
+$subMenuHover:inherit;
+$subMenuHoverTextColor:#1890ff;
+
+$headHeight:60px;
+$sidebarMenuWidth:54px;
+$headBg:#0B2251;
+$sideBarWidth: 210px;
+$headactiveBg:#1890ff;
+
+$mainPading:20px;
+
+ 
+// 对应tailwind.config ->screens ->md
+$screen-md: 768px;
+
+// 对应tailwind.config ->screens ->lg
+$screen-lg: 1280px;
+
+// 对应tailwind.config ->screens ->xl
+$screen-xl: 1430px;
+
+
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  headerMenuText:$headerMenuText;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+  headHeight:$headHeight;
+  headBg:$headBg;
+  headactiveBg:$headactiveBg;
+  subMenuHoverTextColor:$subMenuHoverTextColor; 
+  mainPading:$mainPading;
+  sidebarMenuWidth:$sidebarMenuWidth;
+
+  screen-md:$screen-md;
+  screen-lg:$screen-lg;
+  screen-xl:$screen-xl;
+}

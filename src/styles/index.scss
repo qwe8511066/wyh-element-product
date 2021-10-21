@@ -1,0 +1,521 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './btn.scss';
+@import './layout.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  border: 0 solid #e5e7eb;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+
+.inlineBlock {
+  display: block;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+aside {
+  background: #eef1f6;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  display: block;
+  line-height: 32px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
+}
+
+//main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.components-container {
+  margin: 30px 50px;
+  position: relative;
+}
+
+.pagination-container {
+  margin-top: 30px;
+}
+ 
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+ /** 通用style  **/
+.flexCloumn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.flexCloumnAbsolute {
+  @extend .flexCloumn;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.flexMain {
+  -webkit-box-flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.flexBox {
+  display: -webkit-box;
+}
+
+.flex1 {
+  -webkit-box-flex: 1;
+  display: block;
+  width: 100%
+}
+
+.flexContent {
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: -webkit-box;
+}
+
+.flexLeftContent {
+  -webkit-box-pack: initial;
+  -webkit-box-align: center;
+  display: -webkit-box;
+}
+
+.flexRightContent {
+  -webkit-box-pack: initial;
+  -webkit-box-align: center;
+  display: -webkit-box;
+}
+
+@for $i from 12 through 40 {
+  .font#{$i} {
+    font-size: 1px*$i
+  }
+}
+
+@for $i from 1 through 10 {
+  .width#{$i} {
+    width: 10%*$i;
+    display: block
+  }
+
+  .weight#{$i} {
+    font-weight: 100*$i
+  }
+}
+
+@for $i from 5 through 30 {
+  .margin#{$i} {
+    margin: 1px * $i
+  }
+
+  .padding#{$i} {
+    padding: 1px *$i
+  }
+
+  .marginLeft#{$i} {
+    margin-left: 1px * $i
+  }
+
+  .marginRight#{$i} {
+    margin-right: 1px * $i
+  }
+
+  .marginTop#{$i} {
+    margin-top: 1px * $i
+  }
+
+  .marginBottom#{$i} {
+    margin-bottom: 1px * $i
+  }
+
+  .paddingLeft#{$i} {
+    padding-left: 1px*$i
+  }
+
+  .paddingTop#{$i} {
+    padding-top: 1px*$i
+  }
+
+  .paddingRigth#{$i} {
+    padding-right: 1px*$i
+  }
+
+  .paddingBonttom#{$i} {
+    padding-bottom: 1px*$i
+  }
+}
+
+@for $i from 1 through 10 {
+  .limit-#{$i} {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.customerForm {
+  &.el-form--label-right{
+    .el-form-item__label{
+      text-align: right;
+      padding-right: 12px;
+    }
+  }
+  .myField {
+    box-sizing: border-box;
+    overflow: hidden;
+    float: left;
+    display: flex;
+    margin-bottom:0;
+    padding-bottom: 22px;
+  }
+
+   [mycol='1'] {
+      width: 100%;
+    }
+    [mycol='2'] {
+      width: 50%;
+    }
+    [mycol='3'] {
+      width: 33.333%;
+    }
+    [mycol='4'] {
+      width: 25%;
+    }
+    .el-form-item__label {
+      display: table-cell;
+      flex: 0 0 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  
+    .el-form-item__content {
+      width: 100%;
+      margin-left: 0!important;
+    }
+.el-date-editor.el-input,
+.el-input-number--medium,
+.el-select,
+.el-cascader,.el-input-number{
+  width: 100%;
+  margin-left: 0 !important;
+}
+  .tinymce{
+    .mce-panel {
+      width: calc(100% - 2px) !important
+    }
+    .mce-btn-group{
+      .mce-btn{
+        float: left;
+      }
+    }
+  }
+}
+
+//占位符
+.occupancy::after {
+  content: 'occupancy';
+  visibility:hidden;
+}
+.designForm {
+  .designFormRequired .el-form-item__label::before {
+    content: '*';
+    color: #f56c6c;
+    margin-right: 4px;
+  }
+}
+
+/* 自定义表单start  */
+.absolute100 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.myCascader {
+  .el-radio__inner {
+    border: 0px;
+    background-color: inherit
+  }
+
+  .el-radio__input.is-checked .el-radio__inner {
+    @extend.absolute100;
+    background: none
+  }
+
+  .el-radio {
+    @extend.absolute100;
+  }
+}
+
+.phantom{
+  pointer-events: none;
+}
+.pointer{
+  cursor: pointer;
+}
+.phantomf5f5f5 {
+  @extend.phantom;
+  background: #f5f5f5;
+}
+
+.myDialog{
+  .el-dialog__body{max-height: calc(85vh - 130px);overflow: auto;}
+  .el-dialog__footer{
+    text-align: center;
+  } 
+}
+.height100{height: 100%;}
+.headerTabs {
+  width: 100%;
+  .el-tabs__header {
+    margin: 0;
+  }
+  .el-tabs__nav-wrap::after{
+    display: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  .el-tabs__item{
+    color: white;
+    font-weight: 400;
+    &.is-active{
+      font-size: 15px;
+    }
+  }
+  .el-tabs__active-bar {
+    background: $headactiveBg;
+    height: 4px;
+}
+}
+
+.myLbTable{
+  .el-pagination{
+    background: white;
+    padding: 15px 10px;
+    margin-top:  0!important;
+  }
+  &[highlight-current-row="true"] .el-table__body td{
+    cursor: pointer;
+  }
+}
+
+.noLabel .el-radio__label,.el-popper.publicChoiceSelect{
+  display: none;
+}
+
+
+.headerMenu{
+  width: 100%;
+  .el-menu.el-menu--horizontal{
+    border-bottom: 0;
+  }
+  ul{
+    @extend .flexBox;
+  height:$headHeight;
+  }
+.el-submenu{
+  @extend .flex1;
+  @extend .flexContent;
+  margin-right:20px;
+  height: 100%;
+  .el-submenu__icon-arrow {
+    position: static;
+    vertical-align: middle;
+    margin-left: 8px;
+    margin-top: -3px;
+}
+.is-active{
+  .el-submenu__title {
+    // border-bottom:4px solid $headactiveBg!important;
+  }
+}
+.el-submenu__title {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  // border-bottom: 4px solid transparent;
+  // color: #909399;
+}
+}
+}
+
+.popperSubMenu.el-menu--horizontal{
+  ul.el-menu--popup{
+    max-height: 100vh;
+    overflow: auto;
+  }
+}
+
+.autoForm{
+  .el-date-editor,
+    .el-input-number--medium,
+    .el-select,
+    .el-cascader,.el-input-number{
+      width: 100%;
+      margin-left: 0 !important;
+    };
+}
+
+$colorList:('FFF':#fff,);
+@each $key,$value in $colorList{ 
+  .color#{$key}{color:$value};
+} 
+//背景颜色列表
+$bgList: ('FFF': #fff, );
+@each $key, $value in $bgList { 
+  .bg#{$key}{background:$value}
+} 
+
+.formLastButton{
+  text-align: right;
+}
+.el-table th.requiredStars>div::before{
+  content: '*';
+  color: #ff4949;
+  margin-right: 4px;
+}
+
+.slick-slider{
+  .slick-arrow{
+    &:before{
+      color: red;
+    }
+  }
+}
