@@ -85,345 +85,345 @@ export default {
         asNavFor: "$refs.a1"
       },
       data: [
-        {
-          row: {
-            controlType: "row",
-            styleClass: {
-              rowWidthModel: "grid",
-              rowWidth: 12
-            },
-            animation: {}
-          },
-          container: {
-            class: "",
-            type: "container",
-            controlType: "container",
-            animation: {}
-          },
-          col: [
-            {
-              classes: "",
-              id: uuid.v4(),
-              animation: {},
-              colList: [
-                {
-                  animation: {},
-                  controlType: "title",
-                  title: "标题111",
-                  id: "b6f2e5e9-4456-4c79-b5c4-7633ab066d1e",
-                  style: {},
-                  styleClass: {
-                    fontSize: 16,
-                    styleSpacingLeftModel: "",
-                    paddingLeftModel: "",
-                    paddingTopModel: "",
-                    paddingRightModel: "",
-                    paddingBottomModel: "",
-                    marginLeftModel: "",
-                    marginTopModel: "",
-                    marginRightModel: "",
-                    marginBottomModel: "",
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    borderLeft: 0,
-                    borderTop: 0,
-                    borderRight: 0,
-                    borderBottom: 0
-                  },
-                  target: false
-                },
-                {
-                  animation: {},
-                  controlType: "title",
-                  title: "标题333",
-                  id: "fa7dc05a-1364-4cbd-82c3-c38f90da84a5",
-                  style: {},
-                  styleClass: {
-                    fontSize: 16,
-                    styleSpacingLeftModel: "",
-                    paddingLeftModel: "",
-                    paddingTopModel: "",
-                    paddingRightModel: "",
-                    paddingBottomModel: "",
-                    marginLeftModel: "",
-                    marginTopModel: "",
-                    marginRightModel: "",
-                    marginBottomModel: "",
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    borderLeft: 0,
-                    borderTop: 0,
-                    borderRight: 0,
-                    borderBottom: 0
-                  },
-                  target: false
-                },
-                {
-                  animation: {},
-                  controlType: "title",
-                  title: "标题555555",
-                  id: "0ffad9cf-785c-4933-8235-ea9683fa5b82",
-                  style: {},
-                  styleClass: {
-                    fontSize: 16,
-                    styleSpacingLeftModel: "",
-                    paddingLeftModel: "",
-                    paddingTopModel: "",
-                    paddingRightModel: "",
-                    paddingBottomModel: "",
-                    marginLeftModel: "",
-                    marginTopModel: "",
-                    marginRightModel: "",
-                    marginBottomModel: "",
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    borderLeft: 0,
-                    borderTop: 0,
-                    borderRight: 0,
-                    borderBottom: 0
-                  },
-                  target: false
-                },
-                {
-                  controlType: "carousel",
-                  id: "be82049e-c0e5-48bd-8b92-9ac119cea949",
-                  componentsList: [
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf97",
-                      title: "",
-                      value: "<p>a1</p>"
-                    },
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf98",
-                      title: "",
-                      value: "<p>a2</p>"
-                    },
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf99",
-                      title: "",
-                      value: "<p>a3</p>"
-                    },
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f2416511bf99",
-                      title: "",
-                      value: "<p>a4</p>"
-                    }
-                  ],
-                  settings: {
-                    accessibility: true,
-                    adaptiveHeight: false,
-                    arrows: true,
-                    asNavFor: "$refs.c2",
-                    autoplay: false,
-                    autoplaySpeed: 3000,
-                    centerMode: false,
-                    centerPadding: "50px",
-                    cssEase: "ease",
-                    dots: false,
-                    dotsClass: "slick-dots",
-                    draggable: true,
-                    edgeFriction: 0.35,
-                    fade: false,
-                    focusOnSelect: false,
-                    infinite: true,
-                    initialSlide: 0,
-                    lazyLoad: "ondemand",
-                    pauseOnDotsHover: false,
-                    pauseOnFocus: false,
-                    pauseOnHover: true,
-                    responsive: [],
-                    rows: 1,
-                    rtl: false,
-                    slidesPerRow: 1,
-                    slidesToScroll: 1,
-                    slidesToShow: 1,
-                    speed: 500,
-                    swipe: true,
-                    swipeToSlide: false,
-                    touchMove: true,
-                    touchThreshold: 5,
-                    useCSS: true,
-                    useTransform: true,
-                    variableWidth: false,
-                    vertical: false,
-                    waitForAnimate: true,
-                    ref: "c1"
-                  }
-                }
-              ],
-              controlType: "col",
-              styleClass: {
-                desktopWidthModel: "grid",
-                desktopWidth: 6,
-                ipadWidthModel: "grid",
-                ipadWidth: 6,
-                mobileWidthModel: "grid",
-                mobileWidth: 12
-              }
-            },
-            {
-              classes: "",
-              id: uuid.v4(),
-              colList: [
-                {
-                  controlType: "title",
-                  title: "标题222",
-                  id: "fe473d0c-ea93-45fb-89aa-a6c966224f05",
-                  style: {},
-                  styleClass: {
-                    fontSize: 16,
-                    styleSpacingLeftModel: "",
-                    paddingLeftModel: "",
-                    paddingTopModel: "",
-                    paddingRightModel: "",
-                    paddingBottomModel: "",
-                    marginLeftModel: "",
-                    marginTopModel: "",
-                    marginRightModel: "",
-                    marginBottomModel: "",
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    borderLeft: 0,
-                    borderTop: 0,
-                    borderRight: 0,
-                    borderBottom: 0
-                  },
-                  target: false
-                },
-                {
-                  controlType: "title",
-                  title: "标题4444",
-                  id: "a23cda8e-0bd8-443a-bee5-cc8ffdb05452",
-                  style: {},
-                  styleClass: {
-                    fontSize: 16,
-                    styleSpacingLeftModel: "",
-                    paddingLeftModel: "",
-                    paddingTopModel: "",
-                    paddingRightModel: "",
-                    paddingBottomModel: "",
-                    marginLeftModel: "",
-                    marginTopModel: "",
-                    marginRightModel: "",
-                    marginBottomModel: "",
-                    paddingLeft: 0,
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    marginLeft: 0,
-                    marginTop: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    borderLeft: 0,
-                    borderTop: 0,
-                    borderRight: 0,
-                    borderBottom: 0
-                  },
-                  target: false
-                },
-                {
-                  controlType: "carousel",
-                  id: "be82049e-c0e5-48bd-8b92-9ac119cea919",
-                  componentsList: [
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf17",
-                      title: "",
-                      value: "<p>b1</p>"
-                    },
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf18",
-                      title: "",
-                      value: "<p>b2</p>"
-                    },
-                    {
-                      id: "d5414097-71fe-460f-8d3c-f8416511bf19",
-                      title: "",
-                      value: "<p>b3</p>"
-                    },
-                    {
-                      id: "d5414092-71fe-460f-8d3c-f8416511bf19",
-                      title: "",
-                      value: "<p>b4</p>"
-                    }
-                  ],
-                  settings: {
-                    accessibility: true,
-                    adaptiveHeight: false,
-                    arrows: true,
-                    asNavFor: "$refs.c1",
-                    autoplay: false,
-                    autoplaySpeed: 3000,
-                    centerMode: false,
-                    centerPadding: "50px",
-                    cssEase: "ease",
-                    dots: false,
-                    dotsClass: "slick-dots",
-                    draggable: true,
-                    edgeFriction: 0.35,
-                    fade: false,
-                    focusOnSelect: false,
-                    infinite: true,
-                    initialSlide: 0,
-                    lazyLoad: "ondemand",
-                    pauseOnDotsHover: false,
-                    pauseOnFocus: false,
-                    pauseOnHover: true,
-                    responsive: [],
-                    rows: 1,
-                    rtl: false,
-                    slidesPerRow: 1,
-                    slidesToScroll: 1,
-                    slidesToShow: 1,
-                    speed: 500,
-                    swipe: true,
-                    swipeToSlide: false,
-                    touchMove: true,
-                    touchThreshold: 5,
-                    useCSS: true,
-                    useTransform: true,
-                    variableWidth: false,
-                    vertical: false,
-                    waitForAnimate: true,
-                    ref: "c2"
-                  }
-                }
-              ],
-              controlType: "col",
-              styleClass: {
-                desktopWidthModel: "grid",
-                desktopWidth: 6,
-                ipadWidthModel: "grid",
-                ipadWidth: 6,
-                mobileWidthModel: "grid",
-                mobileWidth: 12
-              }
-            }
-          ]
-        }
+        // {
+        //   row: {
+        //     controlType: "row",
+        //     styleClass: {
+        //       rowWidthModel: "grid",
+        //       rowWidth: 12
+        //     },
+        //     animation: {}
+        //   },
+        //   container: {
+        //     class: "",
+        //     type: "container",
+        //     controlType: "container",
+        //     animation: {}
+        //   },
+        //   col: [
+        //     {
+        //       classes: "",
+        //       id: uuid.v4(),
+        //       animation: {},
+        //       colList: [
+        //         {
+        //           animation: {},
+        //           controlType: "title",
+        //           title: "标题111",
+        //           id: "b6f2e5e9-4456-4c79-b5c4-7633ab066d1e",
+        //           style: {},
+        //           styleClass: {
+        //             fontSize: 16,
+        //             styleSpacingLeftModel: "",
+        //             paddingLeftModel: "",
+        //             paddingTopModel: "",
+        //             paddingRightModel: "",
+        //             paddingBottomModel: "",
+        //             marginLeftModel: "",
+        //             marginTopModel: "",
+        //             marginRightModel: "",
+        //             marginBottomModel: "",
+        //             paddingLeft: 0,
+        //             paddingTop: 0,
+        //             paddingRight: 0,
+        //             paddingBottom: 0,
+        //             marginLeft: 0,
+        //             marginTop: 0,
+        //             marginRight: 0,
+        //             marginBottom: 0,
+        //             borderLeft: 0,
+        //             borderTop: 0,
+        //             borderRight: 0,
+        //             borderBottom: 0
+        //           },
+        //           target: false
+        //         },
+        //         {
+        //           animation: {},
+        //           controlType: "title",
+        //           title: "标题333",
+        //           id: "fa7dc05a-1364-4cbd-82c3-c38f90da84a5",
+        //           style: {},
+        //           styleClass: {
+        //             fontSize: 16,
+        //             styleSpacingLeftModel: "",
+        //             paddingLeftModel: "",
+        //             paddingTopModel: "",
+        //             paddingRightModel: "",
+        //             paddingBottomModel: "",
+        //             marginLeftModel: "",
+        //             marginTopModel: "",
+        //             marginRightModel: "",
+        //             marginBottomModel: "",
+        //             paddingLeft: 0,
+        //             paddingTop: 0,
+        //             paddingRight: 0,
+        //             paddingBottom: 0,
+        //             marginLeft: 0,
+        //             marginTop: 0,
+        //             marginRight: 0,
+        //             marginBottom: 0,
+        //             borderLeft: 0,
+        //             borderTop: 0,
+        //             borderRight: 0,
+        //             borderBottom: 0
+        //           },
+        //           target: false
+        //         },
+        //         {
+        //           animation: {},
+        //           controlType: "title",
+        //           title: "标题555555",
+        //           id: "0ffad9cf-785c-4933-8235-ea9683fa5b82",
+        //           style: {},
+        //           styleClass: {
+        //             fontSize: 16,
+        //             styleSpacingLeftModel: "",
+        //             paddingLeftModel: "",
+        //             paddingTopModel: "",
+        //             paddingRightModel: "",
+        //             paddingBottomModel: "",
+        //             marginLeftModel: "",
+        //             marginTopModel: "",
+        //             marginRightModel: "",
+        //             marginBottomModel: "",
+        //             paddingLeft: 0,
+        //             paddingTop: 0,
+        //             paddingRight: 0,
+        //             paddingBottom: 0,
+        //             marginLeft: 0,
+        //             marginTop: 0,
+        //             marginRight: 0,
+        //             marginBottom: 0,
+        //             borderLeft: 0,
+        //             borderTop: 0,
+        //             borderRight: 0,
+        //             borderBottom: 0
+        //           },
+        //           target: false
+        //         },
+        //         {
+        //           controlType: "carousel",
+        //           id: "be82049e-c0e5-48bd-8b92-9ac119cea949",
+        //           componentsList: [
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf97",
+        //               title: "",
+        //               value: "<p>a1</p>"
+        //             },
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf98",
+        //               title: "",
+        //               value: "<p>a2</p>"
+        //             },
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf99",
+        //               title: "",
+        //               value: "<p>a3</p>"
+        //             },
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f2416511bf99",
+        //               title: "",
+        //               value: "<p>a4</p>"
+        //             }
+        //           ],
+        //           settings: {
+        //             accessibility: true,
+        //             adaptiveHeight: false,
+        //             arrows: true,
+        //             asNavFor: "$refs.c2",
+        //             autoplay: false,
+        //             autoplaySpeed: 3000,
+        //             centerMode: false,
+        //             centerPadding: "50px",
+        //             cssEase: "ease",
+        //             dots: false,
+        //             dotsClass: "slick-dots",
+        //             draggable: true,
+        //             edgeFriction: 0.35,
+        //             fade: false,
+        //             focusOnSelect: false,
+        //             infinite: true,
+        //             initialSlide: 0,
+        //             lazyLoad: "ondemand",
+        //             pauseOnDotsHover: false,
+        //             pauseOnFocus: false,
+        //             pauseOnHover: true,
+        //             responsive: [],
+        //             rows: 1,
+        //             rtl: false,
+        //             slidesPerRow: 1,
+        //             slidesToScroll: 1,
+        //             slidesToShow: 1,
+        //             speed: 500,
+        //             swipe: true,
+        //             swipeToSlide: false,
+        //             touchMove: true,
+        //             touchThreshold: 5,
+        //             useCSS: true,
+        //             useTransform: true,
+        //             variableWidth: false,
+        //             vertical: false,
+        //             waitForAnimate: true,
+        //             ref: "c1"
+        //           }
+        //         }
+        //       ],
+        //       controlType: "col",
+        //       styleClass: {
+        //         desktopWidthModel: "grid",
+        //         desktopWidth: 6,
+        //         ipadWidthModel: "grid",
+        //         ipadWidth: 6,
+        //         mobileWidthModel: "grid",
+        //         mobileWidth: 12
+        //       }
+        //     },
+        //     {
+        //       classes: "",
+        //       id: uuid.v4(),
+        //       colList: [
+        //         {
+        //           controlType: "title",
+        //           title: "标题222",
+        //           id: "fe473d0c-ea93-45fb-89aa-a6c966224f05",
+        //           style: {},
+        //           styleClass: {
+        //             fontSize: 16,
+        //             styleSpacingLeftModel: "",
+        //             paddingLeftModel: "",
+        //             paddingTopModel: "",
+        //             paddingRightModel: "",
+        //             paddingBottomModel: "",
+        //             marginLeftModel: "",
+        //             marginTopModel: "",
+        //             marginRightModel: "",
+        //             marginBottomModel: "",
+        //             paddingLeft: 0,
+        //             paddingTop: 0,
+        //             paddingRight: 0,
+        //             paddingBottom: 0,
+        //             marginLeft: 0,
+        //             marginTop: 0,
+        //             marginRight: 0,
+        //             marginBottom: 0,
+        //             borderLeft: 0,
+        //             borderTop: 0,
+        //             borderRight: 0,
+        //             borderBottom: 0
+        //           },
+        //           target: false
+        //         },
+        //         {
+        //           controlType: "title",
+        //           title: "标题4444",
+        //           id: "a23cda8e-0bd8-443a-bee5-cc8ffdb05452",
+        //           style: {},
+        //           styleClass: {
+        //             fontSize: 16,
+        //             styleSpacingLeftModel: "",
+        //             paddingLeftModel: "",
+        //             paddingTopModel: "",
+        //             paddingRightModel: "",
+        //             paddingBottomModel: "",
+        //             marginLeftModel: "",
+        //             marginTopModel: "",
+        //             marginRightModel: "",
+        //             marginBottomModel: "",
+        //             paddingLeft: 0,
+        //             paddingTop: 0,
+        //             paddingRight: 0,
+        //             paddingBottom: 0,
+        //             marginLeft: 0,
+        //             marginTop: 0,
+        //             marginRight: 0,
+        //             marginBottom: 0,
+        //             borderLeft: 0,
+        //             borderTop: 0,
+        //             borderRight: 0,
+        //             borderBottom: 0
+        //           },
+        //           target: false
+        //         },
+        //         {
+        //           controlType: "carousel",
+        //           id: "be82049e-c0e5-48bd-8b92-9ac119cea919",
+        //           componentsList: [
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf17",
+        //               title: "",
+        //               value: "<p>b1</p>"
+        //             },
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf18",
+        //               title: "",
+        //               value: "<p>b2</p>"
+        //             },
+        //             {
+        //               id: "d5414097-71fe-460f-8d3c-f8416511bf19",
+        //               title: "",
+        //               value: "<p>b3</p>"
+        //             },
+        //             {
+        //               id: "d5414092-71fe-460f-8d3c-f8416511bf19",
+        //               title: "",
+        //               value: "<p>b4</p>"
+        //             }
+        //           ],
+        //           settings: {
+        //             accessibility: true,
+        //             adaptiveHeight: false,
+        //             arrows: true,
+        //             asNavFor: "$refs.c1",
+        //             autoplay: false,
+        //             autoplaySpeed: 3000,
+        //             centerMode: false,
+        //             centerPadding: "50px",
+        //             cssEase: "ease",
+        //             dots: false,
+        //             dotsClass: "slick-dots",
+        //             draggable: true,
+        //             edgeFriction: 0.35,
+        //             fade: false,
+        //             focusOnSelect: false,
+        //             infinite: true,
+        //             initialSlide: 0,
+        //             lazyLoad: "ondemand",
+        //             pauseOnDotsHover: false,
+        //             pauseOnFocus: false,
+        //             pauseOnHover: true,
+        //             responsive: [],
+        //             rows: 1,
+        //             rtl: false,
+        //             slidesPerRow: 1,
+        //             slidesToScroll: 1,
+        //             slidesToShow: 1,
+        //             speed: 500,
+        //             swipe: true,
+        //             swipeToSlide: false,
+        //             touchMove: true,
+        //             touchThreshold: 5,
+        //             useCSS: true,
+        //             useTransform: true,
+        //             variableWidth: false,
+        //             vertical: false,
+        //             waitForAnimate: true,
+        //             ref: "c2"
+        //           }
+        //         }
+        //       ],
+        //       controlType: "col",
+        //       styleClass: {
+        //         desktopWidthModel: "grid",
+        //         desktopWidth: 6,
+        //         ipadWidthModel: "grid",
+        //         ipadWidth: 6,
+        //         mobileWidthModel: "grid",
+        //         mobileWidth: 12
+        //       }
+        //     }
+        //   ]
+        // }
       ],
       visible: false
     };
