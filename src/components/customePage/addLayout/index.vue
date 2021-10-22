@@ -27,6 +27,7 @@
 import { isCol } from "@/utils/index";
 import eventEmiter from "@/utils/eventEmiter";
 import { uuid } from "vue-uuid";
+import lodash from "lodash";
 export default {
   //设置布局
   name: "addLayout",
@@ -90,7 +91,9 @@ export default {
       this.layoutList[index].col.forEach(element => {
         element.id = uuid.v4();
       });
-      eventEmiter.emit("addPageLayout", [this.layoutList[index]]);
+      eventEmiter.emit("addPageLayout", [
+        lodash.cloneDeep(this.layoutList[index])
+      ]);
       this.layoutVisible = false;
     }
   }

@@ -11,20 +11,6 @@
             </div>
           </div>
 
-          <!-- <VueSlickCarousel :ref="setting1.ref" v-bind="setting1">
-            <div v-for="(item, index) in 4" :key="'a' + index">
-              <h1 class="text-h1">{{ item }}</h1>
-            </div>
-          </VueSlickCarousel>
-
-          <div class="py-30"></div>
-
-          <VueSlickCarousel :ref="setting2.ref" v-bind="setting2">
-            <div v-for="(item, index) in 4" :key="'b' + index">
-              <h3 class="text-h3">b{{ item }}</h3>
-            </div>
-          </VueSlickCarousel> -->
-
           <div class="">
             <customePage :data="data" :layout="true" ref="test11"></customePage>
           </div>
@@ -72,18 +58,6 @@ export default {
   },
   data() {
     return {
-      setting1: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        ref: "a1",
-        asNavFor: "$refs.a2"
-      },
-      setting2: {
-        ref: "a2",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        asNavFor: "$refs.a1"
-      },
       data: [
         // {
         //   row: {
@@ -436,26 +410,9 @@ export default {
     });
   },
 
-  mounted() {
-    if (typeof this.setting2.asNavFor == "string") {
-      this.setting2.asNavFor = this.$refs.test11.$refs.guideComponent[6].$refs.guideComponentIndex.$refs.c2;
-    }
-    if (typeof this.setting1.asNavFor == "string") {
-      this.setting1.asNavFor = getMultistage(this, this.setting1.asNavFor);
-    }
-  },
+  mounted() {},
   computed: {},
   methods: {}
 };
 </script>
-<style lang="scss">
-@import "~@/styles/variables.scss";
-// .layout-drawer{
-//   background: #000;
-//   header{background: #000;color: white;}
-//   .el-drawer__body{
-//     background: $headBg;
-//     color: white;
-//   }
-// }
-</style>
+<style lang="scss"></style>

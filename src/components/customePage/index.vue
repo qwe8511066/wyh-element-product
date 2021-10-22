@@ -14,6 +14,7 @@
           :class="[
             item.container.type,
             item.container.classes,
+            guideComponentStyleClass(item.container),
             {
               'layout-container': layout
             }
