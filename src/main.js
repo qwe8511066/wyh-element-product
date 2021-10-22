@@ -24,7 +24,6 @@ import AOS from 'aos'
 //全局变量
 import '@/global/';
 
-import './assets/tailwind.css'
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
