@@ -1,6 +1,6 @@
 module.exports = {
   separator: '|',
-  purge: ['src/**/*.vue'],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -146,7 +146,7 @@ module.exports = {
         }
 
         for (let i = 12; i <= 72; i++) {
-          value[i] = i+'px';
+          value[i] = i + 'px';
         }
 
         return value;
