@@ -3,9 +3,9 @@
     <el-form-item label="图片" prop="url">
       <el-input v-model="form.url"></el-input>
     </el-form-item>
-    <!-- <el-form-item label="线上图片">
-      <el-input v-model="form.lineUrl"></el-input>
-    </el-form-item> -->
+    <el-form-item label="开启骨架">
+      <el-switch v-model="form.skeleton"></el-switch>
+    </el-form-item>
     <el-form-item label="宽度">
       <div class="flex">
         <el-slider 
@@ -79,7 +79,8 @@ export default {
             styleClass: {
               imgWidthModel:this.form.styleClass.imgWidthModel?this.form.styleClass.imgWidthModel:'default',
             },
-            url:'/img/img.bd84350b.jpg',
+            url:'https://images5.alphacoders.com/757/757038.jpg',
+            skeleton:Boolean(this.form.skeleton)?this.form.skeleton:false,
           },
           rules: {
             // title: [{ required: true, message: "这是必填项" }]

@@ -404,9 +404,10 @@ export default {
   },
   created() {
     //添加布局
-    eventEmiter.on("addPageLayout", value => {
+    eventEmiter.on("addPageLayout", data => {
+      let {value,index} = data
       value.id = uuid.v4();
-      this.data.push(value);
+      this.data.splice(index, 0, value);
     });
   },
 

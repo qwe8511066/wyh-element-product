@@ -290,6 +290,22 @@
       </div>
      </el-collapse-item>
 
+     <el-collapse-item title="可见性">
+      <div class="el-form-item">
+        <label class="el-form-item__label w-180">可见性</label> 
+          <div class="el-form-item__content">
+          <el-radio-group v-model="form.styleClass[prefixField + 'show']">
+            <el-radio-button
+              :label="item.value"
+              v-for="(item, index) in showList"
+              :key="'show'+index"
+              >{{ item.label }}</el-radio-button
+            >
+          </el-radio-group>
+        </div>
+      </div>
+     </el-collapse-item>
+
      <el-collapse-item title="交互效果" v-if="judgePrefixField()">
        <el-form-item label="鼠标效果">
         <el-radio-group v-model="form.styleClass['cursor']" >
@@ -385,6 +401,7 @@ export default {
       cursorList:this.$style.cursorList,
       shadowList:this.$style.shadowList,
       opacityList:this.$style.opacityList,
+      showList:this.$style.showList,
       textDecorationList:this.$style.textDecorationList,
       hoverTextDecorationList:this.$style.hoverTextDecorationList,
       hoverTextColorList:this.$style.hoverTextColorList,

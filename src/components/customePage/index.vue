@@ -2,7 +2,7 @@
   <div>
     <div class="" :class="[{ 'md|space-y-30': layout }]">
       <div class="mb-20" v-if="layout">
-        <el-button @click="addLayout(true)">
+        <el-button @click="addLayout(true,0)">
           添加布局
         </el-button>
       </div>
@@ -191,7 +191,7 @@
           <!-- 设置Container end -->
         </div>
         <div class="mt-20" v-if="layout">
-          <el-button @click="addLayout(true)">
+          <el-button @click="addLayout(true,(index+1))">
             添加布局
           </el-button>
         </div>
@@ -405,8 +405,11 @@ export default {
     },
 
     //新增布局
-    addLayout(status) {
-      eventEmiter.emit("addLayout", [status]);
+    addLayout(status,index) {
+      eventEmiter.emit("addLayout", [{
+        status:status,
+        index:index,
+      }]);
     },
 
     //删除的弹窗
@@ -635,6 +638,7 @@ export default {
     judgeStyleClassLgXl(styleClass) {
       const array = [];
       const forFieldList = ["", this.ipadFieldName, this.pcFieldName];
+      console.log(styleClass)
       forFieldList.forEach(item => {
         let fontSize = judgeStyleClass(
           styleClass,
@@ -685,6 +689,13 @@ export default {
           item + "marginBottom",
           item + "mb-"
         );
+
+        let show = judgeStyleClass(
+          styleClass,
+          item + "show",
+        );
+        show = show?item+show:show;
+        console.log(show)
         array.push(
           fontSize,
           paddingLeft,
@@ -694,7 +705,8 @@ export default {
           marginLeft,
           marginTop,
           marginRight,
-          marginBottom
+          marginBottom,
+          show
         );
       });
       return array;

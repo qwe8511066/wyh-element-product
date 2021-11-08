@@ -553,6 +553,29 @@ export const opacityList = [
   },
 ]
 
+export const showList = [
+  {
+    label: '默认',
+    value: '',
+  },
+  {
+    label: 'block',
+    value: 'block',
+  },
+  {
+    label: 'inline-block',
+    value: 'inline-block',
+  },
+  {
+    label: 'flex',
+    value: 'flex',
+  },
+  {
+    label: 'hidden',
+    value: 'hidden',
+  },
+]
+
 export const textDecorationList = [
   {
     label: '去除装饰',
@@ -681,6 +704,7 @@ export default {
   cursorList,
   shadowList,
   opacityList,
+  showList,
   textDecorationList,
   hoverTextDecorationList,
   hoverTextColorList,

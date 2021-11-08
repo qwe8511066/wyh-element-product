@@ -35,13 +35,16 @@ export default {
     return {
       layoutList: [],
       layoutVisible: false,
-      layoutArray: [1, 2, 3, 4, 6]
+      layoutArray: [1, 2, 3, 4, 6],
+      dataIndex:-1,
     };
   },
   created() {
     this.init();
     eventEmiter.on("addLayout", value => {
-      this.layoutVisible = value;
+      const {index,status} = value
+      this.layoutVisible = status;
+      this.dataIndex = index
     });
   },
   methods: {
@@ -92,7 +95,11 @@ export default {
         element.id = uuid.v4();
       });
       eventEmiter.emit("addPageLayout", [
-        lodash.cloneDeep(this.layoutList[index])
+        {
+          value:lodash.cloneDeep(this.layoutList[index]),
+          index:this.dataIndex,
+        }
+        
       ]);
       this.layoutVisible = false;
     }
