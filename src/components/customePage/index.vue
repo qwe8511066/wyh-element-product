@@ -7,7 +7,7 @@
         </el-button>
       </div>
 
-      <div v-for="(item, index) in data" :key="'container' + index">
+      <div v-for="(item, index) in data"  :key="'container' + index">
         <div
           class="relative"
           v-aos-animation:{value}="item.container.animation"
@@ -19,6 +19,7 @@
               'layout-container': layout
             }
           ]"
+          v-customePageContainer="layout"
         >
           <div
             class="row flex m-auto justify-start relative"
@@ -31,6 +32,7 @@
                 'flex-wrap': !layout
               }
             ]"
+            v-customePageContainer="layout"
           >
             <div
               v-for="(col, i) in item.col"
@@ -45,6 +47,7 @@
                   'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
                 }
               ]"
+              v-customePageContainer="layout"
             >
               <draggable
                 handle=".el-icon-s-unfold"
@@ -638,7 +641,6 @@ export default {
     judgeStyleClassLgXl(styleClass) {
       const array = [];
       const forFieldList = ["", this.ipadFieldName, this.pcFieldName];
-      console.log(styleClass)
       forFieldList.forEach(item => {
         let fontSize = judgeStyleClass(
           styleClass,
@@ -695,7 +697,6 @@ export default {
           item + "show",
         );
         show = show?item+show:show;
-        console.log(show)
         array.push(
           fontSize,
           paddingLeft,
