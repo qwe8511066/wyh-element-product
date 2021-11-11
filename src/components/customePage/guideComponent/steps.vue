@@ -25,9 +25,7 @@ export default {
     };
   },
   computed: {},
-  created() {
-    console.log(this.value);
-  },
+  created() {},
   methods: {
     outPutForm() {}
   }

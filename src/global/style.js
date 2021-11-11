@@ -44,6 +44,57 @@ export const styleSpacingModel = [
   },
 ]
 
+export const styleJustifyContent = [
+  {
+    label: '起点对齐',
+    value: 'justify-start',
+  },
+  {
+    label: '中心点对齐',
+    value: 'justify-center',
+  },
+  {
+    label: '结束点对齐',
+    value: 'justify-end',
+  },
+]
+
+export const styleFlexAlignContent = [
+  {
+    label: '起点排列',
+    value: 'content-start',
+  },
+  {
+    label: '中心点排列',
+    value: 'content-center',
+  },
+  {
+    label: '终点排列',
+    value: 'ontent-end',
+  },
+]
+
+
+export const styleFlexDirection = [
+  {
+    label: '横向',
+    value: 'flex-row',
+  },
+  {
+    label: '横向反向',
+    value: 'flex-row-reverse',
+  },
+  {
+    label: '纵向',
+    value: 'flex-col',
+  },
+  {
+    label: '纵向反向',
+    value: 'flex-col-reverse',
+  },
+
+]
+
 export const borderList = [
   {
     label: '隐藏',
@@ -714,4 +765,7 @@ export default {
   lazyLoad,
   tabsPositionList,
   stepsPositionList,
+  styleFlexDirection,
+  styleJustifyContent,
+  styleFlexAlignContent,
 }

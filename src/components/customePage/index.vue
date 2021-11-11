@@ -2,12 +2,16 @@
   <div>
     <div class="" :class="[{ 'md|space-y-30': layout }]">
       <div class="mb-20" v-if="layout">
-        <el-button @click="addLayout(true,0)">
+        <el-button @click="addLayout(true, 0)">
           添加布局
         </el-button>
       </div>
 
-      <div v-for="(item, index) in data"  :key="'container' + index">
+      <div
+        v-for="(item, index) in data"
+        :style="[item.container.style]"
+        :key="'container' + index"
+      >
         <div
           class="relative"
           v-aos-animation:{value}="item.container.animation"
@@ -22,8 +26,9 @@
           v-customePageContainer="layout"
         >
           <div
-            class="row flex m-auto justify-start relative"
+            class="row flex relative"
             v-aos-animation:{value}="item.row.animation"
+            :style="[item.row.style]"
             :class="[
               item.row.classes,
               guideComponentStyleClass(item.row),
@@ -36,6 +41,7 @@
           >
             <div
               v-for="(col, i) in item.col"
+              :style="[col.style]"
               class="relative col"
               :key="'col' + i"
               @click="clickRow(item, col, $event)"
@@ -194,7 +200,7 @@
           <!-- 设置Container end -->
         </div>
         <div class="mt-20" v-if="layout">
-          <el-button @click="addLayout(true,(index+1))">
+          <el-button @click="addLayout(true, index + 1)">
             添加布局
           </el-button>
         </div>
@@ -408,11 +414,13 @@ export default {
     },
 
     //新增布局
-    addLayout(status,index) {
-      eventEmiter.emit("addLayout", [{
-        status:status,
-        index:index,
-      }]);
+    addLayout(status, index) {
+      eventEmiter.emit("addLayout", [
+        {
+          status: status,
+          index: index
+        }
+      ]);
     },
 
     //删除的弹窗
@@ -516,6 +524,8 @@ export default {
               this.upedataCarouselLastAsNavFor();
             });
           }
+
+          console.log(this.data);
         }
       });
     },
@@ -577,14 +587,6 @@ export default {
         const roundedBl = judgeStyleClass(styleClass, "roundedBl");
         const roundedBr = judgeStyleClass(styleClass, "roundedBr");
 
-        // const roundedBr =  judgeStyleClass(styleClass,'lg|fontSize');
-        // const roundedBr =  judgeStyleClass(styleClass,'roundedBr');
-        // const roundedBr =  judgeStyleClass(styleClass,'roundedBr');
-        // const roundedBr =  judgeStyleClass(styleClass,'roundedBr');
-        // const roundedBr =  judgeStyleClass(styleClass,'roundedBr');
-        // const roundedBr =  judgeStyleClass(styleClass,'roundedBr');
-        // console.log(styleClass)
-
         const cursor = judgeStyleClass(styleClass, "cursor");
         const opacity = judgeStyleClass(styleClass, "opacity");
         const shadow = judgeStyleClass(styleClass, "shadow");
@@ -597,7 +599,51 @@ export default {
 
         if (value.controlType === "row") {
           const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
-          list.push(rowWidth);
+          const mobileFlexDirection = judgeStyleClass(
+            styleClass,
+            "mobileFlexDirection"
+          );
+          const ipadFlexDirection =
+            this.ipadFieldName +
+            judgeStyleClass(styleClass, "ipadFlexDirection");
+          const desktopFlexDirection =
+            this.pcFieldName +
+            judgeStyleClass(styleClass, "desktopFlexDirection");
+          const mobileJustifyContent = judgeStyleClass(
+            styleClass,
+            "mobileJustifyContent"
+          );
+          const ipadJustifyContent =
+            this.ipadFieldName +
+            judgeStyleClass(styleClass, "ipadJustifyContent");
+          const desktopJustifyContent =
+            this.pcFieldName +
+            judgeStyleClass(styleClass, "desktopJustifyContent");
+
+          const mobileAlignContent = judgeStyleClass(
+            styleClass,
+            "mobileAlignContent"
+          );
+          const ipadAlignContent =
+            this.ipadFieldName +
+            judgeStyleClass(styleClass, "ipadAlignContent");
+          const desktopAlignContent =
+            this.pcFieldName +
+            judgeStyleClass(styleClass, "desktopAlignContent");
+
+          list.push(
+            rowWidth,
+            mobileFlexDirection,
+            ipadFlexDirection,
+            desktopFlexDirection,
+            mobileJustifyContent,
+            mobileJustifyContent,
+            ipadJustifyContent,
+            desktopJustifyContent,
+            mobileAlignContent,
+            ipadAlignContent,
+            desktopAlignContent
+          );
         }
 
         if (value.controlType === "col") {
@@ -692,11 +738,8 @@ export default {
           item + "mb-"
         );
 
-        let show = judgeStyleClass(
-          styleClass,
-          item + "show",
-        );
-        show = show?item+show:show;
+        let show = judgeStyleClass(styleClass, item + "show");
+        show = show ? item + show : show;
         array.push(
           fontSize,
           paddingLeft,
@@ -783,13 +826,13 @@ export default {
 .layout-container:hover {
   border-style: solid;
   .set-attributes-container {
-    display: flex;
+    @extend .public-set-attributes;
   }
 }
 .layout-row:hover {
   border-style: solid;
   .set-attributes-row {
-    display: flex;
+    @extend .public-set-attributes;
     margin-left: 0px;
   }
 }
@@ -798,7 +841,7 @@ export default {
   border-style: solid;
   .set-attributes-col {
     margin: 0;
-    display: flex;
+    @extend .public-set-attributes;
     margin-left: 0px;
   }
 }
@@ -806,7 +849,13 @@ export default {
 .layout-col-component:hover {
   border-style: solid;
   .set-attributes-col-component {
-    display: flex;
+    @extend .public-set-attributes;
   }
+}
+.public-set-attributes {
+  display: flex;
+  color: white;
+  background-color: #141414;
+  height: auto !important;
 }
 </style>

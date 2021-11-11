@@ -10,7 +10,7 @@
         <setGuideComponent :value="value" :form="form"></setGuideComponent>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="组件样式" name="1" :lazy="true">
+    <el-tab-pane label="组件样式->手机模式" name="1" :lazy="true">
       <el-form
         ref="setGuideStyleComponentForm"
         :rules="rules"
@@ -21,7 +21,7 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane label="组件样式(lg)" name="2" :lazy="true">
+    <el-tab-pane label="组件样式->pad模式(lg)" name="2" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormLg"
         :rules="rules"
@@ -35,7 +35,7 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane label="组件样式(xl)" name="3" :lazy="true">
+    <el-tab-pane label="组件样式->电脑pc模式(xl)" name="3" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormXl"
         :rules="rules"

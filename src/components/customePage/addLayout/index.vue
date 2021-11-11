@@ -36,15 +36,15 @@ export default {
       layoutList: [],
       layoutVisible: false,
       layoutArray: [1, 2, 3, 4, 6],
-      dataIndex:-1,
+      dataIndex: -1
     };
   },
   created() {
     this.init();
     eventEmiter.on("addLayout", value => {
-      const {index,status} = value
+      const { index, status } = value;
       this.layoutVisible = status;
-      this.dataIndex = index
+      this.dataIndex = index;
     });
   },
   methods: {
@@ -82,7 +82,16 @@ export default {
             classes: "",
             styleClass: {
               rowWidthModel: "grid",
-              rowWidth: 12
+              rowWidth: 12,
+              mobileFlexDirection: "flex-col",
+              ipadFlexDirection: "flex-row",
+              desktopFlexDirection: "flex-row",
+              mobileJustifyContent: "justify-start",
+              ipadJustifyContent: "justify-start",
+              desktopJustifyContent: "justify-start",
+              mobileAlignContent: "content-start",
+              ipadAlignContent: "content-start",
+              desktopAlignContent: "content-start"
             },
             animation: {}
           },
@@ -96,10 +105,9 @@ export default {
       });
       eventEmiter.emit("addPageLayout", [
         {
-          value:lodash.cloneDeep(this.layoutList[index]),
-          index:this.dataIndex,
+          value: lodash.cloneDeep(this.layoutList[index]),
+          index: this.dataIndex
         }
-        
       ]);
       this.layoutVisible = false;
     }

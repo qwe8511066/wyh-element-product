@@ -13,9 +13,7 @@ export default {
     return {};
   },
   computed: {},
-  created() {
-    console.log(this.value.skeleton);
-  },
+  created() {},
   mounted() {},
   methods: {
     //组件的样式
