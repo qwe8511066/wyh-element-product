@@ -34,6 +34,25 @@
     <el-form-item label="自定义类名">
       <el-input v-model="form.classes"></el-input>
     </el-form-item>
+
+    <el-collapse accordion>
+      <el-collapse-item title="放大和缩放(选中后宽度设置会不生效)">
+        <el-form-item
+          :label="item.title"
+          v-for="(item, index) in colFlexList"
+          :key="'colFlexList' + index"
+        >
+          <el-radio-group v-model="form.styleClass[item.fieldName]">
+            <el-radio-button
+              :label="box.value"
+              v-for="(box, index) in styleColFlex"
+              :key="'styleColFlex' + 'colFlexList' + index"
+              >{{ box.label }}</el-radio-button
+            >
+          </el-radio-group>
+        </el-form-item>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 
@@ -47,6 +66,7 @@ export default {
   data() {
     return {
       styleSpacingModel: this.$style.styleSpacingModel,
+      styleColFlex: this.$style.styleColFlex,
       fieldList: [
         {
           title: "宽度",
@@ -62,6 +82,20 @@ export default {
           title: "电脑pc模式下的宽度(screens->xl)",
           fieldName: "desktopWidth",
           spacingFieldName: "desktopWidthModel"
+        }
+      ],
+      colFlexList: [
+        {
+          title: "放大和缩小",
+          fieldName: "mobileColFlex"
+        },
+        {
+          title: "pad模式下的放大和缩小(screens->lg)",
+          fieldName: "ipadColFlex"
+        },
+        {
+          title: "电脑pc模式下的放大和缩小(screens->xl)",
+          fieldName: "desktopColFlex"
         }
       ]
     };

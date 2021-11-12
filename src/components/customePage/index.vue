@@ -525,7 +525,7 @@ export default {
             });
           }
 
-          console.log(this.data);
+          console.log(JSON.stringify(this.data));
         }
       });
     },
@@ -647,13 +647,32 @@ export default {
         }
 
         if (value.controlType === "col") {
-          const desktopWidth =
+          let desktopWidth =
             this.pcFieldName +
             judgeStyleClass(styleClass, "desktopWidth", "w-");
-          const ipadWidth =
+          let ipadWidth =
             this.ipadFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
-          const mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
-          list.push(desktopWidth, ipadWidth, mobileWidth);
+          let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
+
+          let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
+          let ipadColFlex = judgeStyleClass(styleClass, "ipadColFlex");
+          let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
+
+          mobileColFlex = mobileColFlex ? this.pcFieldName + mobileColFlex : "";
+          ipadColFlex = ipadColFlex ? this.ipadFieldName + ipadColFlex : "";
+
+          desktopWidth = mobileColFlex ? "" : desktopWidth;
+          ipadWidth = ipadColFlex ? "" : ipadWidth;
+          mobileWidth = desktopColFlex ? "" : mobileWidth;
+
+          list.push(
+            desktopWidth,
+            ipadWidth,
+            mobileWidth,
+            mobileColFlex,
+            ipadColFlex,
+            desktopColFlex
+          );
         }
 
         list = [...list, ...this.judgeStyleClassLgXl(styleClass)];

@@ -74,6 +74,29 @@ export const styleFlexAlignContent = [
   },
 ]
 
+export const styleColFlex = [
+  {
+    label: '默认',
+    value: '',
+  },
+  {
+    label: '铺满剩下的宽度',
+    value: 'flex-1',
+  },
+  {
+    label: 'flex-auto',
+    value: 'flex-auto',
+  },
+  {
+    label: 'flex-initial',
+    value: 'flex-initial',
+  },
+  {
+    label: 'flex-none',
+    value: 'flex-none',
+  },
+]
+
 
 export const styleFlexDirection = [
   {
@@ -675,6 +698,40 @@ export const tabsPositionList = [
     value: 'left',
   },
 ]
+
+export const objectFit = [
+  {
+    label: '包含',
+    value: 'object-contain',
+  },
+  {
+    label: '覆盖',
+    value: 'object-cover',
+  },
+  {
+    label: '填充',
+    value: 'object-fill',
+  },
+  {
+    label: '缩小',
+    value: 'object-scale-down',
+  },
+]
+
+export const styleHeightList = [
+  {
+    label: '铺满高度',
+    value: 'h-full',
+  },
+  {
+    label: '全屏高度',
+    value: 'h-screen',
+  },
+  {
+    label: '自适应高度',
+    value: 'h-auto',
+  },
+]
 export const stepsPositionList = [
   {
     label: '水平',
@@ -768,4 +825,7 @@ export default {
   styleFlexDirection,
   styleJustifyContent,
   styleFlexAlignContent,
+  styleColFlex,
+  objectFit,
+  styleHeightList,
 }

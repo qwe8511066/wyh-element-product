@@ -63,7 +63,10 @@ export default {
               ipadWidthModel: "grid",
               ipadWidth: desktopType,
               mobileWidthModel: "grid",
-              mobileWidth: 12
+              mobileWidth: 12,
+              mobileColFlex: "",
+              ipadColFlex: "",
+              desktopColFlex: ""
             },
             animation: {}
           });

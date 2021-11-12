@@ -27,7 +27,9 @@ export default {
         const styleClass = this.value.styleClass;
         const imgWidth = judgeStyleClass(styleClass, "imgWidth", "w-");
         const blockAlign = judgeStyleClass(styleClass, "blockAlign", "");
-        list.push(imgWidth, blockAlign);
+        const objectFit = judgeStyleClass(styleClass, "objectFit", "");
+        const imgHeight = judgeStyleClass(styleClass, "imgHeight", "");
+        list.push(imgWidth, blockAlign, objectFit, imgHeight);
       }
       return list.join(" ");
     },
