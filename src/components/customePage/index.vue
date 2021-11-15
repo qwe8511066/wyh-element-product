@@ -68,7 +68,7 @@
                   v-for="(box, index_1) in col.colList"
                   :key="'component' + index_1"
                   :class="[
-                    box.class,
+                    guideComponentStyleClassPosition(box),
                     {
                       'mt-20': index_1 != 0 && layout,
                       'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout
@@ -587,16 +587,9 @@ export default {
         const roundedBl = judgeStyleClass(styleClass, "roundedBl");
         const roundedBr = judgeStyleClass(styleClass, "roundedBr");
 
-        const cursor = judgeStyleClass(styleClass, "cursor");
         const opacity = judgeStyleClass(styleClass, "opacity");
         const shadow = judgeStyleClass(styleClass, "shadow");
         const textDecoration = judgeStyleClass(styleClass, "textDecoration");
-        const hoverTextDecoration = judgeStyleClass(
-          styleClass,
-          "hoverTextDecoration"
-        );
-        const hoverTextColor = judgeStyleClass(styleClass, "hoverTextColor");
-
         if (value.controlType === "row") {
           const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
           const mobileFlexDirection = judgeStyleClass(
@@ -691,13 +684,28 @@ export default {
           roundedTr,
           roundedBl,
           roundedBr,
-          cursor,
           opacity,
           shadow,
-          textDecoration,
-          hoverTextDecoration,
-          hoverTextColor
+          textDecoration
         );
+      }
+      return list.join(" ");
+    },
+
+    //定位的样式
+    guideComponentStyleClassPosition(value) {
+      let list = [];
+      if (value && value.styleClass) {
+        const styleClass = value.styleClass;
+        const position = judgeStyleClass(styleClass, "position");
+        if (position) {
+          const left = judgeStyleClass(styleClass, "left", "left-");
+          const top = judgeStyleClass(styleClass, "top", "top-");
+          const right = judgeStyleClass(styleClass, "right", "right-");
+          const bottom = judgeStyleClass(styleClass, "bottom", "bottom-");
+          list.push(left, top, right, bottom);
+        }
+        list.push(position);
       }
       return list.join(" ");
     },

@@ -447,7 +447,7 @@ export const borderWidth = [
     fieldName: "borderLeft"
   },
   {
-    title: "上边宽度",
+    title: "顶部宽度",
     fieldName: "borderTop"
   },
   {
@@ -455,7 +455,7 @@ export const borderWidth = [
     fieldName: "borderRight"
   },
   {
-    title: "下边宽度",
+    title: "底部宽度",
     fieldName: "borderBottom"
   }
 ]
@@ -732,6 +732,30 @@ export const styleHeightList = [
     value: 'h-auto',
   },
 ]
+
+export const stylePositionList = [
+  {
+    label: '默认',
+    value: '',
+  },
+  {
+    label: '相对定位',
+    value: 'relative',
+  },
+  {
+    label: '绝对定位',
+    value: 'absolute',
+  },
+  {
+    label: '粘性定位',
+    value: 'sticky',
+  },
+  {
+    label: '浏览器窗口定位',
+    value: 'fixed',
+  },
+]
+
 export const stepsPositionList = [
   {
     label: '水平',
@@ -740,6 +764,49 @@ export const stepsPositionList = [
   {
     label: '垂直',
     value: 'vertical',
+  },
+]
+
+export const styleZIndexList = [
+  {
+    label: '默认',
+    value: '',
+  },
+  {
+    label: '-1',
+    value: '-z-1',
+  },
+  {
+    label: '0',
+    value: 'z-0',
+  },
+  {
+    label: '1',
+    value: 'z-1',
+  },
+  {
+    label: '10',
+    value: 'z-10',
+  },
+  {
+    label: '20',
+    value: 'z-20',
+  },
+  {
+    label: '30',
+    value: 'z-30',
+  },
+  {
+    label: '40',
+    value: 'z-40',
+  },
+  {
+    label: '50',
+    value: 'z-50',
+  },
+  {
+    label: '9999',
+    value: 'z-full',
   },
 ]
 
@@ -828,4 +895,6 @@ export default {
   styleColFlex,
   objectFit,
   styleHeightList,
+  stylePositionList,
+  styleZIndexList,
 }

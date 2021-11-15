@@ -87,7 +87,9 @@ export default {
           marginLeftModel: "",
           marginTopModel: "",
           marginRightModel: "",
-          marginBottomModel: ""
+          marginBottomModel: "",
+          position: "",
+          zIndex: ""
         },
         animation: {
           dataAosOffset: 120,

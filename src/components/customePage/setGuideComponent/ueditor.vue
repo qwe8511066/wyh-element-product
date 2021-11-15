@@ -1,18 +1,11 @@
 <template>
   <div>
-    <tinymce
-      v-model="form.value"
-      menubar="false"
-      :height="360"
-    />
-   <!-- <el-form-item label="正则转换(&nbsp;)">
-       <el-input v-model="form.egular"></el-input> 
-    </el-form-item>-->
+    <tinymce v-model="form.value" menubar="false" :height="360" />
   </div>
 </template>
 
 <script>
-import tinymce from '@/components/Tinymce/index'
+import tinymce from "@/components/Tinymce/index";
 import setGuideComponentProperty from "./setGuideComponentProperty";
 export default {
   name: "customerPageUeditor",
@@ -22,13 +15,10 @@ export default {
     return {};
   },
   components: {
-    tinymce,
+    tinymce
   },
-  created() {
-     
-  },
-  methods: {
-  }
+  created() {},
+  methods: {}
 };
 </script>
 
