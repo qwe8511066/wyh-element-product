@@ -92,9 +92,9 @@ export default {
               mobileJustifyContent: "justify-start",
               ipadJustifyContent: "justify-start",
               desktopJustifyContent: "justify-start",
-              mobileAlignContent: "content-start",
-              ipadAlignContent: "content-start",
-              desktopAlignContent: "content-start"
+              mobileItemsContent: "items-start",
+              ipadItemsContent: "items-start",
+              desktopItemsContent: "items-start"
             },
             animation: {}
           },

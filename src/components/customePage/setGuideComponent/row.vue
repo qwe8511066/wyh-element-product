@@ -34,7 +34,7 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="定位">
+      <el-collapse-item title="纵轴对齐">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in justifyContentList"
@@ -51,17 +51,17 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="排列">
+      <el-collapse-item title="横轴对齐">
         <el-form-item
           :label="item.title"
-          v-for="(item, index) in alignContenttList"
-          :key="'alignContenttList' + index"
+          v-for="(item, index) in alignItemsList"
+          :key="'alignItemsList' + index"
         >
           <el-radio-group v-model="form.styleClass[item.fieldName]">
             <el-radio-button
               :label="box.value"
               v-for="(box, index) in styleFlexAlignContent"
-              :key="'styleFlexAlignContent' + 'alignContenttList' + index"
+              :key="'styleFlexAlignContent' + 'alignItemsList' + index"
               >{{ box.label }}</el-radio-button
             >
           </el-radio-group>
@@ -99,31 +99,31 @@ export default {
       ],
       justifyContentList: [
         {
-          title: "col定位",
+          title: "col对齐方式",
           fieldName: "mobileJustifyContent"
         },
         {
-          title: "pad模式下的col定位(screens->lg)",
+          title: "pad模式下的col对齐方式(screens->lg)",
           fieldName: "ipadJustifyContent"
         },
         {
-          title: "电脑pc模式下的col定位(screens->xl)",
+          title: "电脑pc模式下的col对齐方式(screens->xl)",
           fieldName: "desktopJustifyContent"
         }
       ],
 
-      alignContenttList: [
+      alignItemsList: [
         {
           title: "col对齐方式",
-          fieldName: "mobileAlignContent"
+          fieldName: "mobileItemsContent"
         },
         {
           title: "pad模式下的col对齐方式(screens->lg)",
-          fieldName: "ipadAlignContent"
+          fieldName: "ipadItemsContent"
         },
         {
           title: "电脑pc模式下的col对齐方式(screens->xl)",
-          fieldName: "desktopAlignContent"
+          fieldName: "desktopItemsContent"
         }
       ]
     };

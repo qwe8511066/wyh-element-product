@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-form-item label="图片" prop="url">
-      <el-input v-model="form.url"></el-input>
+    <el-form-item label="图片" prop="imgUrl">
+      <el-input v-model="form.imgUrl"></el-input>
     </el-form-item>
     <el-form-item label="开启骨架">
       <el-switch v-model="form.skeleton"></el-switch>
@@ -109,7 +109,7 @@ export default {
                 ? this.form.styleClass.imgHeight
                 : "h-auto"
             },
-            url: "https://images5.alphacoders.com/757/757038.jpg",
+            imgUrl: "https://images5.alphacoders.com/757/757038.jpg",
             skeleton: Boolean(this.form.skeleton) ? this.form.skeleton : false
           },
           rules: {

@@ -1,5 +1,9 @@
 <template>
-  <img :src="value.url" @load="loadImg" :class="[guideComponentStyleClass()]" />
+  <img
+    :src="value.imgUrl"
+    @load="loadImg"
+    :class="[guideComponentStyleClass()]"
+  />
 </template>
 
 <script>

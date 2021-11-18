@@ -7,6 +7,7 @@
             <div class="flex1">设计页面</div>
 
             <div v-if="data && data.length > 0">
+              <el-button size="mini" @click="savaData()">保存</el-button>
               <el-button size="mini" @click="visible = true">预览</el-button>
             </div>
           </div>
@@ -409,11 +410,24 @@ export default {
       value.id = uuid.v4();
       this.data.splice(index, 0, value);
     });
+    this.init();
   },
 
   mounted() {},
   computed: {},
-  methods: {}
+  methods: {
+    savaData() {
+      const key = "customPage" + this.$route.params.id;
+      window.localStorage.setItem(key, JSON.stringify(this.data));
+    },
+    init() {
+      const key = "customPage" + this.$route.params.id;
+      const data = window.localStorage.getItem(key);
+      if (data) {
+        this.data = eval(data);
+      }
+    }
+  }
 };
 </script>
 <style lang="scss"></style>

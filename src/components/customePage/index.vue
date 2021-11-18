@@ -48,6 +48,7 @@
               v-aos-animation:{value}="col.animation"
               :class="[
                 col.classes,
+                guideComponentStyleClassPosition(col),
                 guideComponentStyleClass(col),
                 {
                   'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
@@ -155,18 +156,6 @@
               <i
                 class="el-icon-s-tools text-lg cursor-pointer"
                 @click="setContainerRowTools(item, 'row', index, 3)"
-              ></i>
-              <i
-                class="el-icon-close text-lg cursor-pointer"
-                @click="
-                  deleteContainerRow(
-                    item,
-                    index,
-                    'row',
-                    '清空Row',
-                    '是否清空该Row'
-                  )
-                "
               ></i>
             </div>
             <!-- 设置Row end -->
@@ -613,16 +602,16 @@ export default {
             this.pcFieldName +
             judgeStyleClass(styleClass, "desktopJustifyContent");
 
-          const mobileAlignContent = judgeStyleClass(
+          const mobileItemsContent = judgeStyleClass(
             styleClass,
-            "mobileAlignContent"
+            "mobileItemsContent"
           );
-          const ipadAlignContent =
+          const ipadItemsContent =
             this.ipadFieldName +
-            judgeStyleClass(styleClass, "ipadAlignContent");
-          const desktopAlignContent =
+            judgeStyleClass(styleClass, "ipadItemsContent");
+          const desktopItemsContent =
             this.pcFieldName +
-            judgeStyleClass(styleClass, "desktopAlignContent");
+            judgeStyleClass(styleClass, "desktopItemsContent");
 
           list.push(
             rowWidth,
@@ -633,9 +622,9 @@ export default {
             mobileJustifyContent,
             ipadJustifyContent,
             desktopJustifyContent,
-            mobileAlignContent,
-            ipadAlignContent,
-            desktopAlignContent
+            mobileItemsContent,
+            ipadItemsContent,
+            desktopItemsContent
           );
         }
 
@@ -705,7 +694,9 @@ export default {
           const bottom = judgeStyleClass(styleClass, "bottom", "bottom-");
           list.push(left, top, right, bottom);
         }
-        list.push(position);
+        const zIndex = judgeStyleClass(styleClass, "zIndex");
+        console.log(zIndex);
+        list.push(position, zIndex);
       }
       return list.join(" ");
     },

@@ -61,16 +61,16 @@ export const styleJustifyContent = [
 
 export const styleFlexAlignContent = [
   {
-    label: '起点排列',
-    value: 'content-start',
+    label: '起点对齐',
+    value: 'items-start',
   },
   {
-    label: '中心点排列',
-    value: 'content-center',
+    label: '中心点对齐',
+    value: 'items-center',
   },
   {
-    label: '终点排列',
-    value: 'ontent-end',
+    label: '结束点对齐',
+    value: 'items-end',
   },
 ]
 
@@ -390,6 +390,10 @@ export const componentList = [
       {
         controlType: "steps",
         title: "步骤条"
+      },
+      {
+        controlType: "video",
+        title: "视频"
       }
     ]
   }
