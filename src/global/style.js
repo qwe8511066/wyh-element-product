@@ -361,7 +361,7 @@ export const componentList = [
     list: [
       {
         controlType: "title",
-        title: "标题"
+        title: "标题",
       },
       {
         controlType: "imgae",

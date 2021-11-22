@@ -6,17 +6,28 @@
       v-for="(item, index) in value.componentsList"
       :key="'tabsList' + index"
     >
-      <div v-html="item.value"></div>
+      <div v-for="(box, i) in item.children" :key="'tabsListChildren' + i">
+        <guideComponent
+          :v-aos-animation="box.animation"
+          :class="[cobyGuideComponentStyleClass(box)]"
+          :value="box"
+          ref="tabsListChildrenGuideComponent"
+        ></guideComponent>
+      </div>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
-import lodash from "lodash";
 import guideComponentProperty from "./guideComponentProperty";
+import guideComponent from "./index";
+import { guideComponentStyleClass } from "@/utils";
 export default {
   name: "customerPageTabs",
   mixins: [guideComponentProperty],
+  components: {
+    guideComponent
+  },
   props: {},
   data() {
     return {
@@ -28,7 +39,10 @@ export default {
     this.activeNames = String(this.value.compontIndex);
   },
   methods: {
-    outPutForm() {}
+    outPutForm() {},
+    cobyGuideComponentStyleClass(value) {
+      return guideComponentStyleClass(value);
+    }
   }
 };
 </script>

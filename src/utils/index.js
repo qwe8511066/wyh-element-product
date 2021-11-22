@@ -1,6 +1,4 @@
-/**
- * Created by PanJiaChen on 16/11/18.
- */
+import { ipadFieldName, pcFieldName } from '@/global/style'
 
 /**
  * Parse the time to string
@@ -471,8 +469,8 @@ export function sonsTree(arr) {
  * @param {*} divisor   除数
  * @returns 
  */
-export function isCol(dividend,divisor = 12){
-  return dividend!=1 && (divisor % dividend === 0)
+export function isCol(dividend, divisor = 12) {
+  return dividend != 1 && (divisor % dividend === 0)
 }
 
 /**
@@ -482,19 +480,230 @@ export function isCol(dividend,divisor = 12){
  * @param {*} className  类的名称
  * @returns 
  */
-export function judgeStyleClass(value,fieldName,className=''){
+export function judgeStyleClass(value, fieldName, className = '') {
   let name = ''
-  if(fieldName && value[fieldName]){
+  if (fieldName && value[fieldName]) {
     name = value[fieldName]
     //判断负数
-    if(Math.sign(name) == -1 && name.toString().slice(0,1) === '-'){
-      name = '-'+className+parseInt(name.toString().substr(1)) 
-    }else{
-      name = className+ name
+    if (Math.sign(name) == -1 && name.toString().slice(0, 1) === '-') {
+      name = '-' + className + parseInt(name.toString().substr(1))
+    } else {
+      name = className + name
     }
-  } 
-  if(value[fieldName + 'Model']){
-    name = value[fieldName] && value[fieldName]!=12 ?className+value[fieldName] + "/12":'w-full';
+  }
+  if (value[fieldName + 'Model']) {
+    name = value[fieldName] && value[fieldName] != 12 ? className + value[fieldName] + "/12" : 'w-full';
   }
   return name
+}
+
+//组件的样式
+export function guideComponentStyleClass(value) {
+  let list = [];
+  if (value && value.styleClass) {
+    const styleClass = value.styleClass;
+
+    const fontWeight = judgeStyleClass(styleClass, "fontWeight");
+    const textAlign = judgeStyleClass(styleClass, "textAlign", "");
+    const textLimit = judgeStyleClass(styleClass, "textLimit", "limit-");
+    const textTransform = judgeStyleClass(styleClass, "textTransform");
+
+    const borderLeft = judgeStyleClass(
+      styleClass,
+      "borderLeft",
+      "border-l-"
+    );
+    const borderTop = judgeStyleClass(styleClass, "borderTop", "border-t-");
+    const borderRight = judgeStyleClass(
+      styleClass,
+      "borderRight",
+      "border-r-"
+    );
+    const borderBottom = judgeStyleClass(
+      styleClass,
+      "borderBottom",
+      "border-b-"
+    );
+    const borderStyle = judgeStyleClass(styleClass, "borderStyle", "");
+
+    const roundedTl = judgeStyleClass(styleClass, "roundedTl");
+    const roundedTr = judgeStyleClass(styleClass, "roundedTr");
+    const roundedBl = judgeStyleClass(styleClass, "roundedBl");
+    const roundedBr = judgeStyleClass(styleClass, "roundedBr");
+
+    const opacity = judgeStyleClass(styleClass, "opacity");
+    const shadow = judgeStyleClass(styleClass, "shadow");
+    const textDecoration = judgeStyleClass(styleClass, "textDecoration");
+    if (value.controlType === "row") {
+      const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
+      const mobileFlexDirection = judgeStyleClass(
+        styleClass,
+        "mobileFlexDirection"
+      );
+      const ipadFlexDirection =
+        ipadFieldName +
+        judgeStyleClass(styleClass, "ipadFlexDirection");
+      const desktopFlexDirection =
+        pcFieldName +
+        judgeStyleClass(styleClass, "desktopFlexDirection");
+      const mobileJustifyContent = judgeStyleClass(
+        styleClass,
+        "mobileJustifyContent"
+      );
+      const ipadJustifyContent =
+        ipadFieldName +
+        judgeStyleClass(styleClass, "ipadJustifyContent");
+      const desktopJustifyContent =
+        pcFieldName +
+        judgeStyleClass(styleClass, "desktopJustifyContent");
+
+      const mobileItemsContent = judgeStyleClass(
+        styleClass,
+        "mobileItemsContent"
+      );
+      const ipadItemsContent =
+        ipadFieldName +
+        judgeStyleClass(styleClass, "ipadItemsContent");
+      const desktopItemsContent =
+        pcFieldName +
+        judgeStyleClass(styleClass, "desktopItemsContent");
+
+      list.push(
+        rowWidth,
+        mobileFlexDirection,
+        ipadFlexDirection,
+        desktopFlexDirection,
+        mobileJustifyContent,
+        mobileJustifyContent,
+        ipadJustifyContent,
+        desktopJustifyContent,
+        mobileItemsContent,
+        ipadItemsContent,
+        desktopItemsContent
+      );
+    }
+
+    if (value.controlType === "col") {
+      let desktopWidth =
+        pcFieldName +
+        judgeStyleClass(styleClass, "desktopWidth", "w-");
+      let ipadWidth =
+        ipadFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
+      let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
+
+      let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
+      let ipadColFlex = judgeStyleClass(styleClass, "ipadColFlex");
+      let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
+
+      mobileColFlex = mobileColFlex ? pcFieldName + mobileColFlex : "";
+      ipadColFlex = ipadColFlex ? ipadFieldName + ipadColFlex : "";
+
+      desktopWidth = mobileColFlex ? "" : desktopWidth;
+      ipadWidth = ipadColFlex ? "" : ipadWidth;
+      mobileWidth = desktopColFlex ? "" : mobileWidth;
+
+      list.push(
+        desktopWidth,
+        ipadWidth,
+        mobileWidth,
+        mobileColFlex,
+        ipadColFlex,
+        desktopColFlex
+      );
+    }
+
+    list = [...list, ...judgeStyleClassLgXl(styleClass)];
+
+    list.push(
+      fontWeight,
+      textAlign,
+      textLimit,
+      textTransform,
+      borderLeft,
+      borderTop,
+      borderRight,
+      borderBottom,
+      borderStyle,
+      roundedTl,
+      roundedTr,
+      roundedBl,
+      roundedBr,
+      opacity,
+      shadow,
+      textDecoration
+    );
+  }
+  return list.join(" ");
+}
+//判断lg 或者xl 的文本和间距样式
+export function judgeStyleClassLgXl(styleClass) {
+  const array = [];
+  const forFieldList = ["", ipadFieldName, pcFieldName];
+  forFieldList.forEach(item => {
+    let fontSize = judgeStyleClass(
+      styleClass,
+      item + "fontSize",
+      item + "text-"
+    );
+    //判断是否修改文字大小
+    if (item) {
+      fontSize = styleClass[item + "typeFontSize"] ? fontSize : "";
+    }
+    const paddingLeft = judgeStyleClass(
+      styleClass,
+      item + "paddingLeft",
+      item + "pl-"
+    );
+    const paddingTop = judgeStyleClass(
+      styleClass,
+      item + "paddingTop",
+      item + "pt-"
+    );
+    const paddingRight = judgeStyleClass(
+      styleClass,
+      item + "paddingRight",
+      item + "pr-"
+    );
+    const paddingBottom = judgeStyleClass(
+      styleClass,
+      item + "paddingBottom",
+      item + "pb-"
+    );
+    const marginLeft = judgeStyleClass(
+      styleClass,
+      item + "marginLeft",
+      item + "ml-"
+    );
+    const marginTop = judgeStyleClass(
+      styleClass,
+      item + "marginTop",
+      item + "mt-"
+    );
+    const marginRight = judgeStyleClass(
+      styleClass,
+      item + "marginRight",
+      item + "mr-"
+    );
+    const marginBottom = judgeStyleClass(
+      styleClass,
+      item + "marginBottom",
+      item + "mb-"
+    );
+
+    let show = judgeStyleClass(styleClass, item + "show");
+    show = show ? item + show : show;
+    array.push(
+      fontSize,
+      paddingLeft,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      marginLeft,
+      marginTop,
+      marginRight,
+      marginBottom,
+      show
+    );
+  });
+  return array;
 }

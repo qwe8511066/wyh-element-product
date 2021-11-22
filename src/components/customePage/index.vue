@@ -18,7 +18,7 @@
           :class="[
             item.container.type,
             item.container.classes,
-            guideComponentStyleClass(item.container),
+            cobyGuideComponentStyleClass(item.container),
             {
               'layout-container': layout
             }
@@ -31,7 +31,7 @@
             :style="[item.row.style]"
             :class="[
               item.row.classes,
-              guideComponentStyleClass(item.row),
+              cobyGuideComponentStyleClass(item.row),
               {
                 'space-y-20 md|space-y-0 md|space-x-20 layout-row pt-40': layout,
                 'flex-wrap': !layout
@@ -49,7 +49,7 @@
               :class="[
                 col.classes,
                 guideComponentStyleClassPosition(col),
-                guideComponentStyleClass(col),
+                cobyGuideComponentStyleClass(col),
                 {
                   'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
                 }
@@ -77,8 +77,8 @@
                   ]"
                 >
                   <guideComponent
-                    v-aos-animation:{value}="box.animation"
-                    :class="[guideComponentStyleClass(box)]"
+                    :v-aos-animation="box.animation"
+                    :class="[cobyGuideComponentStyleClass(box)]"
                     :layout="layout"
                     :value="box"
                     ref="guideComponent"
@@ -236,15 +236,16 @@
             :key="index"
             v-for="(item, index) in componentList"
           >
-            <div
-              :key="i"
-              v-for="(box, i) in item.list"
-              @click="addPageColComponent(box)"
-              :class="[{ 'border-b-1': i != item.list.length - 1 }]"
-              class="flex p-20 place-items-center cursor-pointer hover|bg-light hover|text-white"
-            >
-              <div class="flex-1 pl-20">
-                {{ box.title }}
+            <div :key="i" v-for="(box, i) in item.list">
+              <div
+                v-if="!box.show"
+                @click="addPageColComponent(box)"
+                :class="[{ 'border-b-1': i != item.list.length - 1 }]"
+                class="flex p-20 place-items-center cursor-pointer hover|bg-light hover|text-white"
+              >
+                <div class="flex-1 pl-20">
+                  {{ box.title }}
+                </div>
               </div>
             </div>
           </el-collapse-item>
@@ -277,6 +278,35 @@
       </div>
     </el-dialog>
     <!-- 设置组件 -->
+
+    <!-- 设置tabs子组件 -->
+    <el-dialog
+      width="80%"
+      :close-on-click-modal="false"
+      v-if="layout"
+      :title="tabsContentComponentTitle"
+      :visible.sync="tabsContentComponentVisible"
+      v-dialogDrag
+      :destroy-on-close="true"
+      custom-class="myDialog"
+    >
+      <setGuidePublicComponent
+        ref="setTabsGuidePublicComponent"
+        v-if="tabsContentComponentVisible"
+        :value="tabsContentComponent"
+      ></setGuidePublicComponent>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="setTabsGuidePublicComponentFinish(false)"
+          >取 消</el-button
+        >
+        <el-button
+          type="primary"
+          @click="setTabsGuidePublicComponentFinish(true)"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
+    <!-- 设置tabs子组件 -->
   </div>
 </template>
 
@@ -288,7 +318,12 @@ import addLayout from "./addLayout/index";
 import guideComponent from "./guideComponent/index";
 import setGuidePublicComponent from "./setGuideComponent/public";
 import { uuid } from "vue-uuid";
-import { checkArray, checkArrayString, judgeStyleClass } from "@/utils";
+import {
+  checkArray,
+  checkArrayString,
+  guideComponentStyleClass,
+  judgeStyleClass
+} from "@/utils";
 export default {
   name: "customePage",
   components: {
@@ -346,9 +381,17 @@ export default {
       setComponeVisible: false,
       setComponeVisibleTitle: "",
       activeName: "0",
-      dragCloneCol: ""
+      dragCloneCol: "",
+
+      tabsContentComponent: "",
+      tabsContentComponentForm: "",
+      tabsContentComponentStatus: "",
+      tabsContentComponentTitle: "",
+      tabsContentComponentVisible: false,
+      tabsContentComponentIndex: -1
     };
   },
+  watch: {},
   props: {
     //从父级获取的表单组件
     data: {
@@ -363,11 +406,31 @@ export default {
       default: false
     }
   },
-  created() {},
+  created() {
+    eventEmiter.on("addTabsContentComponent", value => {
+      const { item, status, form, index } = value;
+      this.tabsContentComponentForm = form;
+      this.tabsContentComponent = item;
+      this.tabsContentComponentStatus = status;
+
+      this.tabsContentComponentIndex = index;
+
+      //新增打开选择弹窗
+      if (status == 1) {
+        this.addComponeVisible = true;
+        this.filterComponentList(["tabs"]);
+      } else {
+        this.tabsContentComponentTitle =
+          "新增tabs下的" + item.controlType + "子组件";
+        this.tabsContentComponentVisible = true;
+      }
+    });
+  },
   mounted() {
     this.upedataCarouselLastAsNavFor();
   },
   methods: {
+    //初始化轮播图
     upedataCarouselLastAsNavFor() {
       const guideComponent = this.$refs.guideComponent;
       if (checkArray(this.data)) {
@@ -400,6 +463,7 @@ export default {
     addComponet(status, col) {
       this.col.list = col.colList;
       this.addComponeVisible = true;
+      this.filterComponentList();
     },
 
     //新增布局
@@ -447,21 +511,29 @@ export default {
     //添加组件
     addPageColComponent(value) {
       const id = uuid.v4();
-      this.col.component = { ...value, id };
-      this.setComponeVisibleTitle = "设置组件";
-      this.setComponeVisible = true;
-      this.col.status = 0;
+      //判断是否是tabs的子组件
+      if (this.tabsContentComponentStatus) {
+        this.tabsContentComponent = { ...value, id };
+        this.tabsContentComponentTitle = "新增tabs的子组件";
+        this.tabsContentComponentVisible = true;
+      } else {
+        this.col.component = { ...value, id };
+        this.setComponeVisibleTitle = "设置组件";
+        this.setComponeVisible = true;
+        this.col.status = 0;
 
-      //传递给轮播图组件
-      if (value.controlType === "carousel") {
-        this.$store.dispatch(
-          "customPage/setCustomizepagesComponets",
-          this.data
-        );
+        //传递给轮播图组件
+        if (value.controlType === "carousel") {
+          this.$store.dispatch(
+            "customPage/setCustomizepagesComponets",
+            this.data
+          );
+        }
       }
-      setTimeout(() => {
+
+      this.$nextTick(() => {
         this.addComponeVisible = false;
-      }, 33);
+      });
     },
 
     //完成设置属性
@@ -519,6 +591,45 @@ export default {
       });
     },
 
+    //选项卡的子组件
+    setTabsGuidePublicComponentFinish(type) {
+      const setTabsGuidePublicComponent = this.$refs.setTabsGuidePublicComponent
+        .$refs.setGuideComponentForm;
+      console.log(this.tabsContentComponentForm);
+      setTabsGuidePublicComponent.validate(valid => {
+        if (valid) {
+          this.tabsContentComponent = {
+            ...this.tabsContentComponent,
+            ...setTabsGuidePublicComponent.model
+          };
+          const componentsList = this.tabsContentComponentForm.componentsList[
+            this.tabsContentComponentIndex
+          ];
+          switch (this.tabsContentComponentStatus) {
+            case 1:
+              componentsList.children.push(this.tabsContentComponent);
+              break;
+
+            default:
+              const _childIndex = checkArrayString(
+                componentsList.children,
+                "id",
+                this.tabsContentComponent.id
+              );
+              this.$set(
+                componentsList.children,
+                _childIndex,
+                this.tabsContentComponent
+              );
+              break;
+          }
+        }
+      });
+      console.log(this.tabsContentComponentForm);
+      this.tabsContentComponentVisible = false;
+      this.$set(this.tabsContentComponentStatus, "");
+    },
+
     //修改属性
     setColComponent(value, index, col) {
       this.col.list = col.colList;
@@ -543,142 +654,8 @@ export default {
     },
 
     //组件的样式
-    guideComponentStyleClass(value) {
-      let list = [];
-      if (value && value.styleClass) {
-        const styleClass = value.styleClass;
-
-        const fontWeight = judgeStyleClass(styleClass, "fontWeight");
-        const textAlign = judgeStyleClass(styleClass, "textAlign", "");
-        const textLimit = judgeStyleClass(styleClass, "textLimit", "limit-");
-        const textTransform = judgeStyleClass(styleClass, "textTransform");
-
-        const borderLeft = judgeStyleClass(
-          styleClass,
-          "borderLeft",
-          "border-l-"
-        );
-        const borderTop = judgeStyleClass(styleClass, "borderTop", "border-t-");
-        const borderRight = judgeStyleClass(
-          styleClass,
-          "borderRight",
-          "border-r-"
-        );
-        const borderBottom = judgeStyleClass(
-          styleClass,
-          "borderBottom",
-          "border-b-"
-        );
-        const borderStyle = judgeStyleClass(styleClass, "borderStyle", "");
-
-        const roundedTl = judgeStyleClass(styleClass, "roundedTl");
-        const roundedTr = judgeStyleClass(styleClass, "roundedTr");
-        const roundedBl = judgeStyleClass(styleClass, "roundedBl");
-        const roundedBr = judgeStyleClass(styleClass, "roundedBr");
-
-        const opacity = judgeStyleClass(styleClass, "opacity");
-        const shadow = judgeStyleClass(styleClass, "shadow");
-        const textDecoration = judgeStyleClass(styleClass, "textDecoration");
-        if (value.controlType === "row") {
-          const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
-          const mobileFlexDirection = judgeStyleClass(
-            styleClass,
-            "mobileFlexDirection"
-          );
-          const ipadFlexDirection =
-            this.ipadFieldName +
-            judgeStyleClass(styleClass, "ipadFlexDirection");
-          const desktopFlexDirection =
-            this.pcFieldName +
-            judgeStyleClass(styleClass, "desktopFlexDirection");
-          const mobileJustifyContent = judgeStyleClass(
-            styleClass,
-            "mobileJustifyContent"
-          );
-          const ipadJustifyContent =
-            this.ipadFieldName +
-            judgeStyleClass(styleClass, "ipadJustifyContent");
-          const desktopJustifyContent =
-            this.pcFieldName +
-            judgeStyleClass(styleClass, "desktopJustifyContent");
-
-          const mobileItemsContent = judgeStyleClass(
-            styleClass,
-            "mobileItemsContent"
-          );
-          const ipadItemsContent =
-            this.ipadFieldName +
-            judgeStyleClass(styleClass, "ipadItemsContent");
-          const desktopItemsContent =
-            this.pcFieldName +
-            judgeStyleClass(styleClass, "desktopItemsContent");
-
-          list.push(
-            rowWidth,
-            mobileFlexDirection,
-            ipadFlexDirection,
-            desktopFlexDirection,
-            mobileJustifyContent,
-            mobileJustifyContent,
-            ipadJustifyContent,
-            desktopJustifyContent,
-            mobileItemsContent,
-            ipadItemsContent,
-            desktopItemsContent
-          );
-        }
-
-        if (value.controlType === "col") {
-          let desktopWidth =
-            this.pcFieldName +
-            judgeStyleClass(styleClass, "desktopWidth", "w-");
-          let ipadWidth =
-            this.ipadFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
-          let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
-
-          let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
-          let ipadColFlex = judgeStyleClass(styleClass, "ipadColFlex");
-          let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
-
-          mobileColFlex = mobileColFlex ? this.pcFieldName + mobileColFlex : "";
-          ipadColFlex = ipadColFlex ? this.ipadFieldName + ipadColFlex : "";
-
-          desktopWidth = mobileColFlex ? "" : desktopWidth;
-          ipadWidth = ipadColFlex ? "" : ipadWidth;
-          mobileWidth = desktopColFlex ? "" : mobileWidth;
-
-          list.push(
-            desktopWidth,
-            ipadWidth,
-            mobileWidth,
-            mobileColFlex,
-            ipadColFlex,
-            desktopColFlex
-          );
-        }
-
-        list = [...list, ...this.judgeStyleClassLgXl(styleClass)];
-
-        list.push(
-          fontWeight,
-          textAlign,
-          textLimit,
-          textTransform,
-          borderLeft,
-          borderTop,
-          borderRight,
-          borderBottom,
-          borderStyle,
-          roundedTl,
-          roundedTr,
-          roundedBl,
-          roundedBr,
-          opacity,
-          shadow,
-          textDecoration
-        );
-      }
-      return list.join(" ");
+    cobyGuideComponentStyleClass(value) {
+      return guideComponentStyleClass(value);
     },
 
     //定位的样式
@@ -695,83 +672,9 @@ export default {
           list.push(left, top, right, bottom);
         }
         const zIndex = judgeStyleClass(styleClass, "zIndex");
-        console.log(zIndex);
         list.push(position, zIndex);
       }
       return list.join(" ");
-    },
-
-    //判断lg 或者xl 的文本和间距样式
-    judgeStyleClassLgXl(styleClass) {
-      const array = [];
-      const forFieldList = ["", this.ipadFieldName, this.pcFieldName];
-      forFieldList.forEach(item => {
-        let fontSize = judgeStyleClass(
-          styleClass,
-          item + "fontSize",
-          item + "text-"
-        );
-        //判断是否修改文字大小
-        if (item) {
-          fontSize = styleClass[item + "typeFontSize"] ? fontSize : "";
-        }
-        const paddingLeft = judgeStyleClass(
-          styleClass,
-          item + "paddingLeft",
-          item + "pl-"
-        );
-        const paddingTop = judgeStyleClass(
-          styleClass,
-          item + "paddingTop",
-          item + "pt-"
-        );
-        const paddingRight = judgeStyleClass(
-          styleClass,
-          item + "paddingRight",
-          item + "pr-"
-        );
-        const paddingBottom = judgeStyleClass(
-          styleClass,
-          item + "paddingBottom",
-          item + "pb-"
-        );
-        const marginLeft = judgeStyleClass(
-          styleClass,
-          item + "marginLeft",
-          item + "ml-"
-        );
-        const marginTop = judgeStyleClass(
-          styleClass,
-          item + "marginTop",
-          item + "mt-"
-        );
-        const marginRight = judgeStyleClass(
-          styleClass,
-          item + "marginRight",
-          item + "mr-"
-        );
-        const marginBottom = judgeStyleClass(
-          styleClass,
-          item + "marginBottom",
-          item + "mb-"
-        );
-
-        let show = judgeStyleClass(styleClass, item + "show");
-        show = show ? item + show : show;
-        array.push(
-          fontSize,
-          paddingLeft,
-          paddingTop,
-          paddingRight,
-          paddingBottom,
-          marginLeft,
-          marginTop,
-          marginRight,
-          marginBottom,
-          show
-        );
-      });
-      return array;
     },
 
     //拖拽时
@@ -835,6 +738,28 @@ export default {
     setAttributeAosAnimation(el, label, value, valueFieldName) {
       if (value) {
         el.setAttribute(label, value[valueFieldName]);
+      }
+    },
+
+    /**
+     * 过滤componentList
+     */
+    filterComponentList(array) {
+      if (checkArray(array)) {
+        this.componentList.forEach(item => {
+          array.forEach(box => {
+            const tabsIndex = checkArrayString(item.list, "controlType", box);
+            if (tabsIndex != -1) {
+              item.list[tabsIndex].show = true;
+            }
+          });
+        });
+      } else {
+        this.componentList.forEach(item => {
+          item.list.forEach(box => {
+            box.show = false;
+          });
+        });
       }
     }
   }

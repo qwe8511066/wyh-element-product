@@ -2,22 +2,28 @@
   <lb-table
     ref="wyhElementTable"
     class="myLbTable"
-    :highlight-current-row="
-        type == 'radio' ||
-          type == 'checkbox'
-      "
+    :highlight-current-row="type == 'radio' || type == 'checkbox'"
     :current-page="returnPage()"
-    :total="listServe?pagination.total:list.length"
+    :total="listServe ? pagination.total : list.length"
     :pagination="isPagination"
     :max-height="maxHeight"
     :page-sizes="pageSizes"
     :layout="layout"
     :column="cobyColumn"
-    :data="listServe?data:list.slice((returnPage() - 1) * returnPageSize(),returnPage() * returnPageSize())"
+    :data="
+      listServe
+        ? data
+        : list.slice(
+            (returnPage() - 1) * returnPageSize(),
+            returnPage() * returnPageSize()
+          )
+    "
     v-loading="loading"
     :border="border"
     row-key="id"
     default-expand-all
+    :align="tableAlign"
+    :paginationAlign="paginationAlign"
     :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     @p-current-change="handleCurrentChange"
     @size-change="sizeChange"
@@ -26,7 +32,7 @@
     :merge="merge"
     :span-method="spanMethod"
     :summary-method="summaryMethod"
-    :show-summary="summaryMethod?true:false"
+    :show-summary="summaryMethod ? true : false"
     @select="select"
   >
     <template slot="item">
@@ -36,39 +42,39 @@
 </template>
 
 <script>
-import LbTable from './lb-table'
+import LbTable from "./lb-table";
 import {
   checkArray,
   checkArrayString,
   getMultistage,
   getObjByValue,
   setMultistage,
-  formateObjToParamStr,
-} from '@/utils/index'
-import { type } from '@jsmini/type'
-import lodash from 'lodash'
-import config from './config'
+  formateObjToParamStr
+} from "@/utils/index";
+import { type } from "@jsmini/type";
+import lodash from "lodash";
+import config from "./config";
 export default {
-  name: 'wyhElementTable',
+  name: "wyhElementTable",
   components: {
-    LbTable,
+    LbTable
   },
   mixins: [config],
   computed: {},
   watch: {
     myPages: {
       handler(newName, oldName) {
-        const self = this
+        const self = this;
         if (self.autoSearch && newName && oldName) {
-          clearTimeout(self.autoSearchTimer)
-          self.autoSearchTimer = setTimeout(function () {
-            self.getList()
-          }, self.autoSearchTime)
+          clearTimeout(self.autoSearchTimer);
+          self.autoSearchTimer = setTimeout(function() {
+            self.getList();
+          }, self.autoSearchTime);
         }
       },
       immediate: true,
-      deep: true,
-    },
+      deep: true
+    }
   },
 
   data() {
@@ -88,247 +94,247 @@ export default {
 
       //分页的配置
       pagination: {
-        total: 0,
+        total: 0
       },
 
       loading: false,
 
       data: [],
 
-      cobyColumn: [],
-    }
+      cobyColumn: []
+    };
   },
   created() {
-    this.initPage()
+    this.initPage();
     if (this.listServe) {
-      this.getList()
+      this.getList();
     }
-    this.initColumn()
+    this.initColumn();
   },
   methods: {
     returnData() {
-      return this.listServe ? this.data : this.list
+      return this.listServe ? this.data : this.list;
     },
     returnPage() {
-      return getMultistage(this.page, this.definitionPage)
+      return getMultistage(this.page, this.definitionPage);
     },
     returnPageSize() {
-      return getMultistage(this.page, this.definitionPageSize)
+      return getMultistage(this.page, this.definitionPageSize);
     },
 
     initPage(page = -1, pageSize = -1) {
       let pageValue =
         page == getMultistage(this.page, this.definitionPage)
           ? getMultistage(this.page, this.definitionPage)
-          : this.definitionPageValue
+          : this.definitionPageValue;
       let pageSizeValue =
         pageSize == getMultistage(this.page, this.definitionPageSize)
           ? getMultistage(this.page, this.definitionPageSize)
-          : this.definitionPageSizeValue
+          : this.definitionPageSizeValue;
       if (page != -1) {
         this.page = lodash.merge(
           this.page,
           setMultistage(this.page, this.definitionPage, page)
-        )
+        );
       }
       if (pageSize != -1) {
         this.page = lodash.merge(
           this.page,
           setMultistage(this.page, this.definitionPageSize, pageSize)
-        )
+        );
       }
 
       if (pageSize == -1 && page == -1) {
         this.page = lodash.merge(
           setMultistage(this.page, this.definitionPage, pageValue),
           setMultistage(this.page, this.definitionPageSize, pageSizeValue)
-        )
+        );
       }
     },
     initColumn() {
-      this.cobyColumn = []
-      lodash.cloneDeep(this.column).forEach((item) => {
-        if (item.iif && type(item.iif) === 'function') {
+      this.cobyColumn = [];
+      lodash.cloneDeep(this.column).forEach(item => {
+        if (item.iif && type(item.iif) === "function") {
           if (item.iif()) {
-            this.cobyColumn.push(item)
+            this.cobyColumn.push(item);
           }
         } else {
-          this.cobyColumn.push(item)
+          this.cobyColumn.push(item);
         }
-      })
+      });
 
-      if (this.type === 'checkbox') {
+      if (this.type === "checkbox") {
         this.cobyColumn.unshift({
-          type: 'selection',
-        })
-      } else if (this.type == 'radio') {
+          type: "selection"
+        });
+      } else if (this.type == "radio") {
         //radio 给新增一个 radio 框框
         this.cobyColumn.unshift({
-          type: 'radio',
-          width: this.radioAttribute.width ? this.radioAttribute.width : '50px',
-          label: this.radioAttribute.label ? this.radioAttribute.label : '选择',
+          type: "radio",
+          width: this.radioAttribute.width ? this.radioAttribute.width : "50px",
+          label: this.radioAttribute.label ? this.radioAttribute.label : "选择",
           radioType: this.radioAttribute.type,
           radioValue: getMultistage(
             this.radioAttribute.value,
             this.radioAttribute.type
-          ),
-        })
+          )
+        });
       }
     },
     //重置列
     resetColumn() {
       if (checkArray(this.column)) {
         this.$nextTick(() => {
-          this.initColumn()
-        })
+          this.initColumn();
+        });
       }
     },
     //点击搜索
     search() {
-      this.page.page = 1
-      this.getList()
+      this.page.page = 1;
+      this.getList();
     },
     //初始化MyPages
     //把myPages的值还原成空或是undefined
     initMyPages(myPages) {
       if (myPages) {
-        Object.keys(myPages).forEach((key) => {
+        Object.keys(myPages).forEach(key => {
           switch (type(myPages[key])) {
-            case 'object':
+            case "object":
               if (Object.keys(myPages[key]).length) {
-                this.initMyPages(myPages[key])
+                this.initMyPages(myPages[key]);
               } else {
-                myPages[key] = {}
+                myPages[key] = {};
               }
-              break
-            case 'array':
-              myPages[key] = []
-              break
+              break;
+            case "array":
+              myPages[key] = [];
+              break;
             default:
-              myPages[key] = undefined
-              break
+              myPages[key] = undefined;
+              break;
           }
-        })
+        });
       }
     },
     // 重置搜索
     reset() {
-      this.page.page = 1
-      this.initMyPages(this.myPages)
-      this.$emit('reset')
+      this.page.page = 1;
+      this.initMyPages(this.myPages);
+      this.$emit("reset");
       if (!this.autoSearch) {
-        this.getList()
+        this.getList();
       }
     },
 
     //获取列表数据
     getList() {
-      this.page = Object.assign({}, this.page, this.myPages)
-      this.page = Object.assign({}, this.page, this.baseParams)
+      this.page = Object.assign({}, this.page, this.myPages);
+      this.page = Object.assign({}, this.page, this.baseParams);
       const url =
-        this.listServeMethod === 'POST'
+        this.listServeMethod === "POST"
           ? this.listServe
-          : this.listServe + '?' + formateObjToParamStr(this.page)
-      this.loading = true
+          : this.listServe + "?" + formateObjToParamStr(this.page);
+      this.loading = true;
       this[this.requestType]
         [this.listServeMethod.toLowerCase()](
           url,
-          this.listServeMethod === 'POST' ? this.page : {}
+          this.listServeMethod === "POST" ? this.page : {}
         )
-        .then((res) => {
-          this.loading = false
+        .then(res => {
+          this.loading = false;
           if (this.checkboxDeleteValue) {
-            this.checkboxAttribute.value = []
+            this.checkboxAttribute.value = [];
           }
           if (checkArray(this.checkboxAttribute.value)) {
-            this.checkboxArrayUpdate()
+            this.checkboxArrayUpdate();
           }
           //返回列表对象
-          this.$emit('onGetList', { data: res })
-          this.data = getMultistage(res, this.definitionData)
-          this.pagination.total = getMultistage(res, this.definitionTotal)
+          this.$emit("onGetList", { data: res });
+          this.data = getMultistage(res, this.definitionData);
+          this.pagination.total = getMultistage(res, this.definitionTotal);
         })
-        .catch((err) => {
-          this.loading = false
-        })
+        .catch(err => {
+          this.loading = false;
+        });
     },
     //分页的change事件
     handleCurrentChange(value) {
-      this.initPage(value, -1)
+      this.initPage(value, -1);
       if (this.listServe) {
-        this.getList()
+        this.getList();
       } else {
-        this.$forceUpdate()
+        this.$forceUpdate();
       }
     },
     //点击行
     rowClick(value, column, event) {
-      this.currentRow = value
-      if (this.type == 'radio') {
+      this.currentRow = value;
+      if (this.type == "radio") {
         //点击行和radio 的选中冲突了  在这做判断  如果是选中radio 则不触发回调
         if (
-          event.target.localName === 'input' &&
-          event.target.type === 'radio'
+          event.target.localName === "input" &&
+          event.target.type === "radio"
         ) {
-          return false
+          return false;
         }
-        this.setRadioAttributeValue(value)
-      } else if (this.type == 'checkbox') {
+        this.setRadioAttributeValue(value);
+      } else if (this.type == "checkbox") {
         //当前列表没有多选判断的唯一值
-        const typeValue = getMultistage(value, this.checkboxAttribute.type)
+        const typeValue = getMultistage(value, this.checkboxAttribute.type);
         if (!typeValue) {
           throw new Error(
-            '当前列表没有多选判断的唯一值  请检查你的多选判断：' +
+            "当前列表没有多选判断的唯一值  请检查你的多选判断：" +
               JSON.stringify(this.checkboxAttribute) +
-              '你的列表:' +
+              "你的列表:" +
               JSON.stringify(this.column)
-          )
-          return false
+          );
+          return false;
         }
         const index = checkArrayString(
           this.checkboxAttribute.value,
           this.checkboxAttribute.type,
           typeValue
-        )
+        );
         if (index === -1) {
-          this.checkboxAttribute.value.push(value)
+          this.checkboxAttribute.value.push(value);
         } else {
-          this.checkboxAttribute.value.splice(index, 1)
+          this.checkboxAttribute.value.splice(index, 1);
         }
-        this.$refs.wyhElementTable.$refs.elTable.toggleRowSelection(value)
+        this.$refs.wyhElementTable.$refs.elTable.toggleRowSelection(value);
       }
-      this.$refs.wyhElementTable.$refs.elTable.setCurrentRow()
-      this.selectComplete()
+      this.$refs.wyhElementTable.$refs.elTable.setCurrentRow();
+      this.selectComplete();
     },
 
     //点击全选
     selectAll(value) {
       if (checkArray(value)) {
-        this.returnData().forEach((item) => {
+        this.returnData().forEach(item => {
           const index = checkArrayString(
             this.checkboxAttribute.value,
             this.checkboxAttribute.type,
             getMultistage(item, this.checkboxAttribute.type)
-          )
-          if (index == -1) this.checkboxAttribute.value.push(item)
-        })
+          );
+          if (index == -1) this.checkboxAttribute.value.push(item);
+        });
       } else {
-        this.returnData().forEach((item) => {
+        this.returnData().forEach(item => {
           const index = checkArrayString(
             this.checkboxAttribute.value,
             this.checkboxAttribute.type,
             getMultistage(item, this.checkboxAttribute.type)
-          )
-          if (index != -1) this.checkboxAttribute.value.splice(index, 1)
-        })
+          );
+          if (index != -1) this.checkboxAttribute.value.splice(index, 1);
+        });
       }
-      this.selectComplete()
+      this.selectComplete();
     },
 
     //修改checkbox状态
     checkboxArrayUpdate() {
       this.$nextTick(() => {
-        this.returnData().forEach((value) => {
+        this.returnData().forEach(value => {
           if (
             checkArrayString(
               this.checkboxAttribute.value,
@@ -336,59 +342,59 @@ export default {
               getMultistage(value, this.checkboxAttribute.type)
             ) != -1
           ) {
-            this.$refs.wyhElementTable.$refs.elTable.toggleRowSelection(value)
+            this.$refs.wyhElementTable.$refs.elTable.toggleRowSelection(value);
           }
-        })
-      })
+        });
+      });
     },
     //点击单选
     select(value, row) {
-      this.$emit('select', value, row)
+      this.$emit("select", value, row);
       //找出已选列表数据的下标(element 的table selection)
       const index = checkArrayString(
         this.$refs.wyhElementTable.$refs.elTable.selection,
         this.checkboxAttribute.type,
         getMultistage(row, this.checkboxAttribute.type)
-      )
+      );
       //不存在则添加
       if (index != -1) {
-        this.checkboxAttribute.value.push(row)
+        this.checkboxAttribute.value.push(row);
       } else {
         //存在则再根据寻找一次(自己存的一份)
         const i = checkArrayString(
           this.checkboxAttribute.value,
           this.checkboxAttribute.type,
           getMultistage(row, this.checkboxAttribute.type)
-        )
-        this.checkboxAttribute.value.splice(i, 1)
+        );
+        this.checkboxAttribute.value.splice(i, 1);
       }
-      this.selectComplete()
+      this.selectComplete();
     },
 
     //分页的页码改变
     sizeChange(value) {
-      this.initPage(-1, value)
+      this.initPage(-1, value);
       if (this.listServe) {
-        this.getList()
+        this.getList();
       } else {
-        this.$forceUpdate()
+        this.$forceUpdate();
       }
     },
 
     //设置单选的value
     setRadioAttributeValue(value = null) {
-      this.radioAttribute.value = value
+      this.radioAttribute.value = value;
       this.cobyColumn[
-        checkArrayString(this.cobyColumn, 'type', 'radio')
+        checkArrayString(this.cobyColumn, "type", "radio")
       ].radioValue =
         this.radioAttribute.type && value
           ? getMultistage(value, this.radioAttribute.type)
-          : value
+          : value;
     },
 
     //发送信息
     selectComplete() {
-      this.$emit('selectComplete', {
+      this.$emit("selectComplete", {
         //返回列表对象
         list: this.returnData,
 
@@ -396,9 +402,9 @@ export default {
         currentRow: this.currentRow,
 
         //返回多选对象
-        checkboxAttribute: this.checkboxAttribute,
-      })
-    },
-  },
-}
+        checkboxAttribute: this.checkboxAttribute
+      });
+    }
+  }
+};
 </script>

@@ -2,7 +2,11 @@
   <div>
     <el-collapse v-model="activeNames">
       <el-collapse-item title="列表" name="0">
-        <wyhElementTable :column="column" :list="form.componentsList">
+        <wyhElementTable
+          tableAlign="left"
+          :column="column"
+          :list="form.componentsList"
+        >
         </wyhElementTable>
         <div class="text-center">
           <el-button
@@ -67,13 +71,24 @@
             placeholder="请输入标题"
           ></el-input>
         </el-form-item>
-        <el-form-item label="内容" prop="value">
+
+        <!-- <wyhElementTable
+          :column="columnChildren"
+          :list="form.componentsList[componentsListIndex].children"
+        >
+        </wyhElementTable> -->
+
+        <!-- <el-form-item label="内容" prop="value">
           <tinymce
             v-model="dialogCollapse.value.value"
             menubar="false"
             :height="360"
           />
-        </el-form-item>
+        </el-form-item> -->
+
+        <!-- <el-button @click="addTabsContentComponent('', 1)">
+          添加组件
+        </el-button> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogCollapse.visible = false">取 消</el-button>
@@ -96,6 +111,7 @@ import carouselAttributes from "./carouselAttributes";
 import tinymce from "@/components/Tinymce/index";
 import { uuid } from "vue-uuid";
 import lodash from "lodash";
+import { checkArrayString } from "@/utils";
 export default {
   name: "customerPageTabs",
   mixins: [setGuideComponentProperty],
@@ -114,6 +130,7 @@ export default {
         value: {},
         type: ""
       },
+      componentsListIndex: 0,
       rules: {
         title: [{ required: true, message: "这是必填项" }],
         value: [{ required: true, message: "这是必填项" }]
@@ -124,41 +141,85 @@ export default {
           label: "标题"
         },
         {
-          prop: "value",
-          label: "内容"
+          prop: "controlType",
+          label: "组件类型"
         },
         {
+          type: "buttons",
           label: "操作",
-          render: (h, scope) => {
-            return (
-              <div class="buttonDivide">
-                <el-button
-                  type="text"
-                  onClick={() =>
-                    this.addFormComponet("编辑选项卡", 1, scope.row)
-                  }
-                >
-                  编辑
-                </el-button>
-                <el-button
-                  type="text"
-                  onClick={() =>
-                    this.addFormComponet("查看选项卡", 2, scope.row)
-                  }
-                >
-                  查看
-                </el-button>
-                <el-button
-                  type="text"
-                  onClick={() =>
-                    this.form.componentsList.splice(scope.$index, 1)
-                  }
-                >
-                  删除
-                </el-button>
-              </div>
-            );
-          }
+          buttons: [
+            {
+              //按钮隐藏或展示
+              iif: scope => !scope.row.controlType,
+              text: "新增子组件",
+              click: (scope, modal) => {
+                this.addTabsContentComponent(scope.row, 1);
+              }
+            },
+            {
+              //按钮隐藏或展示
+              iif: scope => scope.row.controlType,
+              text: "修改组件",
+              click: (scope, modal) => {
+                this.addTabsContentComponent(scope.row, 2);
+              }
+            },
+
+            {
+              iif: scope => !scope.row.controlType,
+              text: "编辑",
+              click: (scope, modal) => {
+                this.addFormComponet("编辑选项卡", 1, scope.row);
+              }
+            },
+            {
+              text: "删除",
+              click: (scope, modal) => {
+                this.form.componentsList.splice(scope.$index, 1);
+              }
+            }
+          ]
+          // render: (h, scope) => {
+          //   return (
+          //     <div class="buttonDivide">
+          //       <el-button
+          //         type="text"
+          //         class=""
+          //         onClick={() =>
+          //           this.addTabsContentComponent(
+          //             scope.row,
+          //             1,
+          //             scope.$index,
+          //             scope
+          //           )
+          //         }
+          //       >
+          //         新增子组件
+          //       </el-button>
+          //       <el-button
+          //         type="text"
+          //         onClick={() =>
+          //           this.addFormComponet(
+          //             "编辑选项卡",
+          //             1,
+          //             scope.row,
+          //             scope.$index
+          //           )
+          //         }
+          //       >
+          //         编辑
+          //       </el-button>
+          //       <el-button
+          //         type="text"
+          //         onClick={() =>
+          //           this.form.componentsList.splice(scope.$index, 1)
+          //         }
+          //       >
+          //         删除
+          //       </el-button>
+          //     </div>
+          //   );
+          // }
         }
       ]
     };
@@ -185,9 +246,17 @@ export default {
       ]);
     },
     addFormComponet(title, type, value) {
-      this.dialogCollapse.value = value
-        ? value
-        : { title: "", value: "", id: uuid.v4() };
+      if (value) {
+        this.componentsListIndex = checkArrayString(
+          this.form.componentsList,
+          "id",
+          value.id
+        );
+        this.dialogCollapse.value = lodash.cloneDeep(value);
+      } else {
+        this.componentsListIndex = this.form.componentsList.length - 1;
+        this.dialogCollapse.value = { title: "", children: [], id: uuid.v4() };
+      }
       this.dialogCollapse.title = title;
       this.dialogCollapse.type = type;
       this.dialogCollapse.visible = true;
@@ -199,10 +268,11 @@ export default {
           if (this.dialogCollapse.type == 0) {
             this.form.componentsList.push(customerPageCollapseForm.model);
           } else {
-            this.form.value = {
-              ...this.form.value,
-              ...customerPageCollapseForm.model
-            };
+            this.$set(
+              this.form.componentsList,
+              this.componentsListIndex,
+              customerPageCollapseForm.model
+            );
           }
           this.dialogCollapse.visible = false;
         }
@@ -210,6 +280,44 @@ export default {
     },
     judgeComponentsList() {
       return this.form.componentsList && this.form.componentsList.length > 0;
+    },
+
+    /**
+     * tabsItem tabs子组件对象
+     * status 1添加 2修改
+     * index 当前数组的索引
+     */
+    addTabsContentComponent(tabsItem, status) {
+      if (status == 1) {
+        this.componentsIndex = checkArrayString(
+          this.form.componentsList,
+          "id",
+          tabsItem.id
+        );
+      } else {
+        console.log(this.form.componentsList);
+        for (let index = 0; index < this.form.componentsList.length; index++) {
+          if (
+            checkArrayString(
+              this.form.componentsList[index].children,
+              "id",
+              tabsItem.id
+            ) != -1
+          ) {
+            //父级的index
+            this.componentsIndex = index;
+            break;
+          }
+        }
+      }
+      eventEmiter.emit("addTabsContentComponent", [
+        {
+          form: this.form,
+          item: tabsItem,
+          status: status,
+          index: this.componentsIndex
+        }
+      ]);
     }
   }
 };

@@ -166,5 +166,15 @@ export default {
       type: Number,
       default: 666,
     },
+    //table 对齐方向
+    tableAlign: {
+      type: String,
+      default: 'center'
+    },
+    //table的分页 对齐方向
+    paginationAlign: {
+      type: String,
+      default: "right"
+    },
   }
 }
