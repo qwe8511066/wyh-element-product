@@ -1,4 +1,4 @@
-import { ipadFieldName, pcFieldName } from '@/global/style'
+import { ipadFieldName, pcFieldName, mdFieldName } from '@/global/style'
 
 /**
  * Parse the time to string
@@ -473,30 +473,6 @@ export function isCol(dividend, divisor = 12) {
   return dividend != 1 && (divisor % dividend === 0)
 }
 
-/**
- * 判断styleClass
- * @param {*} value 数据
- * @param {*} fieldName  字段名称
- * @param {*} className  类的名称
- * @returns 
- */
-export function judgeStyleClass(value, fieldName, className = '') {
-  let name = ''
-  if (fieldName && value[fieldName]) {
-    name = value[fieldName]
-    //判断负数
-    if (Math.sign(name) == -1 && name.toString().slice(0, 1) === '-') {
-      name = '-' + className + parseInt(name.toString().substr(1))
-    } else {
-      name = className + name
-    }
-  }
-  if (value[fieldName + 'Model']) {
-    name = value[fieldName] && value[fieldName] != 12 ? className + value[fieldName] + "/12" : 'w-full';
-  }
-  return name
-}
-
 //组件的样式
 export function guideComponentStyleClass(value) {
   let list = [];
@@ -543,6 +519,11 @@ export function guideComponentStyleClass(value) {
       const ipadFlexDirection =
         ipadFieldName +
         judgeStyleClass(styleClass, "ipadFlexDirection");
+
+      const mdFlexDirection = mdFieldName +
+        judgeStyleClass(styleClass, "ipadFlexDirection");
+
+
       const desktopFlexDirection =
         pcFieldName +
         judgeStyleClass(styleClass, "desktopFlexDirection");
@@ -553,6 +534,11 @@ export function guideComponentStyleClass(value) {
       const ipadJustifyContent =
         ipadFieldName +
         judgeStyleClass(styleClass, "ipadJustifyContent");
+
+      const mdJustifyContent =
+        mdFieldName +
+        judgeStyleClass(styleClass, "ipadJustifyContent");
+
       const desktopJustifyContent =
         pcFieldName +
         judgeStyleClass(styleClass, "desktopJustifyContent");
@@ -564,6 +550,11 @@ export function guideComponentStyleClass(value) {
       const ipadItemsContent =
         ipadFieldName +
         judgeStyleClass(styleClass, "ipadItemsContent");
+
+      const mdItemsContent =
+        mdFieldName +
+        judgeStyleClass(styleClass, "ipadItemsContent");
+
       const desktopItemsContent =
         pcFieldName +
         judgeStyleClass(styleClass, "desktopItemsContent");
@@ -579,7 +570,10 @@ export function guideComponentStyleClass(value) {
         desktopJustifyContent,
         mobileItemsContent,
         ipadItemsContent,
-        desktopItemsContent
+        desktopItemsContent,
+        mdFlexDirection,
+        mdJustifyContent,
+        mdItemsContent,
       );
     }
 
@@ -589,18 +583,24 @@ export function guideComponentStyleClass(value) {
         judgeStyleClass(styleClass, "desktopWidth", "w-");
       let ipadWidth =
         ipadFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
+      let mdWidth =
+        mdFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
+
       let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
 
       let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
       let ipadColFlex = judgeStyleClass(styleClass, "ipadColFlex");
       let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
+      let mdColFlex = judgeStyleClass(styleClass, "mdColFlex");
 
       mobileColFlex = mobileColFlex ? pcFieldName + mobileColFlex : "";
       ipadColFlex = ipadColFlex ? ipadFieldName + ipadColFlex : "";
+      mdColFlex = mdColFlex ? mdFieldName + mdColFlex : "";
 
       desktopWidth = mobileColFlex ? "" : desktopWidth;
       ipadWidth = ipadColFlex ? "" : ipadWidth;
       mobileWidth = desktopColFlex ? "" : mobileWidth;
+      mdWidth = mdColFlex ? "" : mdWidth;
 
       list.push(
         desktopWidth,
@@ -608,7 +608,10 @@ export function guideComponentStyleClass(value) {
         mobileWidth,
         mobileColFlex,
         ipadColFlex,
-        desktopColFlex
+        desktopColFlex,
+
+        mdWidth,
+        mdColFlex,
       );
     }
 
@@ -635,10 +638,36 @@ export function guideComponentStyleClass(value) {
   }
   return list.join(" ");
 }
+
+/**
+ * 判断styleClass
+ * @param {*} value 数据
+ * @param {*} fieldName  字段名称
+ * @param {*} className  类的名称
+ * @returns 
+ */
+export function judgeStyleClass(value, fieldName, className = '') {
+  let name = ''
+  if (fieldName && value[fieldName]) {
+    name = value[fieldName]
+    //判断负数
+    if (Math.sign(name) == -1 && name.toString().slice(0, 1) === '-') {
+      name = '-' + className + parseInt(name.toString().substr(1))
+    } else {
+      name = className + name
+    }
+  }
+
+  if (value[fieldName + 'Model']) {
+    name = value[fieldName] && value[fieldName] != 12 ? className + value[fieldName] + "/12" : 'w-full';
+  }
+  return name
+}
+
 //判断lg 或者xl 的文本和间距样式
 export function judgeStyleClassLgXl(styleClass) {
   const array = [];
-  const forFieldList = ["", ipadFieldName, pcFieldName];
+  const forFieldList = ["", ipadFieldName, pcFieldName, mdFieldName];
   forFieldList.forEach(item => {
     let fontSize = judgeStyleClass(
       styleClass,

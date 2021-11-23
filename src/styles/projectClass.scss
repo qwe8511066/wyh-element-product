@@ -1,0 +1,28 @@
+/** 项目的专用class **/
+.ul-list-card-1-0 {
+  .col {
+    &:hover {
+      background-color: #4095ec;
+      color: white;
+      a {
+        color: white;
+      }
+      .icon {
+        background-color: #4095ec;
+        border-color: white;
+      }
+    }
+    .icon {
+      font-size: 1.75rem;
+      width: 80px;
+      line-height: 80px;
+      text-align: center;
+      height: 80px;
+      background-color: #43788e;
+      border: 1px solid #43788e;
+      color: white;
+      border-radius: 9999px;
+      display: block;
+    }
+  }
+}

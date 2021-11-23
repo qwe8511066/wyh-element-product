@@ -17,7 +17,7 @@ import '@/directive/customePageContainer.js' //全局表单回车事件
 import service from '@/utils/request'
 import lodash from "lodash";
 import UUID from "vue-uuid";
-
+import './assets/font/iconfont.css';
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 

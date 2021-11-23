@@ -127,11 +127,7 @@
               <label class="w-180">{{ box.title }}</label>
               <el-slider
                 class="flex-1 px-20"
-                :min="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
-                    ? 1
-                    : 0
-                "
+                :min="0"
                 :step="
                   form.styleClass['' + box.spacingFieldName + ''] === 'grid'
                     ? 1
@@ -173,7 +169,11 @@
               <label class="w-180">{{ box.title }}</label>
               <el-slider
                 class="flex-1 px-20"
-                :min="-100"
+                :min="
+                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                    ? 0
+                    : -100
+                "
                 :step="
                   form.styleClass['' + box.spacingFieldName + ''] === 'grid'
                     ? 1

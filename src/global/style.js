@@ -5,6 +5,7 @@ let hoverTextColorListVariable = []
 
 export const ipadFieldName = 'lg' + tailwind.separator;
 export const pcFieldName = 'xl' + tailwind.separator;
+export const mdFieldName = 'md' + tailwind.separator;
 
 Object.keys(colors).forEach(key => {
   stylePulbicColorVariable.push(colors[key]);
@@ -71,6 +72,10 @@ export const styleFlexAlignContent = [
   {
     label: '结束点对齐',
     value: 'items-end',
+  },
+  {
+    label: '拉伸对齐(高度一致)',
+    value: 'items-stretch',
   },
 ]
 
@@ -889,6 +894,7 @@ export default {
   hoverTextColorList,
   pcFieldName,
   ipadFieldName,
+  mdFieldName,
   carouselSettings,
   lazyLoad,
   tabsPositionList,

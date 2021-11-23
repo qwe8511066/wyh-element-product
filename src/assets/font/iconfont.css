@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "icon"; /* Project id 2462412 */
+  src: url('iconfont.woff2?t=1637553036443') format('woff2'),
+       url('iconfont.woff?t=1637553036443') format('woff'),
+       url('iconfont.ttf?t=1637553036443') format('truetype');
+}
+
+.icon {
+  font-family: "icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-livingicon-2-0:before {
+  content: "\e65c";
+}
+
+.icon-livingicon-1-0:before {
+  content: "\e65b";
+}
+
+.icon-investment-1-0:before {
+  content: "\e65a";
+}
+
+.icon-play-fill:before {
+  content: "\e6d2";
+}
+
+.icon-twitter:before {
+  content: "\e6c05";
+}
+
+.icon-instagram:before {
+  content: "\e6c02";
+}
+
+.icon-search:before {
+  content: "\e6c09";
+}
+
+.icon-weibo:before {
+  content: "\e6c01";
+}
+
+.icon-facebook:before {
+  content: "\e6c03";
+}
+
+.icon-menu-:before {
+  content: "\e6c10";
+}
+
+.icon-home:before {
+  content: "\e6c18";
+}
+
+.icon-explorationicon:before {
+  content: "\e6c33";
+}
+
+.icon-workicon:before {
+  content: "\e6c65";
+}
+
+.icon-investmenticon:before {
+  content: "\e6c32";
+}
+
+.icon-livingicon:before {
+  content: "\e6c31";
+}
+
+.icon-clip:before {
+  content: "\e6c30";
+}
+
+.icon-hospital-fill:before {
+  content: "\e6c29";
+}
+
+.icon-water:before {
+  content: "\e6c28";
+}
+
+.icon-house-door:before {
+  content: "\e6c27";
+}
+
+.icon-house-shape:before {
+  content: "\e6c26";
+}
+
+.icon-next:before {
+  content: "\e6c25";
+}
+
+.icon-prev:before {
+  content: "\e6c24";
+}
+
+.icon-electric-fill:before {
+  content: "\e6c23";
+}
+
+.icon-water-fill:before {
+  content: "\e6c22";
+}
+
+.icon-gas-fill:before {
+  content: "\e6c21";
+}
+
+.icon-email:before {
+  content: "\e6c20";
+}
+
+.icon-faq:before {
+  content: "\e6c19";
+}
+
+.icon-passport:before {
+  content: "\e6c17";
+}
+
+.icon-layout:before {
+  content: "\e6c16";
+}
+
+.icon-lists:before {
+  content: "\e6c15";
+}
+
+.icon-download:before {
+  content: "\e6c14";
+}
+
+.icon-place:before {
+  content: "\e6c13";
+}
+
+.icon-cursor-double:before {
+  content: "\e6c12";
+}
+
+.icon-browser:before {
+  content: "\e6c11";
+}
+
+.icon-electric:before {
+  content: "\e6c08";
+}
+
+.icon-gas:before {
+  content: "\e6c07";
+}
+
+.icon-youtube:before {
+  content: "\e6c06";
+}
+
+.icon-google-plus:before {
+  content: "\e6c04";
+}
+

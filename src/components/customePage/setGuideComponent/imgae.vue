@@ -117,8 +117,7 @@ export default {
           }
         }
       ]);
-    },
-    outPutForm() {}
+    }
   }
 };
 </script>

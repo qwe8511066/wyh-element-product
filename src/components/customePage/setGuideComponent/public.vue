@@ -21,9 +21,27 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane label="组件样式->pad模式(lg)" name="2" :lazy="true">
+    <el-tab-pane
+      label="组件样式->md模式(md 手机之外的样式 低于ipad)"
+      name="2"
+      :lazy="true"
+    >
       <el-form
         ref="setGuideStyleComponentFormLg"
+        :rules="rules"
+        label-position="top"
+        :model="form"
+      >
+        <setGuideStyleComponent
+          :form="form"
+          :prefixField="mdFieldName"
+        ></setGuideStyleComponent>
+      </el-form>
+    </el-tab-pane>
+
+    <el-tab-pane label="组件样式->pad模式(lg)" name="3" :lazy="true">
+      <el-form
+        ref="setGuideStyleComponentFormMd"
         :rules="rules"
         label-position="top"
         :model="form"
@@ -35,7 +53,7 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane label="组件样式->电脑pc模式(xl)" name="3" :lazy="true">
+    <el-tab-pane label="组件样式->电脑pc模式(xl)" name="4" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormXl"
         :rules="rules"
@@ -72,6 +90,7 @@ export default {
     return {
       pcFieldName: this.$style.pcFieldName,
       ipadFieldName: this.$style.ipadFieldName,
+      mdFieldName: this.$style.mdFieldName,
 
       form: {
         //用于直接设置style 背景颜色和字体颜色
@@ -126,6 +145,11 @@ export default {
         this.ipadFieldName + "fontSize"
       ]
         ? styleClass[this.ipadFieldName + "fontSize"]
+        : 16;
+      styleClass[this.mdFieldName + "fontSize"] = styleClass[
+        this.mdFieldName + "fontSize"
+      ]
+        ? styleClass[this.mdFieldName + "fontSize"]
         : 16;
     }
   }

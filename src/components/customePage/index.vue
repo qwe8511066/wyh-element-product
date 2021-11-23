@@ -356,8 +356,6 @@ export default {
     return {
       styleFontSize: this.$style.styleFontSize,
       componentList: this.$style.componentList,
-      pcFieldName: this.$style.pcFieldName,
-      ipadFieldName: this.$style.ipadFieldName,
 
       deleteEmptyVisible: {
         title: "",
@@ -595,7 +593,6 @@ export default {
     setTabsGuidePublicComponentFinish(type) {
       const setTabsGuidePublicComponent = this.$refs.setTabsGuidePublicComponent
         .$refs.setGuideComponentForm;
-      console.log(this.tabsContentComponentForm);
       setTabsGuidePublicComponent.validate(valid => {
         if (valid) {
           this.tabsContentComponent = {
