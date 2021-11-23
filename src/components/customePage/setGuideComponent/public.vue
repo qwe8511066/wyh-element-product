@@ -97,16 +97,6 @@ export default {
         style: {},
         //用于直接设置字体大小 边框 间距这类class
         styleClass: {
-          fontSize: 16,
-          styleSpacingLeftModel: "",
-          paddingLeftModel: "",
-          paddingTopModel: "",
-          paddingRightModel: "",
-          paddingBottomModel: "",
-          marginLeftModel: "",
-          marginTopModel: "",
-          marginRightModel: "",
-          marginBottomModel: "",
           position: "",
           zIndex: ""
         },
@@ -134,23 +124,38 @@ export default {
     //合并从外层获取的value对象
     init() {
       this.form = this.value ? { ...this.form, ...this.value } : this.form;
+      this.setFieldPublicName();
+    },
 
+    //各种模式的默认值
+    setFieldPublicName() {
+      const forFieldList = [
+        "",
+        this.ipadFieldName,
+        this.pcFieldName,
+        this.mdFieldName
+      ];
+      const spacingModel = [
+        "paddingLeftModel",
+        "paddingTopModel",
+        "paddingRightModel",
+        "paddingBottomModel",
+        "marginLeftModel",
+        "marginTopModel",
+        "marginRightModel",
+        "marginBottomModel"
+      ];
       const styleClass = this.form.styleClass;
-      styleClass[this.pcFieldName + "fontSize"] = styleClass[
-        this.pcFieldName + "fontSize"
-      ]
-        ? styleClass[this.pcFieldName + "fontSize"]
-        : 16;
-      styleClass[this.ipadFieldName + "fontSize"] = styleClass[
-        this.ipadFieldName + "fontSize"
-      ]
-        ? styleClass[this.ipadFieldName + "fontSize"]
-        : 16;
-      styleClass[this.mdFieldName + "fontSize"] = styleClass[
-        this.mdFieldName + "fontSize"
-      ]
-        ? styleClass[this.mdFieldName + "fontSize"]
-        : 16;
+      forFieldList.forEach(item => {
+        styleClass[item + "fontSize"] = styleClass[item + "fontSize"]
+          ? styleClass[item + "fontSize"]
+          : 16;
+        spacingModel.forEach(box => {
+          styleClass[item + box] = styleClass[item + box]
+            ? styleClass[item + box]
+            : "";
+        });
+      });
     }
   }
 };

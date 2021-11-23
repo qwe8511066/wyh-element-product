@@ -8,7 +8,7 @@
     >
       <div v-for="(box, i) in item.children" :key="'tabsListChildren' + i">
         <guideComponent
-          :v-aos-animation="box.animation"
+          v-aos-animation:{value}="box.animation"
           :class="[cobyGuideComponentStyleClass(box)]"
           :value="box"
           ref="tabsListChildrenGuideComponent"

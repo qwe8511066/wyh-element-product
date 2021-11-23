@@ -129,12 +129,16 @@
                 class="flex-1 px-20"
                 :min="0"
                 :step="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                  form.styleClass[
+                    '' + prefixField + box.spacingFieldName + ''
+                  ] === 'grid'
                     ? 1
                     : 2
                 "
                 :max="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                  form.styleClass[
+                    '' + prefixField + box.spacingFieldName + ''
+                  ] === 'grid'
                     ? 11
                     : 100
                 "
@@ -143,7 +147,11 @@
               ></el-slider>
               <div class="">
                 <el-radio-group
-                  v-model="form.styleClass['' + box.spacingFieldName + '']"
+                  v-model="
+                    form.styleClass[
+                      '' + prefixField + box.spacingFieldName + ''
+                    ]
+                  "
                 >
                   <el-radio-button
                     :label="item.value"
@@ -170,17 +178,23 @@
               <el-slider
                 class="flex-1 px-20"
                 :min="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                  form.styleClass[
+                    '' + prefixField + box.spacingFieldName + ''
+                  ] === 'grid'
                     ? 0
                     : -100
                 "
                 :step="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                  form.styleClass[
+                    '' + prefixField + box.spacingFieldName + ''
+                  ] === 'grid'
                     ? 1
                     : 2
                 "
                 :max="
-                  form.styleClass['' + box.spacingFieldName + ''] === 'grid'
+                  form.styleClass[
+                    '' + prefixField + box.spacingFieldName + ''
+                  ] === 'grid'
                     ? 11
                     : 100
                 "
@@ -189,7 +203,11 @@
               ></el-slider>
               <div class="">
                 <el-radio-group
-                  v-model="form.styleClass['' + box.spacingFieldName + '']"
+                  v-model="
+                    form.styleClass[
+                      '' + prefixField + box.spacingFieldName + ''
+                    ]
+                  "
                 >
                   <el-radio-button
                     :label="item.value"

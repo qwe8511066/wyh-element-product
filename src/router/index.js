@@ -41,6 +41,13 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
+  {
+    path: '/customizePagePreview/:id',
+    name: '自定义页面预览',
+    component: () => import('@/views/formTemplate/customizePagePreview/index'),
+    title: '自定义页面预览',
+    hidden: true,
+  },
   // {
   //   path: '/home',
   //   component: Layout,

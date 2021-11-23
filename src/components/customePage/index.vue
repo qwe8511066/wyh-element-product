@@ -77,7 +77,7 @@
                   ]"
                 >
                   <guideComponent
-                    :v-aos-animation="box.animation"
+                    v-aos-animation:{value}="box.animation"
                     :class="[cobyGuideComponentStyleClass(box)]"
                     :layout="layout"
                     :value="box"
