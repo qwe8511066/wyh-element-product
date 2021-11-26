@@ -116,7 +116,7 @@ export default {
     this.init();
     //接收到组件属性初始化的请求 合并对象
     eventEmiter.once("setGuideComponentPropertyInitForm", value => {
-      this.form = value.form ? lodash.merge(value.form, this.form) : this.form;
+      this.form = value.form ? lodash.merge(this.form, value.form) : this.form;
       this.rules = value.rules ? { ...this.rules, ...value.rules } : this.rules;
     });
   },
