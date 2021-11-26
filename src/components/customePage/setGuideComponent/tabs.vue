@@ -173,53 +173,27 @@ export default {
               }
             },
             {
-              text: "删除",
+              iif: scope => !scope.row.controlType,
+              text: "删除tab",
               click: (scope, modal) => {
-                this.form.componentsList.splice(scope.$index, 1);
+                this.form.componentsList.splice(
+                  this.getComponentIndex(scope.row.id).parentIndex,
+                  1
+                );
+              }
+            },
+            {
+              iif: scope => scope.row.controlType,
+              text: "删除组件",
+              click: (scope, modal) => {
+                const value = this.getComponentIndex(scope.row.id, false);
+                this.form.componentsList[value.parentIndex].children.splice(
+                  value.childIndex,
+                  1
+                );
               }
             }
           ]
-          // render: (h, scope) => {
-          //   return (
-          //     <div class="buttonDivide">
-          //       <el-button
-          //         type="text"
-          //         class=""
-          //         onClick={() =>
-          //           this.addTabsContentComponent(
-          //             scope.row,
-          //             1,
-          //             scope.$index,
-          //             scope
-          //           )
-          //         }
-          //       >
-          //         新增子组件
-          //       </el-button>
-          //       <el-button
-          //         type="text"
-          //         onClick={() =>
-          //           this.addFormComponet(
-          //             "编辑选项卡",
-          //             1,
-          //             scope.row,
-          //             scope.$index
-          //           )
-          //         }
-          //       >
-          //         编辑
-          //       </el-button>
-          //       <el-button
-          //         type="text"
-          //         onClick={() =>
-          //           this.form.componentsList.splice(scope.$index, 1)
-          //         }
-          //       >
-          //         删除
-          //       </el-button>
-          //     </div>
-          //   );
-          // }
         }
       ]
     };
@@ -247,11 +221,7 @@ export default {
     },
     addFormComponet(title, type, value) {
       if (value) {
-        this.componentsListIndex = checkArrayString(
-          this.form.componentsList,
-          "id",
-          value.id
-        );
+        this.componentsListIndex = this.getComponentIndex(value.id).parentIndex;
         this.dialogCollapse.value = lodash.cloneDeep(value);
       } else {
         this.componentsListIndex = this.form.componentsList.length - 1;
@@ -288,28 +258,7 @@ export default {
      * index 当前数组的索引
      */
     addTabsContentComponent(tabsItem, status) {
-      if (status == 1) {
-        this.componentsIndex = checkArrayString(
-          this.form.componentsList,
-          "id",
-          tabsItem.id
-        );
-      } else {
-        console.log(this.form.componentsList);
-        for (let index = 0; index < this.form.componentsList.length; index++) {
-          if (
-            checkArrayString(
-              this.form.componentsList[index].children,
-              "id",
-              tabsItem.id
-            ) != -1
-          ) {
-            //父级的index
-            this.componentsIndex = index;
-            break;
-          }
-        }
-      }
+      this.componentsIndex = this.getComponentIndex(tabsItem.id).parentIndex;
       eventEmiter.emit("addTabsContentComponent", [
         {
           form: this.form,
@@ -318,6 +267,35 @@ export default {
           index: this.componentsIndex
         }
       ]);
+    },
+    getComponentIndex(id, parentType = true) {
+      let value = {
+        parentIndex: "",
+        childIndex: ""
+      };
+      if (parentType) {
+        value.parentIndex = checkArrayString(
+          this.form.componentsList,
+          "id",
+          id
+        );
+      } else {
+        for (let index = 0; index < this.form.componentsList.length; index++) {
+          const _childIndex = checkArrayString(
+            this.form.componentsList[index].children,
+            "id",
+            id
+          );
+          console.log(_childIndex);
+          if (_childIndex != -1) {
+            value.childIndex = _childIndex;
+            //父级的index
+            value.parentIndex = index;
+            break;
+          }
+        }
+      }
+      return value;
     }
   }
 };

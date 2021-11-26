@@ -7,11 +7,14 @@
         <div slot="header" class="clearfix">
           <span>代码片段</span>
         </div>
-        <pre>  
+        <pre>
+  
           &lt;wyhElementTable :column=&quot;column&quot; listServe=&quot;/getList1&quot;&gt;
       &lt;template slot=&quot;item&quot;&gt;
         &lt;el-table-column label=&quot;日期&quot; width=&quot;320&quot;&gt;
-          &lt;template slot-scope=&quot;{row,$index}&quot;&gt;{{`row.user.mtime`}}&lt;/template&gt;
+          &lt;template slot-scope=&quot;{row,$index}&quot;&gt;{{
+            `row.user.mtime`
+          }}&lt;/template&gt;
         &lt;/el-table-column&gt;
 
         &lt;el-table-column label=&quot;图片&quot; width=&quot;320&quot;&gt;
@@ -33,7 +36,8 @@
     }
   },  
 }
-  </pre>
+  </pre
+        >
       </el-card>
     </div>
   </div>
@@ -41,34 +45,46 @@
 
 <script>
 export default {
-  name: 'customizePage',
+  name: "customizePage",
   components: {},
   data() {
     return {
       column: [
         {
-          label: '操作',
+          label: "操作",
           render: (h, scope) => {
             return (
               <div class="buttonDivide">
                 <buttonPermission
-                  name="编辑"
+                  name="自定义页面"
                   onClick={() =>
-                    this.$router.push('/formTemplate/customizePage/customPage/' + scope.row.id)
+                    this.$router.push(
+                      "/formTemplate/customizePage/customPage/" + scope.row.id
+                    )
+                  }
+                ></buttonPermission>
+
+                <buttonPermission
+                  name="编辑"
+                  onClick={
+                    () => console.log("11")
+                    // this.$router.push(
+                    //   "/formTemplate/customizePage/customPage/" + scope.row.id
+                    // )
                   }
                 ></buttonPermission>
               </div>
-            )
-          },
+            );
+          }
         },
         {
-          prop: 'name',
-          label: '页面名称',
-        },
-      ],
-    }
-  },
-}
+          prop: "name",
+          label: "页面名称"
+        }
+      ]
+    };
+  }
+};
 </script>
 <style scoped lang="scss">
 .box-card {

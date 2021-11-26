@@ -72,6 +72,7 @@ export default {
       }
     },
     customizePagePreview() {
+      this.savaData();
       this.$router.push("/customizePagePreview/" + this.$route.params.id);
     }
   }

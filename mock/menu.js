@@ -208,7 +208,7 @@ module.exports = [
                 label: '编辑',
                 icon: 'el-icon-edit'
               },
-            ], 
+            ],
           },
           {
             path: '/formTemplate/customizeForm/customForm/:id',
@@ -224,6 +224,9 @@ module.exports = [
             component: 'views/formTemplate/customizePage/index',
             title: '页面列表', icon: 'el-icon-s-help',
             permissionButtons: [
+              {
+                label: '自定义页面',
+              },
               {
                 label: '编辑',
                 icon: 'el-icon-edit'
