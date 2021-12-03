@@ -7,7 +7,11 @@
         label-position="top"
         :model="form"
       >
-        <setGuideComponent :value="value" :form="form"></setGuideComponent>
+        <setGuideComponent
+          @eventTheParentInit="eventTheParentInit"
+          :value="value"
+          :form="form"
+        ></setGuideComponent>
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="组件样式->手机模式" name="1" :lazy="true">
@@ -114,17 +118,20 @@ export default {
   computed: {},
   created() {
     this.init();
-    //接收到组件属性初始化的请求 合并对象
-    eventEmiter.once("setGuideComponentPropertyInitForm", value => {
-      this.form = value.form ? lodash.merge(this.form, value.form) : this.form;
-      this.rules = value.rules ? { ...this.rules, ...value.rules } : this.rules;
-    });
   },
   methods: {
+    //接收到组件属性初始化的请求 合并对象
+    eventTheParentInit(value) {
+      this.form =
+        value && value.form ? lodash.merge(this.form, value.form) : this.form;
+      this.rules =
+        value && value.rules ? { ...this.rules, ...value.rules } : this.rules;
+    },
     //合并从外层获取的value对象
     init() {
       this.form = this.value ? { ...this.form, ...this.value } : this.form;
       this.setFieldPublicName();
+      this.eventTheParentInit();
     },
 
     //各种模式的默认值

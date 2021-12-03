@@ -4,6 +4,7 @@
       <el-collapse-item title="列表" name="0">
         <wyhElementTable
           tableAlign="left"
+          ref="tabsWyhElementTable"
           :column="column"
           :list="form.componentsList"
         >
@@ -71,27 +72,9 @@
             placeholder="请输入标题"
           ></el-input>
         </el-form-item>
-
-        <!-- <wyhElementTable
-          :column="columnChildren"
-          :list="form.componentsList[componentsListIndex].children"
-        >
-        </wyhElementTable> -->
-
-        <!-- <el-form-item label="内容" prop="value">
-          <tinymce
-            v-model="dialogCollapse.value.value"
-            menubar="false"
-            :height="360"
-          />
-        </el-form-item> -->
-
-        <!-- <el-button @click="addTabsContentComponent('', 1)">
-          添加组件
-        </el-button> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogCollapse.visible = false">取 消</el-button>
+        <el-button @click="dialogCollapse.visible = false">关 闭</el-button>
         <el-button
           type="primary"
           @click="saveFormComponet"
@@ -199,26 +182,8 @@ export default {
     };
   },
   computed: {},
-  created() {
-    this.init();
-  },
+  created() {},
   methods: {
-    //该组件的属性初始化 向父级发送信息  让父级去做对象的合并
-    init() {
-      eventEmiter.emit("setGuideComponentPropertyInitForm", [
-        {
-          form: {
-            componentsList: this.form.componentsList
-              ? this.form.componentsList
-              : [],
-            compontIndex: this.form.compontIndex ? this.form.compontIndex : 0,
-            compontPosition: this.form.compontPosition
-              ? this.form.compontPosition
-              : "top"
-          }
-        }
-      ]);
-    },
     addFormComponet(title, type, value) {
       if (value) {
         this.componentsListIndex = this.getComponentIndex(value.id).parentIndex;
@@ -246,6 +211,7 @@ export default {
           }
           this.dialogCollapse.visible = false;
         }
+        this.$refs.tabsWyhElementTable.forceRefreshTable();
       });
     },
     judgeComponentsList() {
@@ -258,7 +224,10 @@ export default {
      * index 当前数组的索引
      */
     addTabsContentComponent(tabsItem, status) {
-      this.componentsIndex = this.getComponentIndex(tabsItem.id).parentIndex;
+      this.componentsIndex = this.getComponentIndex(
+        tabsItem.id,
+        status === 1 ? true : false
+      ).parentIndex;
       eventEmiter.emit("addTabsContentComponent", [
         {
           form: this.form,

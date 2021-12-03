@@ -89,37 +89,8 @@ export default {
     };
   },
   computed: {},
-  created() {
-    this.init();
-    console.log(this.form);
-  },
-  methods: {
-    //该组件的属性初始化 向父级发送信息  让父级去做对象的合并
-    init() {
-      eventEmiter.emit("setGuideComponentPropertyInitForm", [
-        {
-          form: {
-            styleClass: {
-              imgWidthModel: this.form.styleClass.imgWidthModel
-                ? this.form.styleClass.imgWidthModel
-                : "default",
-              objectFit: this.form.styleClass.objectFit
-                ? this.form.styleClass.objectFit
-                : "object-cover",
-              imgHeight: this.form.styleClass.imgHeight
-                ? this.form.styleClass.imgHeight
-                : "h-auto"
-            },
-            imgUrl: "https://images5.alphacoders.com/757/757038.jpg",
-            skeleton: Boolean(this.form.skeleton) ? this.form.skeleton : false
-          },
-          rules: {
-            // title: [{ required: true, message: "这是必填项" }]
-          }
-        }
-      ]);
-    }
-  }
+  created() {},
+  methods: {}
 };
 </script>
 

@@ -112,6 +112,9 @@ export default {
     this.initColumn();
   },
   methods: {
+    forceRefreshTable() {
+      this.$forceUpdate();
+    },
     returnData() {
       return this.listServe ? this.data : this.list;
     },

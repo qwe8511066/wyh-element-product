@@ -211,7 +211,7 @@
         </div>
         <div class="flex p-20">
           <el-button @click="deleteEmptyVisible.visible = false" class="w-full"
-            >取 消</el-button
+            >关 闭</el-button
           >
           <el-button type="primary" class="w-full" @click="determineDelete"
             >确 定</el-button
@@ -271,7 +271,7 @@
         :value="col.component"
       ></setGuidePublicComponent>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="setComponeVisible = false">取 消</el-button>
+        <el-button @click="setComponeVisible = false">关 闭</el-button>
         <el-button type="primary" @click="setGuidePublicComponentFinish"
           >确 定</el-button
         >
@@ -297,7 +297,7 @@
       ></setGuidePublicComponent>
       <div slot="footer" class="dialog-footer">
         <el-button @click="setTabsGuidePublicComponentFinish(false)"
-          >取 消</el-button
+          >关 闭</el-button
         >
         <el-button
           type="primary"
@@ -530,7 +530,9 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.addComponeVisible = false;
+        setTimeout(() => {
+          this.addComponeVisible = false;
+        }, 33);
       });
     },
 
@@ -622,9 +624,8 @@ export default {
           }
         }
       });
-      console.log(this.tabsContentComponentForm);
+      this.tabsContentComponentStatus = "";
       this.tabsContentComponentVisible = false;
-      this.$set(this.tabsContentComponentStatus, "");
     },
 
     //修改属性

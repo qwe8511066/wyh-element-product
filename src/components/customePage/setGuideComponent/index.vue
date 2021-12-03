@@ -19,8 +19,91 @@ export default {
     }
   },
   mixins: [setGuideComponentProperty],
-  methods: {},
-  created() {}
+  methods: {
+    //该组件的属性初始化 向父级发送信息  让父级去做对象的合并
+    eventTheParentInit() {
+      let initForm = {
+        styleClass: {}
+      };
+      let initRules = {};
+      const controlType = this.value.controlType;
+      if (
+        controlType === "collapse" ||
+        controlType === "carousel" ||
+        controlType === "steps" ||
+        controlType === "tabs"
+      ) {
+        initForm.componentsList = this.form.componentsList
+          ? this.form.componentsList
+          : [];
+        initForm.compontIndex = this.form.compontIndex
+          ? this.form.compontIndex
+          : 0;
+      }
+
+      switch (controlType) {
+        case "iconfont":
+          initForm.fontFamily = this.form.fontFamily
+            ? this.form.fontFamily
+            : "icon";
+
+          initRules.fontFamily = [{ required: true, message: "这是必填项" }];
+          initRules.fontClass = [{ required: true, message: "这是必填项" }];
+          break;
+        case "carousel":
+          initForm.settings = this.form.settings
+            ? this.form.settings
+            : lodash.cloneDeep(this.$style.carouselSettings);
+          break;
+        case "imgae":
+          initForm.styleClass.imgWidthModel = this.form.styleClass.imgWidthModel
+            ? this.form.styleClass.imgWidthModel
+            : "default";
+          initForm.styleClass.objectFit = this.form.styleClass.objectFit
+            ? this.form.styleClass.objectFit
+            : "object-cover";
+          initForm.styleClass.imgHeight = this.form.styleClass.imgHeight
+            ? this.form.styleClass.imgHeight
+            : "h-auto";
+
+          initForm.imgUrl = this.form.imgUrl
+            ? this.form.imgUrl
+            : "https://images5.alphacoders.com/757/757038.jpg";
+          initForm.skeleton = Boolean(this.form.skeleton)
+            ? this.form.skeleton
+            : false;
+          break;
+
+        case "steps":
+          initForm.compontPosition = this.form.compontPosition
+            ? this.form.compontPosition
+            : "horizontal";
+          break;
+
+        case "tabs":
+          initForm.compontPosition = this.form.compontPosition
+            ? this.form.compontPosition
+            : "top";
+          break;
+
+        case "title":
+          initRules.title = [{ required: true, message: "这是必填项" }];
+          break;
+        case "video":
+          initForm.videoSrc = this.form.videoSrc
+            ? this.form.videoSrc
+            : "http://vjs.zencdn.net/v/oceans.mp4";
+          initRules.videoSrc = [{ required: true, message: "这是必填项" }];
+          break;
+      }
+      this.$emit("eventTheParentInit", {
+        form: initForm
+      });
+    }
+  },
+  created() {
+    this.eventTheParentInit();
+  }
 };
 </script>
 

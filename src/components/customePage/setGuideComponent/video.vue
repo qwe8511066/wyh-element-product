@@ -29,25 +29,8 @@ export default {
   components: {
     tinymce
   },
-  created() {
-    this.init();
-  },
-  methods: {
-    init() {
-      eventEmiter.emit("setGuideComponentPropertyInitForm", [
-        {
-          form: {
-            videoSrc: this.form.videoSrc
-              ? this.form.videoSrc
-              : "http://vjs.zencdn.net/v/oceans.mp4"
-          },
-          rules: {
-            videoSrc: [{ required: true, message: "这是必填项" }]
-          }
-        }
-      ]);
-    }
-  }
+  created() {},
+  methods: {}
 };
 </script>
 

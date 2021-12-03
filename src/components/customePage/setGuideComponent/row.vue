@@ -130,10 +130,7 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {
-    //该组件的属性初始化 向父级发送信息  让父级去做对象的合并
-    init() {}
-  }
+  methods: {}
 };
 </script>
 
