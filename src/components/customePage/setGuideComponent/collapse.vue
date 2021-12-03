@@ -1,6 +1,10 @@
 <template>
   <div>
-    <wyhElementTable :column="column" :list="form.componentsList">
+    <wyhElementTable
+      ref="collapseWyhElementTable"
+      :column="column"
+      :list="form.componentsList"
+    >
     </wyhElementTable>
     <div class="text-center">
       <el-button
@@ -148,6 +152,7 @@ export default {
             };
           }
           this.dialogCollapse.visible = false;
+          this.$refs.collapseWyhElementTable.forceRefreshTable();
         }
       });
     }

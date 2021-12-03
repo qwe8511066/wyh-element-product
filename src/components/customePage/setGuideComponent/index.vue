@@ -1,4 +1,5 @@
 <script>
+import lodash from "lodash";
 import setGuideComponentProperty from "./setGuideComponentProperty";
 //指引组件
 // 传入组件类型  生成指定的组件
@@ -26,6 +27,7 @@ export default {
         styleClass: {}
       };
       let initRules = {};
+      console.log(this.value);
       const controlType = this.value.controlType;
       if (
         controlType === "collapse" ||

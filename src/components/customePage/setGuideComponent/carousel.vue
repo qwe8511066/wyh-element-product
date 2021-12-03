@@ -2,7 +2,11 @@
   <div>
     <el-collapse v-model="activeNames">
       <el-collapse-item title="列表" name="0">
-        <wyhElementTable :column="column" :list="form.componentsList">
+        <wyhElementTable
+          ref="carouselWyhElementTable"
+          :column="column"
+          :list="form.componentsList"
+        >
         </wyhElementTable>
         <div class="text-center">
           <el-button
@@ -173,7 +177,11 @@ export default {
     };
   },
   computed: {},
-  created() {},
+  created() {
+    setTimeout(() => {
+      console.log(this.form);
+    }, 333);
+  },
   methods: {
     addFormComponet(title, type, value) {
       this.dialogCollapse.value = value
@@ -195,6 +203,7 @@ export default {
               ...customerPageCollapseForm.model
             };
           }
+          this.$refs.carouselWyhElementTable.forceRefreshTable();
           this.dialogCollapse.visible = false;
         }
       });

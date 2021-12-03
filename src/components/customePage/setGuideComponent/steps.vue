@@ -2,7 +2,11 @@
   <div>
     <el-collapse v-model="activeNames">
       <el-collapse-item title="列表" name="0">
-        <wyhElementTable :column="column" :list="form.componentsList">
+        <wyhElementTable
+          ref="stepsWyhElementTable"
+          :column="column"
+          :list="form.componentsList"
+        >
         </wyhElementTable>
         <div class="text-center">
           <el-button
@@ -186,6 +190,8 @@ export default {
             };
           }
           this.dialogCollapse.visible = false;
+
+          this.$refs.stepsWyhElementTable.forceRefreshTable();
         }
       });
     },

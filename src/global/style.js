@@ -820,7 +820,7 @@ export const styleZIndexList = [
 ]
 
 //轮播图的初始化属性
-const carouselSettings = {
+export const carouselSettings = {
   accessibility: true,
   adaptiveHeight: false,
   arrows: true,
