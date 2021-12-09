@@ -40,13 +40,7 @@ export default {
       let list = [];
       if (value && value.styleClass) {
         const styleClass = value.styleClass;
-        const forFieldList = [
-          "",
-          this.ipadFieldName,
-          this.pcFieldName,
-          this.mdFieldName
-        ];
-        forFieldList.forEach(item => {
+        this.$style.forFieldList.forEach(item => {
           let fontSize = judgeStyleClass(
             styleClass,
             item + "fontSize",

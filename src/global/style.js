@@ -7,6 +7,13 @@ export const ipadFieldName = 'lg' + tailwind.separator;
 export const pcFieldName = 'xl' + tailwind.separator;
 export const mdFieldName = 'md' + tailwind.separator;
 
+export const forFieldList = [
+  "",
+  ipadFieldName,
+  pcFieldName,
+  mdFieldName,
+]
+
 Object.keys(colors).forEach(key => {
   stylePulbicColorVariable.push(colors[key]);
   hoverTextColorListVariable.push({
@@ -907,4 +914,5 @@ export default {
   styleHeightList,
   stylePositionList,
   styleZIndexList,
+  forFieldList,
 }

@@ -123,7 +123,7 @@ export default {
     //接收到组件属性初始化的请求 合并对象
     eventTheParentInit(value) {
       this.form =
-        value && value.form ? lodash.merge(this.form, value.form) : this.form;
+        value && value.form ? lodash.merge(value.form, this.form) : this.form;
       this.rules =
         value && value.rules ? { ...this.rules, ...value.rules } : this.rules;
     },
@@ -136,12 +136,6 @@ export default {
 
     //各种模式的默认值
     setFieldPublicName() {
-      const forFieldList = [
-        "",
-        this.ipadFieldName,
-        this.pcFieldName,
-        this.mdFieldName
-      ];
       const spacingModel = [
         "paddingLeftModel",
         "paddingTopModel",
@@ -153,7 +147,7 @@ export default {
         "marginBottomModel"
       ];
       const styleClass = this.form.styleClass;
-      forFieldList.forEach(item => {
+      this.$style.forFieldList.forEach(item => {
         styleClass[item + "fontSize"] = styleClass[item + "fontSize"]
           ? styleClass[item + "fontSize"]
           : 16;

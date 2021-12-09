@@ -1,4 +1,4 @@
-import { ipadFieldName, pcFieldName, mdFieldName } from '@/global/style'
+import { ipadFieldName, pcFieldName, mdFieldName, forFieldList } from '@/global/style'
 
 /**
  * Parse the time to string
@@ -667,7 +667,6 @@ export function judgeStyleClass(value, fieldName, className = '') {
 //判断lg 或者xl 的文本和间距样式
 export function judgeStyleClassLgXl(styleClass) {
   const array = [];
-  const forFieldList = ["", ipadFieldName, pcFieldName, mdFieldName];
   forFieldList.forEach(item => {
     let fontSize = judgeStyleClass(
       styleClass,

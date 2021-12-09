@@ -57,7 +57,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="字体粗细">
+      <el-form-item label="字体粗细" v-if="judgePrefixField()">
         <el-radio-group v-model="form.styleClass['fontWeight']">
           <el-radio-button
             :label="item.value"
@@ -68,7 +68,10 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="溢出行数(超出多少行显示...)">
+      <el-form-item
+        label="溢出行数(超出多少行显示...)"
+        v-if="judgePrefixField()"
+      >
         <el-radio-group v-model="form.styleClass['textLimit']">
           <el-radio-button label="">默认</el-radio-button>
           <el-radio-button
@@ -80,7 +83,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="文本转换">
+      <el-form-item label="文本转换" v-if="judgePrefixField()">
         <el-radio-group v-model="form.styleClass['textTransform']">
           <el-radio-button
             :label="item.value"
@@ -91,7 +94,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="文本装饰">
+      <el-form-item label="文本装饰" v-if="judgePrefixField()">
         <el-radio-group v-model="form.styleClass['textDecoration']">
           <el-radio-button
             :label="item.value"
@@ -102,7 +105,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="文字方向">
+      <el-form-item label="文字方向" v-if="judgePrefixField()">
         <el-radio-group v-model="form.styleClass['textAlign']">
           <el-radio-button
             :label="item.value"
