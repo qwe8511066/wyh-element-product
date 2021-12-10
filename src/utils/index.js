@@ -480,7 +480,7 @@ export function guideComponentStyleClass(value) {
     const styleClass = value.styleClass;
 
     const fontWeight = judgeStyleClass(styleClass, "fontWeight");
-    const textAlign = judgeStyleClass(styleClass, "textAlign", "");
+    const textAlign = judgeStyleClass(styleClass, "textAlign");
     const textLimit = judgeStyleClass(styleClass, "textLimit", "limit-");
     const textTransform = judgeStyleClass(styleClass, "textTransform");
 
@@ -500,7 +500,7 @@ export function guideComponentStyleClass(value) {
       "borderBottom",
       "border-b-"
     );
-    const borderStyle = judgeStyleClass(styleClass, "borderStyle", "");
+    const borderStyle = judgeStyleClass(styleClass, "borderStyle");
 
     const roundedTl = judgeStyleClass(styleClass, "roundedTl");
     const roundedTr = judgeStyleClass(styleClass, "roundedTr");
@@ -644,22 +644,23 @@ export function guideComponentStyleClass(value) {
  * @param {*} value 数据
  * @param {*} fieldName  字段名称
  * @param {*} className  类的名称
+ * @param {*} screensClassName 响应式类的名称
  * @returns 
  */
-export function judgeStyleClass(value, fieldName, className = '') {
+export function judgeStyleClass(value, fieldName, className = "", screensClassName = "") {
   let name = ''
   if (fieldName && value[fieldName]) {
     name = value[fieldName]
     //判断负数
     if (Math.sign(name) == -1 && name.toString().slice(0, 1) === '-') {
-      name = '-' + className + parseInt(name.toString().substr(1))
+      name = screensClassName + '-' + className + parseInt(name.toString().substr(1))
     } else {
-      name = className + name
+      name = screensClassName + className + name
     }
   }
 
   if (value[fieldName + 'Model']) {
-    name = value[fieldName] && value[fieldName] != 12 ? className + value[fieldName] + "/12" : 'w-full';
+    name = value[fieldName] && value[fieldName] != 12 ? screensClassName + className + value[fieldName] + "/12" : 'w-full';
   }
   return name
 }
@@ -671,7 +672,8 @@ export function judgeStyleClassLgXl(styleClass) {
     let fontSize = judgeStyleClass(
       styleClass,
       item + "fontSize",
-      item + "text-"
+      "text-",
+      item
     );
     //判断是否修改文字大小
     if (item) {
@@ -680,42 +682,50 @@ export function judgeStyleClassLgXl(styleClass) {
     const paddingLeft = judgeStyleClass(
       styleClass,
       item + "paddingLeft",
-      item + "pl-"
+      "pl-",
+      item
     );
     const paddingTop = judgeStyleClass(
       styleClass,
       item + "paddingTop",
-      item + "pt-"
+      "pt-",
+      item
     );
     const paddingRight = judgeStyleClass(
       styleClass,
       item + "paddingRight",
-      item + "pr-"
+      "pr-",
+      item
     );
     const paddingBottom = judgeStyleClass(
       styleClass,
       item + "paddingBottom",
-      item + "pb-"
+      "pb-",
+      item
     );
     const marginLeft = judgeStyleClass(
       styleClass,
       item + "marginLeft",
-      item + "ml-"
+      "ml-",
+      item
     );
     const marginTop = judgeStyleClass(
       styleClass,
       item + "marginTop",
-      item + "mt-"
+      "mt-",
+      item
     );
     const marginRight = judgeStyleClass(
       styleClass,
       item + "marginRight",
-      item + "mr-"
+      "mr-",
+      item
     );
     const marginBottom = judgeStyleClass(
       styleClass,
       item + "marginBottom",
-      item + "mb-"
+      "mb-",
+      item
     );
 
     let show = judgeStyleClass(styleClass, item + "show");

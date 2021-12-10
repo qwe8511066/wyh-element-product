@@ -35,8 +35,7 @@ export default {
         const cursor = judgeStyleClass(styleClass, "cursor");
         const hoverTextDecoration = judgeStyleClass(
           styleClass,
-          "hoverTextDecoration",
-          ""
+          "hoverTextDecoration"
         );
         list.push(hoverTextColor, cursor, hoverTextDecoration);
       }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form-item label="图片" prop="imgUrl">
-      <el-input v-model="form.imgUrl"></el-input>
+      <el-input v-model="form.imgUrl" @change="test1"></el-input>
     </el-form-item>
     <el-form-item label="开启骨架">
       <el-switch v-model="form.skeleton"></el-switch>
@@ -90,7 +90,11 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {}
+  methods: {
+    test1() {
+      console.log(this.form);
+    }
+  }
 };
 </script>
 

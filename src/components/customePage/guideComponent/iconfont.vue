@@ -44,7 +44,8 @@ export default {
           let fontSize = judgeStyleClass(
             styleClass,
             item + "fontSize",
-            item + "text-"
+            "text-",
+            item
           );
           //判断是否修改文字大小
           if (item) {

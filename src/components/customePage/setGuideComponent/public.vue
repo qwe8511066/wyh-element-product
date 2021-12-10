@@ -123,7 +123,9 @@ export default {
     //接收到组件属性初始化的请求 合并对象
     eventTheParentInit(value) {
       this.form =
-        value && value.form ? lodash.merge(value.form, this.form) : this.form;
+        value && value.form
+          ? lodash.merge(lodash.cloneDeep(this.form), value.form)
+          : this.form;
       this.rules =
         value && value.rules ? { ...this.rules, ...value.rules } : this.rules;
     },

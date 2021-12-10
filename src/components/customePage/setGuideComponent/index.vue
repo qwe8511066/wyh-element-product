@@ -27,7 +27,6 @@ export default {
         styleClass: {}
       };
       let initRules = {};
-      console.log(this.value);
       const controlType = this.value.controlType;
       if (
         controlType === "collapse" ||
@@ -99,7 +98,8 @@ export default {
           break;
       }
       this.$emit("eventTheParentInit", {
-        form: initForm
+        form: initForm,
+        rules: initRules
       });
     }
   },
