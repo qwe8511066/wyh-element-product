@@ -76,6 +76,7 @@
                     }
                   ]"
                 >
+                  <!-- 通用组件 start -->
                   <guideComponent
                     v-aos-animation:{value}="box.animation"
                     :class="[cobyGuideComponentStyleClass(box)]"
@@ -83,6 +84,7 @@
                     :value="box"
                     ref="guideComponent"
                   ></guideComponent>
+                  <!-- 通用组件 end -->
 
                   <!-- 设置ColComponent start -->
                   <div
@@ -508,6 +510,7 @@ export default {
 
     //添加组件
     addPageColComponent(value) {
+      console.log(value);
       const id = uuid.v4();
       //判断是否是tabs的子组件
       if (this.tabsContentComponentStatus) {
