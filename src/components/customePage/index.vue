@@ -24,6 +24,7 @@
             }
           ]"
           v-customePageContainer="layout"
+          :style="[item.container.style]"
         >
           <div
             class="row flex relative"
