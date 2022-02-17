@@ -374,38 +374,47 @@ export const componentList = [
       {
         controlType: "title",
         title: "标题",
+        path: '@/components/customePage/publicComponent/title/',
       },
       {
         controlType: "imgae",
-        title: "图片"
+        title: "图片",
+        path: '@/components/customePage/publicComponent/imgae/'
       },
       {
         controlType: "ueditor",
-        title: "富文本"
+        title: "富文本",
+        path: '@/components/customePage/publicComponent/ueditor/'
       },
       {
         controlType: "iconfont",
-        title: "字体图标"
+        title: "字体图标",
+        path: '@/components/customePage/publicComponent/iconfont/'
       },
       {
         controlType: "collapse",
-        title: "折叠面板"
+        title: "折叠面板",
+        path: '@/components/customePage/publicComponent/collapse/'
       },
       {
         controlType: "carousel",
-        title: "走马灯"
+        title: "走马灯",
+        path: '@/components/customePage/publicComponent/carousel/'
       },
       {
         controlType: "tabs",
-        title: "选项卡"
+        title: "选项卡",
+        path: '@/components/customePage/publicComponent/tabs/'
       },
       {
         controlType: "steps",
-        title: "步骤条"
+        title: "步骤条",
+        path: '@/components/customePage/publicComponent/steps/'
       },
       {
         controlType: "video",
-        title: "视频"
+        title: "视频",
+        path: '@/components/customePage/publicComponent/video/'
       }
     ]
   }

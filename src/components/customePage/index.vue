@@ -315,11 +315,10 @@
 
 <script>
 import eventEmiter from "@/utils/eventEmiter";
-import lodash from "lodash";
 import draggable from "vuedraggable";
-import addLayout from "./addLayout/index";
-import guideComponent from "./guideComponent/index";
-import setGuidePublicComponent from "./setGuideComponent/public";
+import addLayout from "@/components/customePage/addLayout/index";
+import guideComponent from "@/components/customePage/componentsIntercept/guideComponent/index";
+import setGuidePublicComponent from "./setComponentTabs/index";
 import { uuid } from "vue-uuid";
 import {
   checkArray,

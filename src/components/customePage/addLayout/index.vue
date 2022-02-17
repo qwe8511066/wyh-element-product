@@ -57,6 +57,7 @@ export default {
             classes: "",
             colList: [],
             controlType: "col",
+            path: "@/components/customePage/publicComponent/col/",
             styleClass: {
               desktopWidthModel: "grid",
               desktopWidth: desktopType,
@@ -74,6 +75,7 @@ export default {
         this.layoutList.push({
           container: {
             controlType: "container",
+            path: "@/components/customePage/publicComponent/container/",
             classes: "",
             //对应的类型：
             //container、container-lg、container-md、container-sm、container-xs
@@ -82,6 +84,7 @@ export default {
           },
           row: {
             controlType: "row",
+            path: "@/components/customePage/publicComponent/row/",
             classes: "",
             styleClass: {
               rowWidthModel: "grid",
