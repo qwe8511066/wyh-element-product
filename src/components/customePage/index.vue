@@ -31,12 +31,12 @@
             v-aos-animation:{value}="item.row.animation"
             :style="[item.row.style]"
             :class="[
-              item.row.classes,
-              cobyGuideComponentStyleClass(item.row),
               {
-                'space-y-20 md|space-y-0 md|space-x-20 layout-row pt-40': layout,
-                'flex-wrap': !layout
-              }
+                'layout-row pt-40': layout
+                //'flex-wrap': !layout
+              },
+              cobyGuideComponentStyleClass(item.row),
+              item.row.classes
             ]"
             v-customePageContainer="layout"
           >

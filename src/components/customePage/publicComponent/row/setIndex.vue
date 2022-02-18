@@ -17,7 +17,39 @@
     </el-form-item>
 
     <el-collapse accordion>
-      <el-collapse-item title="方向">
+      <el-collapse-item title="col水平间隔">
+        <el-form-item
+          :label="item.title"
+          v-for="(item, index) in spaceXList"
+          :key="'spaceXList' + index"
+        >
+          <el-slider
+            class="flex-1 px-20"
+            :min="-1"
+            :max="100"
+            v-model="form.styleClass[item.fieldName]"
+            show-input
+          ></el-slider>
+        </el-form-item>
+      </el-collapse-item>
+
+      <el-collapse-item title="col垂直间距">
+        <el-form-item
+          :label="item.title"
+          v-for="(item, index) in spaceYList"
+          :key="'spaceYList' + index"
+        >
+          <el-slider
+            class="flex-1 px-20"
+            :min="-1"
+            :max="100"
+            v-model="form.styleClass[item.fieldName]"
+            show-input
+          ></el-slider>
+        </el-form-item>
+      </el-collapse-item>
+
+      <el-collapse-item title="col方向">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in flexDirectionList"
@@ -34,7 +66,7 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="纵轴对齐">
+      <el-collapse-item title="col纵轴对齐">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in justifyContentList"
@@ -51,7 +83,7 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="横轴对齐">
+      <el-collapse-item title="col横轴对齐">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in alignItemsList"
@@ -88,22 +120,53 @@ export default {
           fieldName: "mobileFlexDirection"
         },
         {
-          title: "pad模式下的col方向(screens->lg)",
-          fieldName: "ipadFlexDirection"
+          title: "md模式下的col方向(screens->md)",
+          fieldName: "mdFlexDirection"
         },
         {
           title: "电脑pc模式下的col方向(screens->xl)",
           fieldName: "desktopFlexDirection"
         }
       ],
+
+      spaceYList: [
+        {
+          title: "col垂直间隔",
+          fieldName: "mobileSpaceY"
+        },
+        {
+          title: "md模式下的col垂直间隔(screens->md)",
+          fieldName: "mdSpaceY"
+        },
+        {
+          title: "电脑pc模式下的col垂直间隔(screens->xl)",
+          fieldName: "desktopSpaceY"
+        }
+      ],
+
+      spaceXList: [
+        {
+          title: "col水平间隔",
+          fieldName: "mobileSpaceX"
+        },
+        {
+          title: "md模式下的col水平间隔(screens->md)",
+          fieldName: "mdSpaceX"
+        },
+        {
+          title: "电脑pc模式下的col水平间隔(screens->xl)",
+          fieldName: "desktopSpaceX"
+        }
+      ],
+
       justifyContentList: [
         {
           title: "col对齐方式",
           fieldName: "mobileJustifyContent"
         },
         {
-          title: "pad模式下的col对齐方式(screens->lg)",
-          fieldName: "ipadJustifyContent"
+          title: "md模式下的col对齐方式(screens->md)",
+          fieldName: "mdJustifyContent"
         },
         {
           title: "电脑pc模式下的col对齐方式(screens->xl)",
@@ -117,8 +180,8 @@ export default {
           fieldName: "mobileItemsContent"
         },
         {
-          title: "pad模式下的col对齐方式(screens->lg)",
-          fieldName: "ipadItemsContent"
+          title: "md模式下的col对齐方式(screens->md)",
+          fieldName: "mdItemsContent"
         },
         {
           title: "电脑pc模式下的col对齐方式(screens->xl)",

@@ -512,68 +512,85 @@ export function guideComponentStyleClass(value) {
     const textDecoration = judgeStyleClass(styleClass, "textDecoration");
     if (value.controlType === "row") {
       const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
-      const mobileFlexDirection = judgeStyleClass(
-        styleClass,
-        "mobileFlexDirection"
-      );
-      const ipadFlexDirection =
-        ipadFieldName +
-        judgeStyleClass(styleClass, "ipadFlexDirection");
+      // const mobileFlexDirection = judgeStyleClass(
+      //   styleClass,
+      //   "mobileFlexDirection"
+      // );
 
-      const mdFlexDirection = mdFieldName +
-        judgeStyleClass(styleClass, "ipadFlexDirection");
+      // const mdFlexDirection = mdFieldName +
+      //   judgeStyleClass(styleClass, "mdFlexDirection");
 
 
-      const desktopFlexDirection =
-        pcFieldName +
-        judgeStyleClass(styleClass, "desktopFlexDirection");
-      const mobileJustifyContent = judgeStyleClass(
-        styleClass,
-        "mobileJustifyContent"
-      );
-      const ipadJustifyContent =
-        ipadFieldName +
-        judgeStyleClass(styleClass, "ipadJustifyContent");
+      // const desktopFlexDirection =
+      //   pcFieldName +
+      //   judgeStyleClass(styleClass, "desktopFlexDirection");
 
-      const mdJustifyContent =
-        mdFieldName +
-        judgeStyleClass(styleClass, "ipadJustifyContent");
+      // const mobileJustifyContent = judgeStyleClass(
+      //   styleClass,
+      //   "mobileJustifyContent"
+      // );
 
-      const desktopJustifyContent =
-        pcFieldName +
-        judgeStyleClass(styleClass, "desktopJustifyContent");
+      // const mdJustifyContent =
+      //   mdFieldName +
+      //   judgeStyleClass(styleClass, "mdJustifyContent");
 
-      const mobileItemsContent = judgeStyleClass(
-        styleClass,
-        "mobileItemsContent"
-      );
-      const ipadItemsContent =
-        ipadFieldName +
-        judgeStyleClass(styleClass, "ipadItemsContent");
+      // const desktopJustifyContent =
+      //   pcFieldName +
+      //   judgeStyleClass(styleClass, "desktopJustifyContent");
 
-      const mdItemsContent =
-        mdFieldName +
-        judgeStyleClass(styleClass, "ipadItemsContent");
+      // const mobileItemsContent = judgeStyleClass(
+      //   styleClass,
+      //   "mobileItemsContent"
+      // );
 
-      const desktopItemsContent =
-        pcFieldName +
-        judgeStyleClass(styleClass, "desktopItemsContent");
+      // const mdItemsContent =
+      //   mdFieldName +
+      //   judgeStyleClass(styleClass, "mdItemsContent");
+
+      // const desktopItemsContent =
+      //   pcFieldName +
+      //   judgeStyleClass(styleClass, "desktopItemsContent");
+
+      const rowAttributeList = [
+        { name: 'mobileFlexDirection', screensClassName: '', },
+        { name: 'mdFlexDirection', screensClassName: mdFieldName },
+        { name: 'desktopFlexDirection', screensClassName: pcFieldName },
+        { name: 'mobileJustifyContent', screensClassName: '' },
+        { name: 'mdJustifyContent', screensClassName: mdFieldName },
+        { name: 'desktopJustifyContent', screensClassName: pcFieldName },
+
+        { name: 'mobileItemsContent', screensClassName: '' },
+        { name: 'mdItemsContent', screensClassName: mdFieldName },
+        { name: 'desktopItemsContent', screensClassName: pcFieldName },
+        { name: 'mobileSpaceX', screensClassName: '', className: 'space-x-' },
+        { name: 'mdSpaceX', screensClassName: mdFieldName, className: 'space-x-' },
+        { name: 'desktopSpaceX', screensClassName: pcFieldName, className: 'space-x-' },
+        { name: 'mobileSpaceY', screensClassName: '', className: 'space-y-' },
+        { name: 'mdSpaceY', screensClassName: mdFieldName, className: 'space-y-' },
+        { name: 'desktopSpaceY', screensClassName: pcFieldName, className: 'space-y-' },
+      ]
+
+      rowAttributeList.forEach(item => {
+        let rowAttributeValue = styleClass[item.name]
+        if (item.className) {
+          rowAttributeValue = rowAttributeValue == -1 ? '' : item.screensClassName + item.className + rowAttributeValue
+        } else {
+          rowAttributeValue = item.screensClassName + rowAttributeValue
+        }
+        list.push(rowAttributeValue)
+      })
 
       list.push(
         rowWidth,
-        mobileFlexDirection,
-        ipadFlexDirection,
-        desktopFlexDirection,
-        mobileJustifyContent,
-        mobileJustifyContent,
-        ipadJustifyContent,
-        desktopJustifyContent,
-        mobileItemsContent,
-        ipadItemsContent,
-        desktopItemsContent,
-        mdFlexDirection,
-        mdJustifyContent,
-        mdItemsContent,
+        // mobileFlexDirection,
+        // desktopFlexDirection,
+        // mobileJustifyContent,
+        // desktopJustifyContent,
+        // mobileItemsContent,
+        // desktopItemsContent,
+        // mdFlexDirection,
+        // mdJustifyContent,
+        // mdItemsContent,
       );
     }
 
@@ -581,33 +598,27 @@ export function guideComponentStyleClass(value) {
       let desktopWidth =
         pcFieldName +
         judgeStyleClass(styleClass, "desktopWidth", "w-");
-      let ipadWidth =
-        ipadFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
+
       let mdWidth =
-        mdFieldName + judgeStyleClass(styleClass, "ipadWidth", "w-");
+        mdFieldName + judgeStyleClass(styleClass, "mdWidth", "w-");
 
       let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
 
       let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
-      let ipadColFlex = judgeStyleClass(styleClass, "ipadColFlex");
       let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
       let mdColFlex = judgeStyleClass(styleClass, "mdColFlex");
 
       mobileColFlex = mobileColFlex ? pcFieldName + mobileColFlex : "";
-      ipadColFlex = ipadColFlex ? ipadFieldName + ipadColFlex : "";
       mdColFlex = mdColFlex ? mdFieldName + mdColFlex : "";
 
       desktopWidth = mobileColFlex ? "" : desktopWidth;
-      ipadWidth = ipadColFlex ? "" : ipadWidth;
       mobileWidth = desktopColFlex ? "" : mobileWidth;
       mdWidth = mdColFlex ? "" : mdWidth;
 
       list.push(
         desktopWidth,
-        ipadWidth,
         mobileWidth,
         mobileColFlex,
-        ipadColFlex,
         desktopColFlex,
 
         mdWidth,

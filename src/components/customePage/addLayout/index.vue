@@ -61,12 +61,12 @@ export default {
             styleClass: {
               desktopWidthModel: "grid",
               desktopWidth: desktopType,
-              ipadWidthModel: "grid",
-              ipadWidth: desktopType,
+              mdWidthModel: "grid",
+              mdWidth: desktopType,
               mobileWidthModel: "grid",
               mobileWidth: 12,
               mobileColFlex: "",
-              ipadColFlex: "",
+              mdColFlex: "",
               desktopColFlex: ""
             },
             animation: {}
@@ -89,15 +89,26 @@ export default {
             styleClass: {
               rowWidthModel: "grid",
               rowWidth: 12,
+
               mobileFlexDirection: "flex-col",
-              ipadFlexDirection: "flex-row",
+              mdFlexDirection: "flex-row",
               desktopFlexDirection: "flex-row",
+
               mobileJustifyContent: "justify-start",
-              ipadJustifyContent: "justify-start",
+              mdJustifyContent: "justify-start",
               desktopJustifyContent: "justify-start",
+
               mobileItemsContent: "items-start",
-              ipadItemsContent: "items-start",
-              desktopItemsContent: "items-start"
+              mdItemsContent: "items-start",
+              desktopItemsContent: "items-start",
+
+              mobileSpaceX: 0,
+              mdSpaceX: 0,
+              desktopSpaceX: -1,
+
+              mobileSpaceY: 0,
+              mdSpaceY: 0,
+              desktopSpaceY: -1
             },
             animation: {}
           },

@@ -25,11 +25,7 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane
-      label="组件样式->md模式(md 手机之外的样式 低于ipad)"
-      name="2"
-      :lazy="true"
-    >
+    <el-tab-pane label="组件样式->md模式(md)" name="2" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormLg"
         :rules="rules"
@@ -43,7 +39,7 @@
       </el-form>
     </el-tab-pane>
 
-    <el-tab-pane label="组件样式->pad模式(lg)" name="3" :lazy="true">
+    <!-- <el-tab-pane label="组件样式->pad模式(lg)" name="3" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormMd"
         :rules="rules"
@@ -55,7 +51,7 @@
           :prefixField="ipadFieldName"
         ></setGuideStyleComponent>
       </el-form>
-    </el-tab-pane>
+    </el-tab-pane> -->
 
     <el-tab-pane label="组件样式->电脑pc模式(xl)" name="4" :lazy="true">
       <el-form

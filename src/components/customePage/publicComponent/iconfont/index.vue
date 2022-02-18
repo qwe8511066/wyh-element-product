@@ -25,11 +25,7 @@ export default {
   mixins: [guideComponentProperty],
   props: {},
   data() {
-    return {
-      pcFieldName: this.$style.pcFieldName,
-      ipadFieldName: this.$style.ipadFieldName,
-      mdFieldName: this.$style.mdFieldName
-    };
+    return {};
   },
   computed: {},
   created() {},

@@ -9,7 +9,7 @@ export const mdFieldName = 'md' + tailwind.separator;
 
 export const forFieldList = [
   "",
-  ipadFieldName,
+  // ipadFieldName,
   pcFieldName,
   mdFieldName,
 ]

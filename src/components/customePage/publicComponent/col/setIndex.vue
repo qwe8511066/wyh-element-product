@@ -73,9 +73,9 @@ export default {
           spacingFieldName: "mobileWidthModel"
         },
         {
-          title: "pad模式下的宽度(screens->lg)",
-          fieldName: "ipadWidth",
-          spacingFieldName: "ipadWidthModel"
+          title: "md模式下的宽度(screens->md)",
+          fieldName: "mdWidth",
+          spacingFieldName: "mdWidthModel"
         },
         {
           title: "电脑pc模式下的宽度(screens->xl)",
@@ -90,7 +90,7 @@ export default {
         },
         {
           title: "pad模式下的放大和缩小(screens->lg)",
-          fieldName: "ipadColFlex"
+          fieldName: "mdColFlex"
         },
         {
           title: "电脑pc模式下的放大和缩小(screens->xl)",
