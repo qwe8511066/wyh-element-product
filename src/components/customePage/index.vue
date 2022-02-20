@@ -1,10 +1,8 @@
 <template>
   <div>
     <div class="" :class="[{ 'md|space-y-30': layout }]">
-      <div class="mb-20" v-if="layout">
-        <el-button @click="addLayout(true, 0)">
-          添加布局
-        </el-button>
+      <div class="mb-20" v-if="layout && colLayout">
+        <el-button @click="addLayout(0)"> 添加布局 </el-button>
       </div>
 
       <div
@@ -16,12 +14,12 @@
           class="relative"
           v-aos-animation:{value}="item.container.animation"
           :class="[
-            item.container.type,
             item.container.classes,
             cobyGuideComponentStyleClass(item.container),
             {
-              'layout-container': layout
-            }
+              'layout-container': layout,
+            },
+            checkColLayoutClassContainer(item.container),
           ]"
           v-customePageContainer="layout"
           :style="[item.container.style]"
@@ -32,11 +30,11 @@
             :style="[item.row.style]"
             :class="[
               {
-                'layout-row pt-40': layout
+                'layout-row pt-40': layout,
                 //'flex-wrap': !layout
               },
               cobyGuideComponentStyleClass(item.row),
-              item.row.classes
+              item.row.classes,
             ]"
             v-customePageContainer="layout"
           >
@@ -52,8 +50,9 @@
                 guideComponentStyleClassPosition(col),
                 cobyGuideComponentStyleClass(col),
                 {
-                  'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
-                }
+                  'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ':
+                    layout,
+                },
               ]"
               v-customePageContainer="layout"
             >
@@ -69,51 +68,55 @@
                 <div
                   v-for="(box, index_1) in col.colList"
                   :key="'component' + index_1"
-                  :class="[
-                    guideComponentStyleClassPosition(box),
-                    {
-                      'mt-20': index_1 != 0 && layout,
-                      'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout
-                    }
-                  ]"
                 >
-                  <!-- 通用组件 start -->
-                  <guideComponent
-                    v-aos-animation:{value}="box.animation"
-                    :class="[cobyGuideComponentStyleClass(box)]"
-                    :layout="layout"
-                    :value="box"
-                    ref="guideComponent"
-                  ></guideComponent>
-                  <!-- 通用组件 end -->
-
-                  <!-- 设置ColComponent start -->
                   <div
-                    v-if="layout"
-                    style="margin-top:0px"
-                    class="set-attributes-col-component hidden place-items-center absolute top-5 left-5 space-x-10"
+                    :class="[
+                      guideComponentStyleClassPosition(box),
+                      {
+                        'mt-20': index_1 != 0 && layout,
+                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ':
+                          layout,
+                      },
+                    ]"
                   >
-                    <span>{{ box.controlType }}</span>
-                    <i
-                      class="el-icon-s-tools text-lg cursor-pointer"
-                      @click="setColComponent(box, index_1, col)"
-                    ></i>
-                    <i
-                      class="el-icon-close text-lg cursor-pointer"
-                      @click="
-                        deleteContainerRow(
-                          col,
-                          index_1,
-                          'component',
-                          '删除组件',
-                          '是否删除该组件'
-                        )
-                      "
-                    ></i>
-                    <i class="el-icon-s-unfold text-lg cursor-pointer"></i>
-                  </div>
+                    <!-- 通用组件 start -->
+                    <guideComponent
+                      v-aos-animation:{value}="box.animation"
+                      :class="[cobyGuideComponentStyleClass(box)]"
+                      :layout="layout"
+                      :value="box"
+                      ref="guideComponent"
+                    ></guideComponent>
+                    <!-- 通用组件 end -->
 
-                  <!-- 设置ColComponent end -->
+                    <!-- 设置ColComponent start -->
+                    <div
+                      v-if="layout"
+                      style="margin-top: 0px"
+                      class="set-attributes-col-component hidden place-items-center absolute top-5 left-5 space-x-10"
+                    >
+                      <span>{{ box.controlType }}</span>
+                      <i
+                        class="el-icon-s-tools text-lg cursor-pointer"
+                        @click="setColComponent(box, index_1, col)"
+                      ></i>
+                      <i
+                        class="el-icon-close text-lg cursor-pointer"
+                        @click="
+                          deleteContainerRow(
+                            col,
+                            index_1,
+                            'component',
+                            '删除组件',
+                            '是否删除该组件'
+                          )
+                        "
+                      ></i>
+                      <i class="el-icon-s-unfold text-lg cursor-pointer"></i>
+                    </div>
+
+                    <!-- 设置ColComponent end -->
+                  </div>
                 </div>
               </draggable>
               <!-- 设置Col start -->
@@ -139,6 +142,23 @@
                 ></i>
               </div>
               <!-- 设置Col end -->
+
+              <customePage
+                :data="col.layouts"
+                :layout="layout"
+                :key="'component' + col.layouts"
+                :colLayout="false"
+              ></customePage>
+
+              <div :class="[{ 'pt-30': layout }]" v-if="layout && colLayout">
+                <el-button
+                  type="primary"
+                  class="w-full"
+                  @click="addColLayot(col)"
+                  plain
+                  >添加布局</el-button
+                >
+              </div>
 
               <div :class="[{ 'pt-30': layout }]" v-if="layout">
                 <el-button
@@ -167,12 +187,13 @@
           <!-- 设置Container start -->
 
           <div
-            class="set-attributes-container hidden place-items-center absolute  top-0  left-0 space-x-10"
+            class="set-attributes-container hidden place-items-center absolute top-0 left-0 space-x-10"
           >
             <span>container</span>
             <span>{{ index + 1 }}</span>
             <i
               class="el-icon-s-tools text-lg cursor-pointer"
+              v-if="colLayout"
               @click="setContainerRowTools(item, 'container', index, 2)"
             ></i>
             <i
@@ -191,16 +212,11 @@
 
           <!-- 设置Container end -->
         </div>
-        <div class="mt-20" v-if="layout">
-          <el-button @click="addLayout(true, index + 1)">
-            添加布局
-          </el-button>
+        <div class="mt-20" v-if="layout && colLayout">
+          <el-button @click="addLayout(index + 1)"> 添加布局 </el-button>
         </div>
       </div>
     </div>
-    <!-- 设置布局 -->
-    <addLayout v-if="layout"></addLayout>
-    <!-- 设置布局 -->
 
     <!-- 删除Container或清空Row -->
     <el-drawer
@@ -209,7 +225,7 @@
       :wrapperClosable="false"
     >
       <div class="h-full flex-col flex">
-        <div class="flex p-20 text-2xl flex-grow  justify-center items-center">
+        <div class="flex p-20 text-2xl flex-grow justify-center items-center">
           {{ deleteEmptyVisible.text }}
         </div>
         <div class="flex p-20">
@@ -310,29 +326,57 @@
       </div>
     </el-dialog>
     <!-- 设置tabs子组件 -->
+
+    <!-- 添加布局弹窗 -->
+    <el-drawer
+      title="请选择布局"
+      v-if="layout"
+      :visible.sync="layoutVisible"
+      custom-class="layout-drawer"
+    >
+      <div
+        @click="addPageLayout(index)"
+        v-for="(item, index) in _layoutArray"
+        :class="[{ 'border-b-1': index != _layoutArray.length - 1 }]"
+        class="flex p-20 place-items-center cursor-pointer hover|bg-light hover|text-white"
+        :key="index"
+      >
+        <div class="w-200 space-x-10 flex">
+          <div
+            v-for="(box, i) in _layoutArray[index]"
+            :key="i"
+            class="h-40 flex-1 bg-secondary"
+          ></div>
+        </div>
+        <div class="flex-1 pl-20">col {{ _layoutArray[index] }}</div>
+      </div>
+    </el-drawer>
+    <!-- 添加布局弹窗 -->
   </div>
 </template>
 
 <script>
 import eventEmiter from "@/utils/eventEmiter";
 import draggable from "vuedraggable";
-import addLayout from "@/components/customePage/addLayout/index";
 import guideComponent from "@/components/customePage/componentsIntercept/guideComponent/index";
 import setGuidePublicComponent from "./setComponentTabs/index";
 import { uuid } from "vue-uuid";
+import customePage from "@/components/customePage/index";
+import { initLayoutList, layoutArray } from "@/global/colLayout";
+import lodash from "lodash";
 import {
   checkArray,
   checkArrayString,
   guideComponentStyleClass,
-  judgeStyleClass
+  judgeStyleClass,
 } from "@/utils";
 export default {
   name: "customePage",
   components: {
-    addLayout,
     guideComponent,
     draggable,
-    setGuidePublicComponent
+    customePage,
+    setGuidePublicComponent,
   },
   directives: {
     "aos-animation": {
@@ -341,8 +385,8 @@ export default {
       },
       update(el, binding, vnode, oldVnode) {
         vnode.context.setAttributeAos(el, binding.value);
-      }
-    }
+      },
+    },
   },
   computed: {
     dragOptions() {
@@ -350,12 +394,41 @@ export default {
         animation: 200,
         group: "description",
         disabled: false,
-        ghostClass: "ghost"
+        ghostClass: "ghost",
       };
-    }
+    },
+  },
+  props: {
+    //从父级获取的表单组件
+    data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    //判断是否是设计
+    layout: {
+      type: Boolean,
+      default: false,
+    },
+    //col是否允许添加布局Layout
+    colLayout: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
+      //layout 的数据
+      layoutList: [],
+      //layout 的弹窗
+      layoutVisible: false,
+      _layoutArray: [],
+      //是添加布局的位置
+      layoutDataIndex: -1,
+      //给对应的col添加布局
+      layoutDataCol: null,
+
       styleFontSize: this.$style.styleFontSize,
       componentList: this.$style.componentList,
 
@@ -365,7 +438,7 @@ export default {
         text: "",
         index: "",
         value: "",
-        fieldName: ""
+        fieldName: "",
       },
 
       col: {
@@ -373,7 +446,7 @@ export default {
         list: [],
         // 0新增col  1修改col
         status: 0,
-        component: ""
+        component: "",
       },
       containerValue: "",
 
@@ -388,26 +461,12 @@ export default {
       tabsContentComponentStatus: "",
       tabsContentComponentTitle: "",
       tabsContentComponentVisible: false,
-      tabsContentComponentIndex: -1
+      tabsContentComponentIndex: -1,
     };
   },
   watch: {},
-  props: {
-    //从父级获取的表单组件
-    data: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
-    //判断是否是设计
-    layout: {
-      type: Boolean,
-      default: false
-    }
-  },
   created() {
-    eventEmiter.on("addTabsContentComponent", value => {
+    eventEmiter.on("addTabsContentComponent", (value) => {
       const { item, status, form, index } = value;
       this.tabsContentComponentForm = form;
       this.tabsContentComponent = item;
@@ -425,6 +484,9 @@ export default {
         this.tabsContentComponentVisible = true;
       }
     });
+    this.layoutList = initLayoutList();
+    this._layoutArray = layoutArray;
+    // console.log(this._layoutArray);
   },
   mounted() {
     this.upedataCarouselLastAsNavFor();
@@ -434,8 +496,8 @@ export default {
     upedataCarouselLastAsNavFor() {
       const guideComponent = this.$refs.guideComponent;
       if (checkArray(this.data)) {
-        this.data[0].col.forEach(element => {
-          element.colList.forEach(box => {
+        this.data[0].col.forEach((element) => {
+          element.colList.forEach((box) => {
             if (
               box.controlType == "carousel" &&
               typeof box.settings.asNavFor == "string"
@@ -467,13 +529,50 @@ export default {
     },
 
     //新增布局
-    addLayout(status, index) {
-      eventEmiter.emit("addLayout", [
-        {
-          status: status,
-          index: index
-        }
-      ]);
+    addLayout(index) {
+      this.layoutDataIndex = index;
+      this.layoutVisible = true;
+    },
+
+    //给col 添加布局
+    addColLayot(col) {
+      this.layoutDataIndex = checkArray(col.layouts)
+        ? col.layouts.length - 1
+        : 0;
+      this.layoutDataCol = col;
+      this.layoutVisible = true;
+    },
+
+    //点击布局col 后
+    addPageLayout(index) {
+      this.layoutList[index].col.forEach((element) => {
+        element.id = uuid.v4();
+      });
+      if (this.layoutDataCol) {
+        this.data.forEach((element) => {
+          const colIndex = checkArrayString(
+            element.col,
+            "id",
+            this.layoutDataCol.id
+          );
+          if (colIndex != -1) {
+            element.col[colIndex].layouts.push(
+              lodash.cloneDeep(this.layoutList[index])
+            );
+          }
+        });
+      } else {
+        eventEmiter.emit("addPageLayout", [
+          {
+            value: lodash.cloneDeep(this.layoutList[index]),
+            index: this.layoutDataIndex,
+            layoutDataCol: this.layoutDataCol,
+          },
+        ]);
+      }
+
+      this.layoutDataCol = null;
+      this.layoutVisible = false;
     },
 
     //删除的弹窗
@@ -541,13 +640,13 @@ export default {
 
     //完成设置属性
     setGuidePublicComponentFinish() {
-      const setGuideComponentForm = this.$refs.setGuidePublicComponent.$refs
-        .setGuideComponentForm;
-      setGuideComponentForm.validate(valid => {
+      const setGuideComponentForm =
+        this.$refs.setGuidePublicComponent.$refs.setGuideComponentForm;
+      setGuideComponentForm.validate((valid) => {
         if (valid) {
           this.col.component = {
             ...this.col.component,
-            ...setGuideComponentForm.model
+            ...setGuideComponentForm.model,
           };
           switch (this.col.status) {
             //新增col
@@ -562,21 +661,21 @@ export default {
             case 2:
               this.containerValue.container = {
                 ...this.containerValue.container,
-                ...this.col.component
+                ...this.col.component,
               };
               break;
             //修改Row
             case 3:
               this.containerValue.row = {
                 ...this.containerValue.row,
-                ...this.col.component
+                ...this.col.component,
               };
               break;
             //修改col
             case 4:
               this.containerValue.col[this.col.index] = {
                 ...this.containerValue.col[this.col.index],
-                ...this.col.component
+                ...this.col.component,
               };
               break;
           }
@@ -596,17 +695,18 @@ export default {
 
     //选项卡的子组件
     setTabsGuidePublicComponentFinish(type) {
-      const setTabsGuidePublicComponent = this.$refs.setTabsGuidePublicComponent
-        .$refs.setGuideComponentForm;
-      setTabsGuidePublicComponent.validate(valid => {
+      const setTabsGuidePublicComponent =
+        this.$refs.setTabsGuidePublicComponent.$refs.setGuideComponentForm;
+      setTabsGuidePublicComponent.validate((valid) => {
         if (valid) {
           this.tabsContentComponent = {
             ...this.tabsContentComponent,
-            ...setTabsGuidePublicComponent.model
+            ...setTabsGuidePublicComponent.model,
           };
-          const componentsList = this.tabsContentComponentForm.componentsList[
-            this.tabsContentComponentIndex
-          ];
+          const componentsList =
+            this.tabsContentComponentForm.componentsList[
+              this.tabsContentComponentIndex
+            ];
           switch (this.tabsContentComponentStatus) {
             case 1:
               componentsList.children.push(this.tabsContentComponent);
@@ -747,8 +847,8 @@ export default {
      */
     filterComponentList(array) {
       if (checkArray(array)) {
-        this.componentList.forEach(item => {
-          array.forEach(box => {
+        this.componentList.forEach((item) => {
+          array.forEach((box) => {
             const tabsIndex = checkArrayString(item.list, "controlType", box);
             if (tabsIndex != -1) {
               item.list[tabsIndex].show = true;
@@ -756,14 +856,19 @@ export default {
           });
         });
       } else {
-        this.componentList.forEach(item => {
-          item.list.forEach(box => {
+        this.componentList.forEach((item) => {
+          item.list.forEach((box) => {
             box.show = false;
           });
         });
       }
-    }
-  }
+    },
+
+    //校验container 的class
+    checkColLayoutClassContainer(item) {
+      return this.colLayout ? item.type : "";
+    },
+  },
 };
 </script>
 <style scoped lang="scss">
