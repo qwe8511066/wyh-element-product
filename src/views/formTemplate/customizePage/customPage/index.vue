@@ -15,7 +15,11 @@
           </div>
 
           <div class="">
-            <customePage :data="data" :layout="true"></customePage>
+            <customePage
+              :data="data"
+              :layout="true"
+              :originalData="data"
+            ></customePage>
           </div>
         </el-card>
       </el-col>
@@ -32,7 +36,6 @@ import { uuid } from "vue-uuid";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import VueSlickCarousel from "vue-slick-carousel";
-import { checkArrayString } from "@/utils";
 
 export default {
   name: "customPage",
@@ -40,38 +43,19 @@ export default {
     Affix,
     customePage,
     draggable,
-    VueSlickCarousel,
+    VueSlickCarousel
   },
   data() {
     return {
-      data: [],
+      data: []
     };
   },
   created() {
     //添加布局
-    eventEmiter.on("addPageLayout", (data) => {
-      let { value, index, layoutDataCol } = data;
+    eventEmiter.on("addPageLayout", data => {
+      let { value, index } = data;
       value.id = uuid.v4();
-      if (layoutDataCol) {
-        // this.data.forEach((element) => {
-        //   const colIndex = checkArrayString(
-        //     element.col,
-        //     "id",
-        //     layoutDataCol.id
-        //   );
-        //   if (colIndex != -1) {
-        //     element.col[colIndex].layouts.splice(index, 0, value);
-        //     // this.$forceUpdate();
-        //     setTimeout(() => {
-        //       this.$forceUpdate();
-        //       console.log("1111");
-        //     }, 1111);
-        //   }
-        // });
-      } else {
-        this.data.splice(index, 0, value);
-      }
-      // console.log(this.data);
+      this.data.splice(index, 0, value);
     });
     this.init();
   },
@@ -94,8 +78,8 @@ export default {
     customizePagePreview() {
       this.savaData();
       this.$router.push("/customizePagePreview/" + this.$route.params.id);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss"></style>

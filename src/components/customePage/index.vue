@@ -17,9 +17,9 @@
             item.container.classes,
             cobyGuideComponentStyleClass(item.container),
             {
-              'layout-container': layout,
+              'layout-container': layout
             },
-            checkColLayoutClassContainer(item.container),
+            checkColLayoutClassContainer(item.container)
           ]"
           v-customePageContainer="layout"
           :style="[item.container.style]"
@@ -30,11 +30,11 @@
             :style="[item.row.style]"
             :class="[
               {
-                'layout-row pt-40': layout,
+                'layout-row pt-40': layout
                 //'flex-wrap': !layout
               },
               cobyGuideComponentStyleClass(item.row),
-              item.row.classes,
+              item.row.classes
             ]"
             v-customePageContainer="layout"
           >
@@ -50,9 +50,8 @@
                 guideComponentStyleClassPosition(col),
                 cobyGuideComponentStyleClass(col),
                 {
-                  'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ':
-                    layout,
-                },
+                  'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
+                }
               ]"
               v-customePageContainer="layout"
             >
@@ -74,9 +73,8 @@
                       guideComponentStyleClassPosition(box),
                       {
                         'mt-20': index_1 != 0 && layout,
-                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ':
-                          layout,
-                      },
+                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout
+                      }
                     ]"
                   >
                     <!-- 通用组件 start -->
@@ -148,6 +146,7 @@
                 :layout="layout"
                 :key="'component' + col.layouts"
                 :colLayout="false"
+                :originalData="data"
               ></customePage>
 
               <div :class="[{ 'pt-30': layout }]" v-if="layout && colLayout">
@@ -368,7 +367,7 @@ import {
   checkArray,
   checkArrayString,
   guideComponentStyleClass,
-  judgeStyleClass,
+  judgeStyleClass
 } from "@/utils";
 export default {
   name: "customePage",
@@ -376,7 +375,7 @@ export default {
     guideComponent,
     draggable,
     customePage,
-    setGuidePublicComponent,
+    setGuidePublicComponent
   },
   directives: {
     "aos-animation": {
@@ -385,8 +384,8 @@ export default {
       },
       update(el, binding, vnode, oldVnode) {
         vnode.context.setAttributeAos(el, binding.value);
-      },
-    },
+      }
+    }
   },
   computed: {
     dragOptions() {
@@ -394,9 +393,9 @@ export default {
         animation: 200,
         group: "description",
         disabled: false,
-        ghostClass: "ghost",
+        ghostClass: "ghost"
       };
-    },
+    }
   },
   props: {
     //从父级获取的表单组件
@@ -404,18 +403,25 @@ export default {
       type: Array,
       default() {
         return [];
-      },
+      }
     },
     //判断是否是设计
     layout: {
       type: Boolean,
-      default: false,
+      default: false
     },
     //col是否允许添加布局Layout
     colLayout: {
       type: Boolean,
-      default: true,
+      default: true
     },
+    //最原始的data
+    originalData: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
   data() {
     return {
@@ -438,7 +444,7 @@ export default {
         text: "",
         index: "",
         value: "",
-        fieldName: "",
+        fieldName: ""
       },
 
       col: {
@@ -446,7 +452,7 @@ export default {
         list: [],
         // 0新增col  1修改col
         status: 0,
-        component: "",
+        component: ""
       },
       containerValue: "",
 
@@ -461,12 +467,12 @@ export default {
       tabsContentComponentStatus: "",
       tabsContentComponentTitle: "",
       tabsContentComponentVisible: false,
-      tabsContentComponentIndex: -1,
+      tabsContentComponentIndex: -1
     };
   },
   watch: {},
   created() {
-    eventEmiter.on("addTabsContentComponent", (value) => {
+    eventEmiter.on("addTabsContentComponent", value => {
       const { item, status, form, index } = value;
       this.tabsContentComponentForm = form;
       this.tabsContentComponent = item;
@@ -496,8 +502,8 @@ export default {
     upedataCarouselLastAsNavFor() {
       const guideComponent = this.$refs.guideComponent;
       if (checkArray(this.data)) {
-        this.data[0].col.forEach((element) => {
-          element.colList.forEach((box) => {
+        this.data[0].col.forEach(element => {
+          element.colList.forEach(box => {
             if (
               box.controlType == "carousel" &&
               typeof box.settings.asNavFor == "string"
@@ -545,29 +551,23 @@ export default {
 
     //点击布局col 后
     addPageLayout(index) {
-      this.layoutList[index].col.forEach((element) => {
+      this.layoutList[index].col.forEach(element => {
         element.id = uuid.v4();
       });
+      //col 布局
       if (this.layoutDataCol) {
-        this.data.forEach((element) => {
-          const colIndex = checkArrayString(
-            element.col,
-            "id",
-            this.layoutDataCol.id
-          );
-          if (colIndex != -1) {
-            element.col[colIndex].layouts.push(
-              lodash.cloneDeep(this.layoutList[index])
-            );
-          }
-        });
+        let layoutValue = lodash.cloneDeep(this.layoutList[index]);
+        layoutValue.id = uuid.v4();
+        this.lookingDataCol(this.data, this.layoutDataCol.id).layouts.push(
+          layoutValue
+        );
       } else {
         eventEmiter.emit("addPageLayout", [
           {
             value: lodash.cloneDeep(this.layoutList[index]),
             index: this.layoutDataIndex,
-            layoutDataCol: this.layoutDataCol,
-          },
+            layoutDataCol: this.layoutDataCol
+          }
         ]);
       }
 
@@ -640,13 +640,13 @@ export default {
 
     //完成设置属性
     setGuidePublicComponentFinish() {
-      const setGuideComponentForm =
-        this.$refs.setGuidePublicComponent.$refs.setGuideComponentForm;
-      setGuideComponentForm.validate((valid) => {
+      const setGuideComponentForm = this.$refs.setGuidePublicComponent.$refs
+        .setGuideComponentForm;
+      setGuideComponentForm.validate(valid => {
         if (valid) {
           this.col.component = {
             ...this.col.component,
-            ...setGuideComponentForm.model,
+            ...setGuideComponentForm.model
           };
           switch (this.col.status) {
             //新增col
@@ -661,21 +661,21 @@ export default {
             case 2:
               this.containerValue.container = {
                 ...this.containerValue.container,
-                ...this.col.component,
+                ...this.col.component
               };
               break;
             //修改Row
             case 3:
               this.containerValue.row = {
                 ...this.containerValue.row,
-                ...this.col.component,
+                ...this.col.component
               };
               break;
             //修改col
             case 4:
               this.containerValue.col[this.col.index] = {
                 ...this.containerValue.col[this.col.index],
-                ...this.col.component,
+                ...this.col.component
               };
               break;
           }
@@ -695,18 +695,17 @@ export default {
 
     //选项卡的子组件
     setTabsGuidePublicComponentFinish(type) {
-      const setTabsGuidePublicComponent =
-        this.$refs.setTabsGuidePublicComponent.$refs.setGuideComponentForm;
-      setTabsGuidePublicComponent.validate((valid) => {
+      const setTabsGuidePublicComponent = this.$refs.setTabsGuidePublicComponent
+        .$refs.setGuideComponentForm;
+      setTabsGuidePublicComponent.validate(valid => {
         if (valid) {
           this.tabsContentComponent = {
             ...this.tabsContentComponent,
-            ...setTabsGuidePublicComponent.model,
+            ...setTabsGuidePublicComponent.model
           };
-          const componentsList =
-            this.tabsContentComponentForm.componentsList[
-              this.tabsContentComponentIndex
-            ];
+          const componentsList = this.tabsContentComponentForm.componentsList[
+            this.tabsContentComponentIndex
+          ];
           switch (this.tabsContentComponentStatus) {
             case 1:
               componentsList.children.push(this.tabsContentComponent);
@@ -786,22 +785,8 @@ export default {
     //拖拽完成的
     onEndClone(e) {
       if (e.target.id != e.to.id) {
-        let dataIndex = -1;
-        let dataCol = -1;
-        for (let index = 0; index < this.data.length; index++) {
-          dataCol = checkArrayString(this.data[index].col, "id", e.to.id);
-          if (dataCol != -1) {
-            dataIndex = index;
-            break;
-          }
-        }
-        if (dataCol != -1) {
-          this.data[dataIndex].col[dataCol].colList.splice(
-            e.newIndex,
-            0,
-            this.dragCloneCol
-          );
-        }
+        const col = this.lookingDataCol(this.originalData, e.to.id);
+        col.colList.splice(e.newIndex, 0, this.dragCloneCol);
       }
     },
     //设置aos 动画
@@ -847,8 +832,8 @@ export default {
      */
     filterComponentList(array) {
       if (checkArray(array)) {
-        this.componentList.forEach((item) => {
-          array.forEach((box) => {
+        this.componentList.forEach(item => {
+          array.forEach(box => {
             const tabsIndex = checkArrayString(item.list, "controlType", box);
             if (tabsIndex != -1) {
               item.list[tabsIndex].show = true;
@@ -856,8 +841,8 @@ export default {
           });
         });
       } else {
-        this.componentList.forEach((item) => {
-          item.list.forEach((box) => {
+        this.componentList.forEach(item => {
+          item.list.forEach(box => {
             box.show = false;
           });
         });
@@ -868,7 +853,26 @@ export default {
     checkColLayoutClassContainer(item) {
       return this.colLayout ? item.type : "";
     },
-  },
+
+    //找data对应的col
+    lookingDataCol(data, typeString) {
+      if (checkArray(data)) {
+        data.forEach(element => {
+          for (let i = 0; i < element.col.length; i++) {
+            const col = element.col[i];
+            if (col.id == typeString) {
+              this.layoutDataCol = col;
+              break;
+            }
+            if (checkArray(col.layouts)) {
+              this.lookingDataCol(col.layouts, typeString);
+            }
+          }
+        });
+      }
+      return this.layoutDataCol;
+    }
+  }
 };
 </script>
 <style scoped lang="scss">
