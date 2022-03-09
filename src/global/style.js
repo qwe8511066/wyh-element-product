@@ -1,8 +1,10 @@
+import scssVariables from '../../tailwind.variables.config'
 import tailwind from '../../tailwind.config'
 const colors = tailwind.theme.extend.colors;
 let stylePulbicColorVariable = []
 let hoverTextColorListVariable = []
 
+//和tailwind.config.js->screens 相匹配
 export const ipadFieldName = 'lg' + tailwind.separator;
 export const pcFieldName = 'xl' + tailwind.separator;
 export const mdFieldName = 'md' + tailwind.separator;
@@ -22,6 +24,15 @@ Object.keys(colors).forEach(key => {
   })
 })
 export const stylePulbicColor = stylePulbicColorVariable
+
+//背景渐变色
+export const gradientList = [
+  {
+    label: 'bg-mask-1-0',
+    value: 'bg-mask-1-0',
+  },
+]
+
 export const textAlign = [
   {
     label: '默认',
@@ -415,7 +426,23 @@ export const componentList = [
         controlType: "video",
         title: "视频",
         path: '@/components/customePage/publicComponent/video/'
+      },
+      {
+        controlType: "float",
+        title: "浮动层",
+        path: '@/components/customePage/publicComponent/float/'
       }
+    ]
+  },
+  {
+    title: "项目组件",
+    list: [
+      {
+        controlType: "showcase-1-0",
+        title: "showcase-1-0",
+        path: '@/components/customePage/projectComponent/showcase-1-0/'
+      }
+
     ]
   }
 ]
@@ -924,4 +951,5 @@ export default {
   stylePositionList,
   styleZIndexList,
   forFieldList,
+  gradientList,
 }

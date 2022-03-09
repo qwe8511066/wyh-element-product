@@ -73,12 +73,14 @@
                       guideComponentStyleClassPosition(box),
                       {
                         'mt-20': index_1 != 0 && layout,
-                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout
+                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout,
+                        'border-pink-600':box.controlType === 'float',
                       }
                     ]"
                   >
                     <!-- 通用组件 start -->
                     <guideComponent
+                    :component-type="box.controlType"
                       v-aos-animation:{value}="box.animation"
                       :class="[cobyGuideComponentStyleClass(box)]"
                       :layout="layout"
@@ -119,6 +121,7 @@
               </draggable>
               <!-- 设置Col start -->
               <div
+                v-if="layout"
                 class="set-attributes-col hidden place-items-center absolute top-0 left-2 space-x-10"
               >
                 <span>col {{ i + 1 }}</span>
@@ -149,29 +152,32 @@
                 :originalData="data"
               ></customePage>
 
-              <div :class="[{ 'pt-30': layout }]" v-if="layout && colLayout">
-                <el-button
-                  type="primary"
-                  class="w-full"
-                  @click="addColLayot(col)"
-                  plain
-                  >添加布局</el-button
-                >
-              </div>
+              <div class="space-x-20 flex" v-if="layout">
+                <div v-if="colLayout" class="flex-1">
+                  <el-button
+                    type="primary"
+                    class="w-full"
+                    @click="addColLayot(col)"
+                    plain
+                    >添加布局</el-button
+                  >
+                </div>
 
-              <div :class="[{ 'pt-30': layout }]" v-if="layout">
-                <el-button
-                  type="primary"
-                  class="w-full"
-                  @click="addComponet(true, col)"
-                  plain
-                  >添加组件</el-button
-                >
+                <div class="flex-1">
+                  <el-button
+                    type="primary"
+                    class="w-full"
+                    @click="addComponet(true, col)"
+                    plain
+                    >添加组件</el-button
+                  >
+                </div>
               </div>
             </div>
 
             <!-- 设置Row start -->
             <div
+              v-if="layout"
               class="set-attributes-row hidden place-items-center absolute top-0 right-0 space-x-10"
             >
               <span>row</span>
@@ -186,6 +192,7 @@
           <!-- 设置Container start -->
 
           <div
+            v-if="layout"
             class="set-attributes-container hidden place-items-center absolute top-0 left-0 space-x-10"
           >
             <span>container</span>
@@ -492,7 +499,6 @@ export default {
     });
     this.layoutList = initLayoutList();
     this._layoutArray = layoutArray;
-    // console.log(this._layoutArray);
   },
   mounted() {
     this.upedataCarouselLastAsNavFor();

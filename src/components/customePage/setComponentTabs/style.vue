@@ -8,6 +8,19 @@
           :predefine="stylePulbicColor"
         ></el-color-picker>
       </el-form-item>
+
+      <el-form-item label="伪类背景颜色渐变色"> 
+      <el-radio-group v-model="form.styleClass['gradient']">
+        <el-radio
+          border
+          :label="item.value"
+          :class="item.label" 
+          v-for="(item, index) in gradientList"
+          :key="'gradient' + index"
+          >{{ item.label }}</el-radio
+        >
+      </el-radio-group>
+    </el-form-item>
     </el-collapse-item>
 
     <el-collapse-item title="文本">
@@ -500,6 +513,7 @@ export default {
   },
   data() {
     return {
+      gradientList:this.$style.gradientList,
       stylePulbicColor: this.$style.stylePulbicColor,
       textAlign: this.$style.textAlign,
       styleSpacingModel: this.$style.styleSpacingModel,

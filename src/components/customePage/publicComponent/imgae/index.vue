@@ -14,7 +14,7 @@
 </template>
 <script>
 import guideComponentProperty from "@/components/customePage/componentsIntercept/guideComponent/guideComponentProperty";
-import imgaeDefault from "./imgaeDefault";
+import imgaeDefault from "@/components/customePage/publicComponent/imgae/imgaeDefault";
 export default {
   name: "customerPageImage",
   mixins: [guideComponentProperty],

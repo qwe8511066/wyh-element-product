@@ -510,6 +510,9 @@ export function guideComponentStyleClass(value) {
     const opacity = judgeStyleClass(styleClass, "opacity");
     const shadow = judgeStyleClass(styleClass, "shadow");
     const textDecoration = judgeStyleClass(styleClass, "textDecoration");
+
+    const gradient = judgeStyleClass(styleClass, "gradient");
+
     if (value.controlType === "row") {
       const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
       // const mobileFlexDirection = judgeStyleClass(
@@ -644,7 +647,8 @@ export function guideComponentStyleClass(value) {
       roundedBr,
       opacity,
       shadow,
-      textDecoration
+      textDecoration,
+      gradient
     );
   }
   return list.join(" ");

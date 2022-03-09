@@ -1,5 +1,7 @@
 <template>
-  <customePage :data="data"></customePage>
+  <div class="pagePreview">
+    <customePage :data="data"></customePage>
+  </div>
 </template>
 
 <script>

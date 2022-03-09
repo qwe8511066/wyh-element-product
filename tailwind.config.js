@@ -1,3 +1,4 @@
+let scssVariables = require('./tailwind.variables.config.js');
 module.exports = {
   separator: '|',
   purge: [],
@@ -5,15 +6,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#003D5C',
-        secondary: '#6DB5CA',
-        tertiary: '#4095EC',
-        dark: '#061E36',
-        black: '#000000',
-        light: '#B8BBBD',
-        lighter: '#F0F3FA',
-        link: '#F1676F',
-        white: '#FFF'
+        primary: scssVariables._primary,
+        secondary: scssVariables.secondary,
+        tertiary: scssVariables._tertiary,
+        dark: scssVariables._dark,
+        black: scssVariables._black,
+        light: scssVariables._light,
+        lighter: scssVariables._lighter,
+        link: scssVariables._link,
+        white: scssVariables._white,
       },
       borderColor: theme => ({
         ...theme('colors'),
@@ -50,19 +51,17 @@ module.exports = {
 
       //响应式
       screens: {
-        sm: '640px',
-        // => @media (min-width: 640px) { ... }
-
-        md: '768px',
+        sm: scssVariables._screen_sm,
         // => @media (min-width: 768px) { ... }
 
-        lg: '1024px',
-        // => @media (min-width: 1024px) { ... }
+        md: scssVariables._screen_md,
+        // => @media (min-width: 992px) { ... }
 
-        xl: '1280px',
-        // => @media (min-width: 1280px) { ... }
+        lg: scssVariables._screen_lg,
+        // => @media (min-width: 1200px) { ... }
 
-        '2xl': '1410px',
+        xl: scssVariables._screen_xl,
+        // => @media (min-width: 1470px) { ... }
       },
       container: {
         center: true,
