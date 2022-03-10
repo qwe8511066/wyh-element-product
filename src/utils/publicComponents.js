@@ -5,8 +5,7 @@ import dialogWyhElementChoose from '@/components/dialogWyhElementChoose/index'
 import dialogWyhElementChooseTabs from '@/components/dialogWyhElementChooseTabs/index'
 import dialogWyhElementChooseSelect from '@/components/dialogWyhElementChooseSelect/index'
 import buttonPermission from '@/components/buttonPermission/index'
-
-
+import CodeView from "vue-code-view";
 
 wyhElementTable.mixins[0].props.definitionData.default = 'data.list'
 wyhElementTable.mixins[0].props.definitionTotal.default = 'data.totalCount'
@@ -14,6 +13,7 @@ wyhElementTable.mixins[0].props.definitionTotal.default = 'data.totalCount'
 const publicComponents = {
   install: function (Vue) {
     Vue.use(ElementUI);
+    Vue.use(CodeView);
     Vue.component(wyhElementTable.name, wyhElementTable)
     Vue.component(dialogWyhElementChoose.name, dialogWyhElementChoose)
     Vue.component(dialogWyhElementChooseTabs.name, dialogWyhElementChooseTabs)

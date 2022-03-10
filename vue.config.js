@@ -40,6 +40,13 @@ module.exports = {
     },
     before: require('./mock/mock-server.js')
   },
+  //vue-code-view 
+  runtimeCompiler: true,
+  // or
+  chainWebpack: (config) => {
+    config.resolve.alias
+      .set("vue$", "vue/dist/vue.esm.js");
+  },
   css: {
     loaderOptions: {
       sass: {
