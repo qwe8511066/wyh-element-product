@@ -53,6 +53,14 @@ export default {
           initRules.fontFamily = [{ required: true, message: "这是必填项" }];
           initRules.fontClass = [{ required: true, message: "这是必填项" }];
           break;
+        case "float":
+           initForm.styleClass.justifyContent = this.form.styleClass.justifyContent
+            ? this.form.styleClass.justifyContent
+            : "justify-center";
+             initForm.styleClass.justifyItems = this.form.styleClass.justifyItems
+            ? this.form.styleClass.justifyItems
+            : "items-center";
+          break;  
         case "carousel":
           initForm.settings = this.form.settings
             ? this.form.settings

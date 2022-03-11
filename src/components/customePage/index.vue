@@ -74,13 +74,13 @@
                       {
                         'mt-20': index_1 != 0 && layout,
                         'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout,
-                        'border-pink-600':box.controlType === 'float',
+                        'border-pink-600': box.controlType === 'float'
                       }
                     ]"
                   >
                     <!-- 通用组件 start -->
                     <guideComponent
-                    :component-type="box.controlType"
+                      :component-type="box.controlType"
                       v-aos-animation:{value}="box.animation"
                       :class="[cobyGuideComponentStyleClass(box)]"
                       :layout="layout"
@@ -152,8 +152,8 @@
                 :originalData="data"
               ></customePage>
 
-              <div class="space-x-20 flex" v-if="layout">
-                <div v-if="colLayout" class="flex-1">
+              <div class="space-y-20" v-if="layout">
+                <div v-if="colLayout">
                   <el-button
                     type="primary"
                     class="w-full"
@@ -163,7 +163,7 @@
                   >
                 </div>
 
-                <div class="flex-1">
+                <div>
                   <el-button
                     type="primary"
                     class="w-full"
@@ -340,22 +340,35 @@
       :visible.sync="layoutVisible"
       custom-class="layout-drawer"
     >
-      <div
-        @click="addPageLayout(index)"
-        v-for="(item, index) in _layoutArray"
-        :class="[{ 'border-b-1': index != _layoutArray.length - 1 }]"
-        class="flex p-20 place-items-center cursor-pointer hover|bg-light hover|text-white"
-        :key="index"
-      >
-        <div class="w-200 space-x-10 flex">
-          <div
-            v-for="(box, i) in _layoutArray[index]"
-            :key="i"
-            class="h-40 flex-1 bg-secondary"
-          ></div>
-        </div>
-        <div class="flex-1 pl-20">col {{ _layoutArray[index] }}</div>
+      <div class="px-10">
+        <el-collapse v-model="activeLayoutName" accordion>
+          <el-collapse-item
+            :title="item.title"
+            :name="String(index)"
+            :key="'_layoutArray' + index"
+            v-for="(item, index) in _layoutArray"
+          >
+            <div
+              :key="'layoutList' + i"
+              :class="[{ 'border-b-1': index != _layoutArray.length - 1 }]"
+              class="flex p-20 place-items-center cursor-pointer hover|bg-light hover|text-white"
+              @click="addPageLayout(box, i)"
+              v-for="(box, i) in item.layoutList"
+            >
+              <div class="w-300 space-x-10 flex">
+                <div
+                  v-for="a in box.col.length"
+                  :key="'layoutCol' + a"
+                  class="h-40 flex-1 bg-primary "
+                ></div>
+              </div>
+              <div class="flex-1 pl-20">col {{ box.col.length }}</div>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
       </div>
+
+      <!--  -->
     </el-drawer>
     <!-- 添加布局弹窗 -->
   </div>
@@ -467,6 +480,7 @@ export default {
       setComponeVisible: false,
       setComponeVisibleTitle: "",
       activeName: "0",
+      activeLayoutName: "0",
       dragCloneCol: "",
 
       tabsContentComponent: "",
@@ -497,7 +511,8 @@ export default {
         this.tabsContentComponentVisible = true;
       }
     });
-    this.layoutList = initLayoutList();
+    // console.log('11111111')
+    // this.layoutList = initLayoutList();
     this._layoutArray = layoutArray;
   },
   mounted() {
@@ -556,13 +571,16 @@ export default {
     },
 
     //点击布局col 后
-    addPageLayout(index) {
-      this.layoutList[index].col.forEach(element => {
+    addPageLayout(box, index) {
+      // console.log(box)
+      // console.log(index)
+      const cobyCol = lodash.cloneDeep(box);
+      cobyCol.col.forEach(element => {
         element.id = uuid.v4();
       });
       //col 布局
       if (this.layoutDataCol) {
-        let layoutValue = lodash.cloneDeep(this.layoutList[index]);
+        let layoutValue = lodash.cloneDeep(cobyCol);
         layoutValue.id = uuid.v4();
         this.lookingDataCol(this.data, this.layoutDataCol.id).layouts.push(
           layoutValue
@@ -570,13 +588,12 @@ export default {
       } else {
         eventEmiter.emit("addPageLayout", [
           {
-            value: lodash.cloneDeep(this.layoutList[index]),
+            value: lodash.cloneDeep(cobyCol),
             index: this.layoutDataIndex,
             layoutDataCol: this.layoutDataCol
           }
         ]);
       }
-
       this.layoutDataCol = null;
       this.layoutVisible = false;
     },

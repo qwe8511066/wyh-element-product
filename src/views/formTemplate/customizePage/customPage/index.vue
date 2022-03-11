@@ -36,7 +36,7 @@ import { uuid } from "vue-uuid";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import VueSlickCarousel from "vue-slick-carousel";
-
+import { initLayoutList } from "@/global/colLayout";
 export default {
   name: "customPage",
   components: {
@@ -47,7 +47,8 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      
     };
   },
   created() {
@@ -58,6 +59,7 @@ export default {
       this.data.splice(index, 0, value);
     });
     this.init();
+    initLayoutList();
   },
 
   mounted() {},
