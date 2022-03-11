@@ -511,8 +511,6 @@ export default {
         this.tabsContentComponentVisible = true;
       }
     });
-    // console.log('11111111')
-    // this.layoutList = initLayoutList();
     this._layoutArray = layoutArray;
   },
   mounted() {

@@ -99,6 +99,11 @@ export default {
           position: "",
           zIndex: ""
         },
+        
+        requestObject:{
+          
+        },
+
         animation: {
           dataAosOffset: 120,
           dataAosDelay: 0,
@@ -112,7 +117,6 @@ export default {
   },
   computed: {},
   created() {
-    console.log(this.value);
     this.init();
   },
   methods: {

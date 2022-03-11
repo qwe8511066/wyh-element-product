@@ -122,5 +122,4 @@ export function initLayoutList() {
       })
     })
   })
-  console.log(layoutArray)
 }

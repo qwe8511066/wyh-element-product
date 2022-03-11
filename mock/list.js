@@ -267,5 +267,34 @@ module.exports = [
         }
       }
     }
+  },
+  {
+    url: '/getNewList1',
+    type: 'post',
+    response: (config) => {
+      console.log(config.body)
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize?pageSize:1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: index + i,
+            name: "@cname" + '新闻中心',
+            title:'新闻中心'+index + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
   }
 ]

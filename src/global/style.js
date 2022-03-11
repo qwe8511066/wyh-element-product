@@ -444,6 +444,17 @@ export const componentList = [
       }
 
     ]
+  },
+  {
+    title: "视图组件",
+    list: [
+      {
+        controlType: "view-list-1-0",
+        title: "view-list-1-0",
+        path: '@/components/customePage/viewComponent/view-list-1-0/'
+      }
+
+    ]
   }
 ]
 
