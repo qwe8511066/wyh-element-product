@@ -4,8 +4,13 @@
       :form="form"
       @getDataList="getDataList"
     ></setCustomerViewComponent_list_1_0>
-    <div v-if="dataList && dataList.length>0">
-      <code-viewer ref="codeViewer" :showCode="true" :source="code_example">
+    <div v-if="dataList && dataList.length > 0">
+      <code-viewer
+        v-if="code_example"
+        ref="codeViewer"
+        :showCode="true"
+        :source="code_example"
+      >
       </code-viewer>
       <customerPageViewIntercept
         :dataList="dataList"
@@ -32,28 +37,27 @@ export default {
     return {
       dataList: [],
       dataTemplate: `<div><div v-for="(item,index) in dataList" :key="index">
-      {{ item.title }}
+      {{ item.title  }}
     </div>
     </div>
       `,
-      code_example: ""
+      code_example: null
     };
   },
 
-  created() {
-  },
+  created() {},
   methods: {
-    getDataList(value){
+    getDataList(value) {
       this.dataList = value.dataList;
       this.code_example =
-      ` 
+        ` 
 <template>
   <div id="` +
-      this.value.controlType +
-      this.value.id +
-      `">
-    <h1>Welcome to Vue.js !</h1> 
-    <div v-html=dataTemplate></div>
+        this.value.controlType +
+        this.value.id +
+        `">
+    {{dataTemplate}}
+
   </div>
 </template>
 <script>
@@ -61,11 +65,11 @@ export default {
     data() {
       return {
         dataList: '` +
-      JSON.stringify(this.dataList) +
-      `'
-        dataTemplate:'` +
-      JSON.stringify(this.dataTemplate) +
-      `'
+        JSON.stringify(this.dataList) +
+        `',
+        dataTemplate:` +
+        JSON.stringify(this.dataTemplate) +
+        `
       };
     },
     created() {
