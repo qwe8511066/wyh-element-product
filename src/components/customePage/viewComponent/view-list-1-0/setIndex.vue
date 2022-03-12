@@ -5,17 +5,18 @@
       @getDataList="getDataList"
     ></setCustomerViewComponent_list_1_0>
     <div v-if="dataList && dataList.length > 0">
-      <code-viewer
-        v-if="code_example"
-        ref="codeViewer"
-        :showCode="true"
-        :source="code_example"
-      >
+      <div class="mb-20">
+        <el-input
+          type="textarea"
+          :rows="2"
+          autosize
+          placeholder="请输入内容"
+          v-model="form.requestObject['dataTemplate']"
+        >
+        </el-input>
+      </div>
+      <code-viewer v-if="code_example" ref="codeViewer" :source="code_example">
       </code-viewer>
-      <customerPageViewIntercept
-        :dataList="dataList"
-        :dataTemplate="dataTemplate"
-      ></customerPageViewIntercept>
     </div>
   </div>
 </template>
@@ -23,25 +24,19 @@
 <script>
 import setGuideComponentProperty from "@/components/customePage/componentsIntercept/setComponent/setGuideComponentProperty";
 import setCustomerViewComponent_list_1_0 from "@/components/customePage/viewComponent/intercept/setIndex";
-import customerPageViewIntercept from "@/components/customePage/viewComponent/intercept/index.vue";
 
 export default {
   name: "setCustomerViewComponent-list-1-0",
   mixins: [setGuideComponentProperty],
   components: {
     setCustomerViewComponent_list_1_0,
-    customerPageViewIntercept
   },
   props: {},
   data() {
     return {
+      //测试数据
       dataList: [],
-      dataTemplate: `<div><div v-for="(item,index) in dataList" :key="index">
-      {{ item.title  }}
-    </div>
-    </div>
-      `,
-      code_example: null
+      code_example: null,
     };
   },
 
@@ -56,8 +51,6 @@ export default {
         this.value.controlType +
         this.value.id +
         `">
-    {{dataTemplate}}
-
   </div>
 </template>
 <script>
@@ -68,8 +61,9 @@ export default {
         JSON.stringify(this.dataList) +
         `',
         dataTemplate:` +
-        JSON.stringify(this.dataTemplate) +
-        `
+        JSON.stringify(this.form.requestObject.dataTemplate) +
+        `,
+        startTime: +new Date(),
       };
     },
     created() {
@@ -77,14 +71,14 @@ export default {
     },
     methods: {
       jsonData(){
-        this.dataList = JSON.parse(this.dataList);
-        this.dataTemplate = JSON.parse(this.dataTemplate);
+        this.dataList = eval(this.dataList);
+        this.dataTemplate = eval(this.dataTemplate);
       }
     },
   };
 <\/script>`;
-    }
-  }
+    },
+  },
 };
 </script>
 

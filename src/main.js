@@ -45,6 +45,7 @@ new Vue({
   store,
   render: h => h(App),
   mounted() {
+    //添加col row 组件动画
     AOS.init({
       // Global settings:
       offset: 120, // offset (in px) from the original trigger point
@@ -55,4 +56,5 @@ new Vue({
       anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
     })
   },
+
 })

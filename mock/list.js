@@ -272,17 +272,156 @@ module.exports = [
     url: '/getNewList1',
     type: 'post',
     response: (config) => {
-      console.log(config.body)
       const { pageSize, page } = config.body
-      const _pageSize = pageSize?pageSize:1;
+      const _pageSize = pageSize ? pageSize : 1;
       const list = []
       const index = page * _pageSize
       for (let i = 0; i < _pageSize; i++) {
         list.push(
           {
-            id: index + i,
+            id: i,
             name: "@cname" + '新闻中心',
-            title:'新闻中心'+index + i,
+            title: '新闻中心' + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList2',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '通告公告',
+            title: '通告公告' + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList3',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '人才招聘',
+            title: '人才招聘' + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList4',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '亲子活动',
+            title: '亲子活动' + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList5',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '游玩活动',
+            title: '游玩活动' + i,
+            "mtime": "@datetime",//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList6',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '公园活动',
+            title: '公园活动' + i,
             "mtime": "@datetime",//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
@@ -297,4 +436,5 @@ module.exports = [
       }
     }
   }
+
 ]

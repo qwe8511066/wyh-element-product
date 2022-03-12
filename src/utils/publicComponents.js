@@ -6,6 +6,7 @@ import dialogWyhElementChooseTabs from '@/components/dialogWyhElementChooseTabs/
 import dialogWyhElementChooseSelect from '@/components/dialogWyhElementChooseSelect/index'
 import buttonPermission from '@/components/buttonPermission/index'
 import CodeView from "vue-code-view";
+import customerPageViewIntercept from "@/components/customePage/viewComponent/intercept/index.vue";
 
 wyhElementTable.mixins[0].props.definitionData.default = 'data.list'
 wyhElementTable.mixins[0].props.definitionTotal.default = 'data.totalCount'
@@ -15,6 +16,7 @@ const publicComponents = {
     Vue.use(ElementUI);
     Vue.use(CodeView);
     Vue.component(wyhElementTable.name, wyhElementTable)
+    Vue.component(customerPageViewIntercept.name, customerPageViewIntercept)
     Vue.component(dialogWyhElementChoose.name, dialogWyhElementChoose)
     Vue.component(dialogWyhElementChooseTabs.name, dialogWyhElementChooseTabs)
     Vue.component(dialogWyhElementChooseSelect.name, dialogWyhElementChooseSelect)

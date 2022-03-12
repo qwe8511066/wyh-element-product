@@ -1,9 +1,5 @@
 <template>
-  <el-form
-    ref="viewComponentForm"
-    :rules="rules"
-    :model="form.requestObject"
-  >
+  <el-form ref="viewComponentForm" :rules="rules" :model="form.requestObject">
     <el-form-item label="请选择分类" prop="requestType">
       <el-select
         el-select
@@ -49,32 +45,38 @@ export default {
       getViewList: this.$API.getViewList,
       rules: {
         requestType: [
-          { required: true, message: "请选择分类", trigger: "blur" }
+          { required: true, message: "请选择分类", trigger: "blur" },
         ],
-        pageSize: [{ required: true, message: "请输入页码", trigger: "blur" }]
-      }
+        pageSize: [{ required: true, message: "请输入页码", trigger: "blur" }],
+      },
     };
   },
-  computed: {},
+  computed: {
+    form: function () {
+      console.log("111");
+    },
+  },
   created() {},
   methods: {
     onSubmit() {
-      this.$refs["viewComponentForm"].validate(valid => {
+      this.$refs["viewComponentForm"].validate((valid) => {
         if (valid) {
           // alert("submit!");
-          this.$http.post('/getNewList1',{
-            pageSize:this.form.requestObject.pageSize
-          }).then(data => {
-            const {list} = data.data;
-            this.$emit("getDataList", { dataList: list });
-          })
+          this.$http
+            .post("/getNewList1", {
+              pageSize: this.form.requestObject.pageSize,
+            })
+            .then((data) => {
+              const { list } = data.data;
+              this.$emit("getDataList", { dataList: list });
+            });
         } else {
           console.log("error submit!!");
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
