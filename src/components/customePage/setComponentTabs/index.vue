@@ -100,9 +100,9 @@ export default {
           zIndex: ""
         },
         
-        requestObject:{
-          
-        },
+        // requestObject:{
+        //   dataTemplate:`<div class=""><div v-for="(item,index) in this.dataList" :key="index">{{ item }}</div></div>`
+        // },
 
         animation: {
           dataAosOffset: 120,

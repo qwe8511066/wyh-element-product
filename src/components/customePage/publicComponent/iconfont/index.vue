@@ -21,7 +21,7 @@
 import guideComponentProperty from "@/components/customePage/componentsIntercept/guideComponent/guideComponentProperty";
 import { judgeStyleClass } from "@/utils";
 export default {
-  name: "customerPageTitle",
+  name: "customerPageIconfont",
   mixins: [guideComponentProperty],
   props: {},
   data() {

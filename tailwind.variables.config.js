@@ -13,12 +13,12 @@ module.exports = {
   // => @media (min-width: 1470px) { ... }
 
   _primary: '#003D5C',
-  _secondary: '#6DB5CA',
+  _secondary: '#58a9df',
   _tertiary: '#4095EC',
   _dark: '#061E36',
   _black: '#000000',
   _light: '#B8BBBD',
-  _lighter: '#F0F3FA',
+  _lighter: '#f3f6f9',
   _link: '#F1676F',
   _white: '#FFF',
 }

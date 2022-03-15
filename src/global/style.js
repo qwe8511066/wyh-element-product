@@ -431,6 +431,16 @@ export const componentList = [
         controlType: "float",
         title: "浮动层",
         path: '@/components/customePage/publicComponent/float/'
+      },
+      {
+        controlType: "view",
+        title: "视图",
+        path: '@/components/customePage/publicComponent/view/'
+      },
+      {
+        controlType: "spacer",
+        title: "占位块",
+        path: '@/components/customePage/publicComponent/spacer/'
       }
     ]
   },
@@ -445,17 +455,17 @@ export const componentList = [
 
     ]
   },
-  {
-    title: "视图组件",
-    list: [
-      {
-        controlType: "view-list-1-0",
-        title: "view-list-1-0",
-        path: '@/components/customePage/viewComponent/view-list-1-0/'
-      }
+  // {
+  //   title: "视图组件",
+  //   list: [
+  //     {
+  //       controlType: "view-list-1-0",
+  //       title: "view-list-1-0",
+  //       path: '@/components/customePage/viewComponent/view-list-1-0/'
+  //     }
 
-    ]
-  }
+  //   ]
+  // }
 ]
 
 export const paddingList = [

@@ -45,6 +45,19 @@ export default {
       }
 
       switch (controlType) {
+        case "view":
+          if (this.form.requestObject) {
+            initForm.requestObject = this.form.requestObject;
+          } else {
+            initForm.requestObject = {
+              pageSize: 1,
+              requestType: '',
+              dataTemplate: `<div class=""><div v-for="(item,index) in this.dataList" :key="index">{{ item }}</div></div>`
+            };
+          }
+          initRules['requestObject.requestType'] = [{ required: true, message: "请选择分类", trigger: "change" }];
+          initRules['requestObject.pageSize'] = [{ required: true, message: "请输入页码", trigger: "blur" }];
+          break;
         case "iconfont":
           initForm.fontFamily = this.form.fontFamily
             ? this.form.fontFamily
@@ -54,13 +67,14 @@ export default {
           initRules.fontClass = [{ required: true, message: "这是必填项" }];
           break;
         case "float":
-           initForm.styleClass.justifyContent = this.form.styleClass.justifyContent
+          initForm.styleClass.justifyContent = this.form.styleClass
+            .justifyContent
             ? this.form.styleClass.justifyContent
             : "justify-center";
-             initForm.styleClass.justifyItems = this.form.styleClass.justifyItems
+          initForm.styleClass.justifyItems = this.form.styleClass.justifyItems
             ? this.form.styleClass.justifyItems
             : "items-center";
-          break;  
+          break;
         case "carousel":
           initForm.settings = this.form.settings
             ? this.form.settings

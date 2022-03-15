@@ -78,7 +78,7 @@ module.exports = {
       },
       spacing: (function () {
         const spacing = {}
-        for (let i = 5; i <= 100; i++) {
+        for (let i = 5; i <= 160; i++) {
           spacing[i] = i + 'px'
           spacing[-i] = -i + 'px'
         }

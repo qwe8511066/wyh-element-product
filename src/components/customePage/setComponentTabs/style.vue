@@ -156,7 +156,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 11
-                    : 100
+                    : 160
                 "
                 v-model="form.styleClass['' + prefixField + box.fieldName + '']"
                 show-input
@@ -198,7 +198,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 0
-                    : -100
+                    : -160
                 "
                 :step="
                   form.styleClass[
@@ -212,7 +212,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 11
-                    : 100
+                    : 160
                 "
                 v-model="form.styleClass['' + prefixField + box.fieldName + '']"
                 show-input
