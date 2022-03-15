@@ -49,20 +49,6 @@ module.exports = {
         full: '9999px',
       },
 
-      //响应式
-      screens: {
-        sm: scssVariables._screen_sm,
-        // => @media (min-width: 768px) { ... }
-
-        md: scssVariables._screen_md,
-        // => @media (min-width: 992px) { ... }
-
-        lg: scssVariables._screen_lg,
-        // => @media (min-width: 1200px) { ... }
-
-        xl: scssVariables._screen_xl,
-        // => @media (min-width: 1470px) { ... }
-      },
       container: {
         center: true,
       },
@@ -159,7 +145,18 @@ module.exports = {
       maxHeight: {
         'full-screen': '100vw',
       },
-    }
+    },
+    //响应式
+    screens: {
+      md: scssVariables._screen_md,
+      // => @media (min-width: 992px) { ... }
+
+      lg: scssVariables._screen_lg,
+      // => @media (min-width: 1200px) { ... }
+
+      xl: scssVariables._screen_xl,
+      // => @media (min-width: 1470px) { ... }
+    },
   },
   variants: {
     extend: {},

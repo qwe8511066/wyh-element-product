@@ -60,6 +60,8 @@ export default {
     });
     this.init();
     initLayoutList();
+
+    console.log(JSON.stringify(this.data))
   },
 
   mounted() {},

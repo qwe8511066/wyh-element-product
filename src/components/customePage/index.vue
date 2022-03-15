@@ -30,7 +30,7 @@
             :style="[item.row.style]"
             :class="[
               {
-                'layout-row pt-40': layout
+                'layout-row pt-40 overflow-auto': layout
                 //'flex-wrap': !layout
               },
               cobyGuideComponentStyleClass(item.row),
@@ -64,11 +64,12 @@
                 :clone="cloneDog"
                 @end="onEndClone"
               >
-                <div
+                <template
                   v-for="(box, index_1) in col.colList"
-                  :key="'component' + index_1"
+                  
                 >
                   <div
+                  :key="'component' + index_1"
                     :class="[
                       guideComponentStyleClassPosition(box),
                       {
@@ -117,7 +118,7 @@
 
                     <!-- 设置ColComponent end -->
                   </div>
-                </div>
+                </template>
               </draggable>
               <!-- 设置Col start -->
               <div

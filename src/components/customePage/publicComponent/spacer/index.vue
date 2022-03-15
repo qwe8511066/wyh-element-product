@@ -10,7 +10,9 @@ export default {
   mixins: [guideComponentProperty],
   props: {},
   data() {
-    return {};
+    return {
+       mdFieldName: this.$style.mdFieldName,
+    };
   },
   computed: {},
   created() {},
@@ -35,7 +37,7 @@ export default {
         //   list.push(fontSize);
         // });
         let mdHeight =
-          mdFieldName + judgeStyleClass(styleClass, "mdHeight", "h-");
+          this.mdFieldName + judgeStyleClass(styleClass, "mdHeight", "h-");
 
         let mobileHeight = judgeStyleClass(styleClass, "mobileHeight", "h-");
         list.push(mdHeight, mobileHeight);
