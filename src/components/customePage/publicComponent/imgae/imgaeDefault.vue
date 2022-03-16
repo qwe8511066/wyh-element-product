@@ -33,7 +33,22 @@ export default {
         const blockAlign = judgeStyleClass(styleClass, "blockAlign");
         const objectFit = judgeStyleClass(styleClass, "objectFit");
         const imgHeight = judgeStyleClass(styleClass, "imgHeight");
-        list.push(imgWidth, blockAlign, objectFit, imgHeight);
+
+        const roundedTl = judgeStyleClass(styleClass, "roundedTl");
+        const roundedTr = judgeStyleClass(styleClass, "roundedTr");
+        const roundedBl = judgeStyleClass(styleClass, "roundedBl");
+        const roundedBr = judgeStyleClass(styleClass, "roundedBr");
+
+        list.push(
+          imgWidth,
+          blockAlign,
+          objectFit,
+          imgHeight,
+          roundedTl,
+          roundedTr,
+          roundedBl,
+          roundedBr
+        );
       }
       return list.join(" ");
     },

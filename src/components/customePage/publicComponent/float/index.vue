@@ -1,5 +1,5 @@
 <template>
-  <div class="inset-0 absolute" >
+  <div class="inset-0 absolute z-1" >
     <div class="flex w-full h-full relative " :class="[guideComponentStyleClass()]">
     <div class="" v-html="value.value"></div></div>
   </div>

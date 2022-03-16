@@ -12,7 +12,7 @@ module.exports = {
   _screen_xl: '1470px',
   // => @media (min-width: 1470px) { ... }
 
-  _primary: '#003D5C',
+  _primary: '#1b72b1',
   _secondary: '#58a9df',
   _tertiary: '#4095EC',
   _dark: '#061E36',

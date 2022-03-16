@@ -47,7 +47,6 @@
               v-aos-animation:{value}="col.animation"
               :class="[
                 col.classes,
-                guideComponentStyleClassPosition(col),
                 cobyGuideComponentStyleClass(col),
                 {
                   'md|space-y-20 layout-col py-40 px-30 border-blue-700 border-2 border-dashed relative ': layout
@@ -55,6 +54,17 @@
               ]"
               v-customePageContainer="layout"
             >
+
+            <!-- 布局套布局 start -->
+              <customePage
+                :data="col.layouts"
+                :layout="layout"
+                :key="'component' + col.layouts"
+                :colLayout="false"
+                :originalData="data"
+              ></customePage>
+              <!-- 布局套布局 end -->
+
               <draggable
                 handle=".el-icon-s-unfold"
                 v-bind="dragOptions"
@@ -71,11 +81,10 @@
                   <div
                   :key="'component' + index_1"
                     :class="[
-                      guideComponentStyleClassPosition(box),
                       {
                         'mt-20': index_1 != 0 && layout,
                         'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout,
-                        'border-pink-600': box.controlType === 'float'
+                        'border-pink-600': box.controlType === 'float' && layout,
                       }
                     ]"
                   >
@@ -144,14 +153,6 @@
                 ></i>
               </div>
               <!-- 设置Col end -->
-
-              <customePage
-                :data="col.layouts"
-                :layout="layout"
-                :key="'component' + col.layouts"
-                :colLayout="false"
-                :originalData="data"
-              ></customePage>
 
               <div class="space-y-20" v-if="layout">
                 <div v-if="colLayout">
@@ -227,6 +228,7 @@
 
     <!-- 删除Container或清空Row -->
     <el-drawer
+      v-if="layout"
       :title="deleteEmptyVisible.title"
       :visible.sync="deleteEmptyVisible.visible"
       :wrapperClosable="false"
@@ -778,25 +780,6 @@ export default {
     //组件的样式
     cobyGuideComponentStyleClass(value) {
       return guideComponentStyleClass(value);
-    },
-
-    //定位的样式
-    guideComponentStyleClassPosition(value) {
-      let list = [];
-      if (value && value.styleClass) {
-        const styleClass = value.styleClass;
-        const position = judgeStyleClass(styleClass, "position");
-        if (position) {
-          const left = judgeStyleClass(styleClass, "left", "left-");
-          const top = judgeStyleClass(styleClass, "top", "top-");
-          const right = judgeStyleClass(styleClass, "right", "right-");
-          const bottom = judgeStyleClass(styleClass, "bottom", "bottom-");
-          list.push(left, top, right, bottom);
-        }
-        const zIndex = judgeStyleClass(styleClass, "zIndex");
-        list.push(position, zIndex);
-      }
-      return list.join(" ");
     },
 
     //拖拽时

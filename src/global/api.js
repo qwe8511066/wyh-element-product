@@ -27,6 +27,15 @@ const getViewList = [{
     value: 'getNewList6',
     label: '公园活动'
   }]
+}, {
+  label: '下载',
+  options: [{
+    value: 'getNewList7',
+    label: '图片文档'
+  }, {
+    value: 'getNewList8',
+    label: '视频文档'
+  }]
 }]
 
 export default {

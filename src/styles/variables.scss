@@ -42,6 +42,16 @@ $screen-lg: $_screen_lg;
 // 对应tailwind.config ->screens ->xl
 $screen-xl: $_screen_xl;
 
+$color-primary:$_primary;
+$color-secondary:$_secondary;
+$color-tertiary:$_tertiary;
+$color-dark:$_dark;
+$color-black:$_black;
+$color-light:$_light;
+$color-lighter:$_lighter;
+$color-link:$_link;
+$color-white:$_white;
+
 
 :export {
   menuText: $menuText;

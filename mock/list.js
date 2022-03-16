@@ -14,7 +14,7 @@ module.exports = [
             id: index + i,
             name: "@cname",
             "type|1-5": 5,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             'status|1': "@boolean",
             img: Mock.Random.image('50x50')
           }
@@ -89,7 +89,7 @@ module.exports = [
             id: index + i,
             name: "@cname",
             "type|1-5": 5,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             'status|1': "@boolean",
             img: Mock.Random.image('50x50')
           }
@@ -124,7 +124,7 @@ module.exports = [
             id: index + i,
             name: "@cname",
             "type|1-5": 5,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             'status|1': "@boolean",
             img: Mock.Random.image('50x50')
           }
@@ -153,7 +153,7 @@ module.exports = [
             id: index + i,
             name: "@cname",
             "type|1-5": 5,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             'status|1': "@boolean",
             img: Mock.Random.image('50x50')
           }
@@ -180,7 +180,7 @@ module.exports = [
         list.push({
           name: "@cname",
           'type|1': "@boolean",
-          "date": "@datetime",//随机生成日期时间
+          "date": Mock.Random.datetime(),//随机生成日期时间
           "status|1-5": 5,
           'number|1-1000': 1000,
         })
@@ -206,7 +206,7 @@ module.exports = [
         list.push({
           name: index + i,
           'status|1': "@boolean",
-          "date": "@datetime",//随机生成日期时间
+          "date": Mock.Random.datetime(),//随机生成日期时间
 
           "type|1-5": 5,
 
@@ -239,18 +239,18 @@ module.exports = [
           id: index + i,
           name: "@cname",
           "type|1-5": 5,
-          "date": "@datetime",//随机生成日期时间
+          "date": Mock.Random.datetime(),//随机生成日期时间
           'status|1': "@boolean",
           img: Mock.Random.image('50x50'),
           children: [
             {
-              "date": "@datetime",//随机生成日期时间
+              "date": Mock.Random.datetime(),//随机生成日期时间
               id: Mock.Random.id(),
               name: "@cname",
 
               children: [
                 {
-                  "date": "@datetime",//随机生成日期时间
+                  "date": Mock.Random.datetime(),//随机生成日期时间
                   id: Mock.Random.id(),
                   name: "@cname",
                 }
@@ -282,7 +282,7 @@ module.exports = [
             id: i,
             name: "@cname" + '新闻中心',
             title: '新闻中心' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -310,7 +310,7 @@ module.exports = [
             id: i,
             name: "@cname" + '通告公告',
             title: '通告公告' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -338,7 +338,7 @@ module.exports = [
             id: i,
             name: "@cname" + '人才招聘',
             title: '人才招聘' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -366,7 +366,7 @@ module.exports = [
             id: i,
             name: "@cname" + '亲子活动',
             title: '亲子活动' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -394,7 +394,7 @@ module.exports = [
             id: i,
             name: "@cname" + '游玩活动',
             title: '游玩活动' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -422,7 +422,7 @@ module.exports = [
             id: i,
             name: "@cname" + '公园活动',
             title: '公园活动' + i,
-            "date": "@datetime",//随机生成日期时间
+            "date": Mock.Random.datetime(),//随机生成日期时间
             img: Mock.Random.image('50x50'),
           }
         )
@@ -435,6 +435,64 @@ module.exports = [
         }
       }
     }
-  }
+  },
+  {
+    url: '/getNewList7',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '公园活动',
+            title: '图片文档:' + "@cname" +"的文档",
+            size:i,
+            "date": Mock.Random.datetime(),//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
+  {
+    url: '/getNewList8',
+    type: 'post',
+    response: (config) => {
+      const { pageSize, page } = config.body
+      const _pageSize = pageSize ? pageSize : 1;
+      const list = []
+      const index = page * _pageSize
+      for (let i = 0; i < _pageSize; i++) {
+        list.push(
+          {
+            id: i,
+            name: "@cname" + '公园活动',
+            title: '视频文档:' + "@cname" +"的文档",
+            size:i,
+            "date": Mock.Random.datetime(),//随机生成日期时间
+            img: Mock.Random.image('50x50'),
+          }
+        )
+      }
+      return {
+        code: 20000,
+        data: {
+          totalCount: 1000,
+          list: list
+        }
+      }
+    }
+  },
 
 ]

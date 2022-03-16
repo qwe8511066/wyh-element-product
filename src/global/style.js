@@ -28,8 +28,16 @@ export const stylePulbicColor = stylePulbicColorVariable
 //背景渐变色
 export const gradientList = [
   {
+    label: '默认',
+    value: '',
+  },
+  {
     label: 'bg-mask-1-0',
     value: 'bg-mask-1-0',
+  },
+  {
+    label: 'bg-mask-primary-to-r',
+    value: 'bg-mask-primary-to-r',
   },
 ]
 
@@ -700,6 +708,30 @@ export const opacityList = [
   },
 ]
 
+
+export const overflowList = [
+  {
+    label: '默认',
+    value: '',
+  },
+  {
+    label: '自动',
+    value: 'overflow-auto',
+  },
+  {
+    label: '隐藏',
+    value: 'overflow-hidden',
+  },
+  {
+    label: '可见',
+    value: 'overflow-visible',
+  },
+  {
+    label: '所有方向滚动',
+    value: 'overflow-scroll',
+  },
+]
+
 export const showList = [
   {
     label: '默认',
@@ -806,29 +838,6 @@ export const styleHeightList = [
   },
 ]
 
-export const stylePositionList = [
-  {
-    label: '默认',
-    value: '',
-  },
-  {
-    label: '相对定位',
-    value: 'relative',
-  },
-  {
-    label: '绝对定位',
-    value: 'absolute',
-  },
-  {
-    label: '粘性定位',
-    value: 'sticky',
-  },
-  {
-    label: '浏览器窗口定位',
-    value: 'fixed',
-  },
-]
-
 export const stepsPositionList = [
   {
     label: '水平',
@@ -839,49 +848,7 @@ export const stepsPositionList = [
     value: 'vertical',
   },
 ]
-
-export const styleZIndexList = [
-  {
-    label: '默认',
-    value: '',
-  },
-  {
-    label: '-1',
-    value: '-z-1',
-  },
-  {
-    label: '0',
-    value: 'z-0',
-  },
-  {
-    label: '1',
-    value: 'z-1',
-  },
-  {
-    label: '10',
-    value: 'z-10',
-  },
-  {
-    label: '20',
-    value: 'z-20',
-  },
-  {
-    label: '30',
-    value: 'z-30',
-  },
-  {
-    label: '40',
-    value: 'z-40',
-  },
-  {
-    label: '50',
-    value: 'z-50',
-  },
-  {
-    label: '9999',
-    value: 'z-full',
-  },
-]
+ 
 
 //轮播图的初始化属性
 export const carouselSettings = {
@@ -953,6 +920,7 @@ export default {
   shadowList,
   opacityList,
   showList,
+  overflowList,
   textDecorationList,
   hoverTextDecorationList,
   hoverTextColorList,
@@ -969,8 +937,6 @@ export default {
   styleColFlex,
   objectFit,
   styleHeightList,
-  stylePositionList,
-  styleZIndexList,
   forFieldList,
   gradientList,
 }

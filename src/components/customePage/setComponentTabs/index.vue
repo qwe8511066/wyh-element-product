@@ -96,8 +96,6 @@ export default {
         style: {},
         //用于直接设置字体大小 边框 间距这类class
         styleClass: {
-          position: "",
-          zIndex: ""
         },
         
         // requestObject:{

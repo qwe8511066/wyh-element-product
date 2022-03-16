@@ -358,84 +358,17 @@
           </el-radio-group>
         </div>
       </div>
-    </el-collapse-item>
+    </el-collapse-item> 
 
-    <el-collapse-item
-      title="位置"
-      v-if="judgeContainerOrRow() && judgePrefixField()"
-    >
+    <el-collapse-item title="溢出" v-if="judgePrefixField()">
       <div class="el-form-item">
-        <label class="el-form-item__label w-180">定位</label>
+        <label class="el-form-item__label w-180">溢出</label>
         <div class="el-form-item__content">
-          <el-radio-group v-model="form.styleClass['position']">
+          <el-radio-group v-model="form.styleClass['overflow']">
             <el-radio-button
               :label="item.value"
-              v-for="(item, index) in stylePositionList"
-              :key="'position' + index"
-              >{{ item.label }}</el-radio-button
-            >
-          </el-radio-group>
-        </div>
-      </div>
-
-      <div class="el-form-item" v-if="form.styleClass['position']">
-        <label class="el-form-item__label w-180">左边</label>
-        <div class="el-form-item__content">
-          <el-slider
-            class="flex-1 px-20"
-            :min="-50"
-            :step="1"
-            :max="50"
-            v-model="form.styleClass['left']"
-            show-input
-          ></el-slider>
-        </div>
-
-        <label class="el-form-item__label w-180">顶部</label>
-        <div class="el-form-item__content">
-          <el-slider
-            class="flex-1 px-20"
-            :min="-50"
-            :step="1"
-            :max="50"
-            v-model="form.styleClass['top']"
-            show-input
-          ></el-slider>
-        </div>
-
-        <label class="el-form-item__label w-180">右边</label>
-        <div class="el-form-item__content">
-          <el-slider
-            class="flex-1 px-20"
-            :min="-50"
-            :step="1"
-            :max="50"
-            v-model="form.styleClass['right']"
-            show-input
-          ></el-slider>
-        </div>
-
-        <label class="el-form-item__label w-180">底部</label>
-        <div class="el-form-item__content">
-          <el-slider
-            class="flex-1 px-20"
-            :min="-50"
-            :step="1"
-            :max="50"
-            v-model="form.styleClass['bottom']"
-            show-input
-          ></el-slider>
-        </div>
-      </div>
-
-      <div class="el-form-item">
-        <label class="el-form-item__label w-180">权重</label>
-        <div class="el-form-item__content">
-          <el-radio-group v-model="form.styleClass['zIndex']">
-            <el-radio-button
-              :label="item.value"
-              v-for="(item, index) in styleZIndexList"
-              :key="'zIndex' + index"
+              v-for="(item, index) in overflowList"
+              :key="'overflow' + index"
               >{{ item.label }}</el-radio-button
             >
           </el-radio-group>
@@ -531,8 +464,7 @@ export default {
       opacityList: this.$style.opacityList,
       showList: this.$style.showList,
       textDecorationList: this.$style.textDecorationList,
-      stylePositionList: this.$style.stylePositionList,
-      styleZIndexList: this.$style.styleZIndexList
+      overflowList:this.$style.overflowList,
     };
   },
   created() {},

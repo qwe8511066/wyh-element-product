@@ -512,48 +512,11 @@ export function guideComponentStyleClass(value) {
     const textDecoration = judgeStyleClass(styleClass, "textDecoration");
 
     const gradient = judgeStyleClass(styleClass, "gradient");
+    const overflow = judgeStyleClass(styleClass, "overflow");
+
 
     if (value.controlType === "row") {
       const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
-      // const mobileFlexDirection = judgeStyleClass(
-      //   styleClass,
-      //   "mobileFlexDirection"
-      // );
-
-      // const mdFlexDirection = mdFieldName +
-      //   judgeStyleClass(styleClass, "mdFlexDirection");
-
-
-      // const desktopFlexDirection =
-      //   pcFieldName +
-      //   judgeStyleClass(styleClass, "desktopFlexDirection");
-
-      // const mobileJustifyContent = judgeStyleClass(
-      //   styleClass,
-      //   "mobileJustifyContent"
-      // );
-
-      // const mdJustifyContent =
-      //   mdFieldName +
-      //   judgeStyleClass(styleClass, "mdJustifyContent");
-
-      // const desktopJustifyContent =
-      //   pcFieldName +
-      //   judgeStyleClass(styleClass, "desktopJustifyContent");
-
-      // const mobileItemsContent = judgeStyleClass(
-      //   styleClass,
-      //   "mobileItemsContent"
-      // );
-
-      // const mdItemsContent =
-      //   mdFieldName +
-      //   judgeStyleClass(styleClass, "mdItemsContent");
-
-      // const desktopItemsContent =
-      //   pcFieldName +
-      //   judgeStyleClass(styleClass, "desktopItemsContent");
-
       const rowAttributeList = [
         { name: 'mobileFlexDirection', screensClassName: '', },
         { name: 'mdFlexDirection', screensClassName: mdFieldName },
@@ -585,15 +548,6 @@ export function guideComponentStyleClass(value) {
 
       list.push(
         rowWidth,
-        // mobileFlexDirection,
-        // desktopFlexDirection,
-        // mobileJustifyContent,
-        // desktopJustifyContent,
-        // mobileItemsContent,
-        // desktopItemsContent,
-        // mdFlexDirection,
-        // mdJustifyContent,
-        // mdItemsContent,
       );
     }
 
@@ -648,7 +602,8 @@ export function guideComponentStyleClass(value) {
       opacity,
       shadow,
       textDecoration,
-      gradient
+      gradient,
+      overflow
     );
   }
   return list.join(" ");
