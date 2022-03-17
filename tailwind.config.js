@@ -72,7 +72,7 @@ module.exports = {
       })(),
       width: (function () {
         const spacing = {}
-        for (let i = 5; i <= 1000; i = i + 5) {
+        for (let i = 5; i <= 200; i = i + 5) {
           spacing[i] = i + 'px'
           spacing[-i] = -i + 'px'
         }
@@ -80,7 +80,7 @@ module.exports = {
       })(),
       height: (function () {
         const spacing = {}
-        for (let i = 5; i <= 1000; i = i + 5) {
+        for (let i = 5; i <= 200; i = i + 5) {
           spacing[i] = i + 'px'
           spacing[-i] = -i + 'px'
         }
