@@ -23,25 +23,51 @@
   }
 }
 
-.bg-mask-primary-to-r{
+.bg-mask-primary-to-r {
   position: relative;
-  &:after{
-    content: '';
+  &:after {
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background-image: linear-gradient(to right, rgba($color-primary, 0.5) 0%, rgba(255, 255, 255, 0.3) 80%);
+    background-image: linear-gradient(
+      to right,
+      rgba($color-primary, 0.5) 0%,
+      rgba(255, 255, 255, 0.3) 80%
+    );
   }
-  
+}
+
+.bg-mask--f5fcff-15-to-b {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(245, 252, 255, 1) 15%,
+      rgba(255, 255, 255, 0) 40%
+    );
+    display: none;
+    @media (min-width: $screen-md) {
+      display: block;
+    }
+  }
 }
 
 //设计页面时避免遮挡
-.layout-container{
-  .bg-mask-1-0,.bg-mask-primary-to-r{
-    &:after{
-      content: '避免遮挡,放在底部';
+.layout-container {
+  .bg-mask-1-0,
+  .bg-mask-primary-to-r,
+  .bg-mask--f5fcff-15-to-b {
+    &:after {
+      content: "避免遮挡,放在底部";
       height: 40px;
       top: initial;
       bottom: 0;

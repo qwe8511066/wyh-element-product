@@ -48,7 +48,9 @@ export default {
   data() {
     return {
       data: [],
-      
+
+      //写死的数据
+      pageList:this.$page.pageList
     };
   },
   created() {
@@ -62,6 +64,7 @@ export default {
     initLayoutList();
 
     console.log(JSON.stringify(this.data))
+    console.log(this.pageList)
   },
 
   mounted() {},
@@ -73,10 +76,17 @@ export default {
       this.$message("保存成功");
     },
     init() {
-      const key = "customPage" + this.$route.params.id;
+      
+      const id = this.$route.params.id;
+      const key = "customPage" + id;
       const data = window.localStorage.getItem(key);
+      //保存在浏览器上的数据
       if (data) {
         this.data = eval(data);
+      }else{
+        
+        //拿写死的数据
+        this.data = this.pageList[id]?this.pageList[id].data:[]
       }
     },
     customizePagePreview() {

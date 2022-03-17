@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div class="" :class="[{ 'md|space-y-30': layout }]">
+  <div :class="[{
+                 'layoutNestLayoutRoot':!colLayout,
+                }]">
+    <div class="" :class="[{ 'md|space-y-30': layout ,
+              'layoutNestLayoutChild':!colLayout,
+            }]">
       <div class="mb-20" v-if="layout && colLayout">
         <el-button @click="addLayout(0)"> 添加布局 </el-button>
       </div>
@@ -9,12 +13,14 @@
         v-for="(item, index) in data"
         :style="[item.container.style]"
         :key="'container' + index"
+        :class="[
+            item.container.classes,
+        ]"
       >
         <div
           class="relative"
           v-aos-animation:{value}="item.container.animation"
           :class="[
-            item.container.classes,
             cobyGuideComponentStyleClass(item.container),
             {
               'layout-container': layout
@@ -32,8 +38,7 @@
             cobyGuideComponentStyleClass(item.row),
               item.row.classes,
               {
-                'layout-row pt-40 overflow-auto': layout
-                //'flex-wrap': !layout
+                'layout-row pt-40 overflow-auto md|flex-nowrap xl|flex-nowrap': layout
               }
               
             ]"
@@ -55,18 +60,10 @@
               ]"
               v-customePageContainer="layout"
             >
-              <!-- 布局套布局 start -->
-              <customePage
-                v-if="col.layouts && col.layouts.length > 0"
-                :data="col.layouts"
-                :layout="layout"
-                :key="'component' + col.layouts"
-                :colLayout="false"
-                :originalData="data"
-              ></customePage>
-              <!-- 布局套布局 end -->
+              
               
               <draggable
+              v-if="col.layouts.length == 0"
                 handle=".el-icon-s-unfold"
                 v-bind="dragOptions"
                 class="dragArea list-group"
@@ -91,6 +88,7 @@
                   <guideComponent
                   v-guideComponentDirective="box.styleClass['customDirective']"
                     :component-type="box.controlType"
+                    :layout-nest-type="!colLayout"
                     v-aos-animation:{value}="box.animation"
                     :class="[cobyGuideComponentStyleClass(box)]"
                     :layout="layout"
@@ -128,6 +126,18 @@
                   <!-- 设置ColComponent end -->
                 </div>
               </draggable>
+
+              <!-- 布局套布局 start -->
+              <customePage
+                v-if="col.layouts && col.layouts.length > 0"
+                :data="col.layouts"
+                :layout="layout"
+                :key="'component' + col.layouts"
+                :colLayout="false"
+                :originalData="data"
+              ></customePage>
+              <!-- 布局套布局 end -->
+
               <!-- 设置Col start -->
               <div
                 v-if="layout"
@@ -914,5 +924,6 @@ export default {
   color: white;
   background-color: #141414;
   height: auto !important;
+  z-index: 2;
 }
 </style>

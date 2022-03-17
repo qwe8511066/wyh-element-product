@@ -1,5 +1,5 @@
 <template>
-  <div :class="[guideComponentStyleClass(value)]"></div>
+  <div :class="[guideComponentStyleClass(value)]"  :style="[value.style]"></div>
 </template>
 
 <script>

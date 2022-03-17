@@ -511,9 +511,12 @@ export function guideComponentStyleClass(value) {
     const shadow = judgeStyleClass(styleClass, "shadow");
     const textDecoration = judgeStyleClass(styleClass, "textDecoration");
 
-    const gradient = judgeStyleClass(styleClass, "gradient");
+    let gradient = judgeStyleClass(styleClass, "gradient");
     const overflow = judgeStyleClass(styleClass, "overflow");
 
+    if(value.controlType === "container"){
+      gradient = '';
+    }
 
     if (value.controlType === "row") {
       const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");

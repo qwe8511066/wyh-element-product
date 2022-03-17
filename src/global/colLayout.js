@@ -54,8 +54,8 @@ const _row = {
     desktopSpaceY: -1,
 
     mobileFlexWrap:'flex-wrap', 
-    mdFlexWrap:'flex-wrap',
-    desktopFlexWrap:'flex-wrap',
+    mdFlexWrap:'flex-nowrap',
+    desktopFlexWrap:'flex-nowrap',
 
   },
   animation: {},

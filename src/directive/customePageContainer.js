@@ -14,8 +14,8 @@ Vue.directive('customePageContainer', {
 })
 
 function typeContainerRowColClass(el,value){ 
-  if(value && el.className.includes('hidden') && el.className){
-    el.style.display = el.className.includes('row')?'flex':'block'
-    el.style.opacity = 0.7
-  }
+  // if(value && el.className.includes('hidden') && el.className){
+  //   el.style.display = el.className.includes('row')?'flex':'block'
+  //   el.style.opacity = 0.7
+  // }
 }

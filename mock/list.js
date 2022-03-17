@@ -62,7 +62,7 @@ module.exports = [
       const index = page * pageSize
       for (let i = 0; i < pageSize; i++) {
         list.push({
-          id: index + i,
+          id: i,
           name: '页面' + i,
         })
       }
