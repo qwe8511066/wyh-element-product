@@ -66,6 +66,23 @@
         </el-form-item>
       </el-collapse-item>
 
+      <el-collapse-item title="col换行(设计模式下不允许换行,因为屏幕过小)">
+        <el-form-item
+          :label="item.title"
+          v-for="(item, index) in flexWrapList"
+          :key="'flexWrapList' + index"
+        >
+          <el-radio-group v-model="form.styleClass[item.fieldName]">
+            <el-radio-button
+              :label="box.value"
+              v-for="(box, index) in styleFlexWrap"
+              :key="'flexWrap' + 'flexWrapList' + index"
+              >{{ box.label }}</el-radio-button
+            >
+          </el-radio-group>
+        </el-form-item>
+      </el-collapse-item>
+
       <el-collapse-item title="col纵轴对齐">
         <el-form-item
           :label="item.title"
@@ -114,6 +131,7 @@ export default {
       styleFlexDirection: this.$style.styleFlexDirection,
       styleJustifyContent: this.$style.styleJustifyContent,
       styleFlexAlignContent: this.$style.styleFlexAlignContent,
+      styleFlexWrap: this.$style.styleFlexWrap,
       flexDirectionList: [
         {
           title: "col方向",
@@ -126,6 +144,21 @@ export default {
         {
           title: "电脑pc模式下的col方向(screens->xl)",
           fieldName: "desktopFlexDirection"
+        }
+      ],
+
+      flexWrapList: [
+        {
+          title: "col换行",
+          fieldName: "mobileFlexWrap"
+        },
+        {
+          title: "md模式下的col换行(screens->md)",
+          fieldName: "mdFlexWrap"
+        },
+        {
+          title: "电脑pc模式下的col换行(screens->xl)",
+          fieldName: "desktopFlexWrap"
         }
       ],
 

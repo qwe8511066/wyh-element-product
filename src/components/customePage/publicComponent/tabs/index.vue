@@ -5,9 +5,11 @@
       :name="String(index)"
       v-for="(item, index) in value.componentsList"
       :key="'tabsList' + index"
+      class="list-group"
     >
-      <div v-for="(box, i) in item.children" :key="'tabsListChildren' + i">
+      <div v-for="(box, i) in item.children"  :key="'tabsListChildren' + i">
         <guideComponent
+        v-guideComponentDirective="box.styleClass['customDirective']"
           :class="[cobyGuideComponentStyleClass(box)]"
           :value="box"
           ref="tabsListChildrenGuideComponent"

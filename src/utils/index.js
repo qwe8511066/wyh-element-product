@@ -528,6 +528,11 @@ export function guideComponentStyleClass(value) {
         { name: 'mobileItemsContent', screensClassName: '' },
         { name: 'mdItemsContent', screensClassName: mdFieldName },
         { name: 'desktopItemsContent', screensClassName: pcFieldName },
+
+        { name: 'mobileFlexWrap', screensClassName: '' },
+        { name: 'mdFlexWrap', screensClassName: mdFieldName },
+        { name: 'desktopFlexWrap', screensClassName: pcFieldName },
+        
         { name: 'mobileSpaceX', screensClassName: '', className: 'space-x-' },
         { name: 'mdSpaceX', screensClassName: mdFieldName, className: 'space-x-' },
         { name: 'desktopSpaceX', screensClassName: pcFieldName, className: 'space-x-' },
@@ -552,34 +557,29 @@ export function guideComponentStyleClass(value) {
     }
 
     if (value.controlType === "col") {
+      let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
+      let mdWidth =
+        mdFieldName + judgeStyleClass(styleClass, "mdWidth", "w-");
       let desktopWidth =
         pcFieldName +
         judgeStyleClass(styleClass, "desktopWidth", "w-");
 
-      let mdWidth =
-        mdFieldName + judgeStyleClass(styleClass, "mdWidth", "w-");
-
-      let mobileWidth = judgeStyleClass(styleClass, "mobileWidth", "w-");
-
       let mobileColFlex = judgeStyleClass(styleClass, "mobileColFlex");
       let desktopColFlex = judgeStyleClass(styleClass, "desktopColFlex");
       let mdColFlex = judgeStyleClass(styleClass, "mdColFlex");
+      mdColFlex = mdColFlex ? mdFieldName + mdColFlex: mdColFlex;
+      desktopColFlex = desktopColFlex ? pcFieldName + desktopColFlex: desktopColFlex;
 
-      mobileColFlex = mobileColFlex ? pcFieldName + mobileColFlex : "";
-      mdColFlex = mdColFlex ? mdFieldName + mdColFlex : "";
-
-      desktopWidth = mobileColFlex ? "" : desktopWidth;
-      mobileWidth = desktopColFlex ? "" : mobileWidth;
-      mdWidth = mdColFlex ? "" : mdWidth;
-
+      mobileWidth = mobileColFlex?mobileColFlex:mobileWidth
+      mdWidth = mdColFlex?mdColFlex:mdWidth
+      desktopWidth = desktopColFlex?desktopColFlex:desktopWidth
       list.push(
-        desktopWidth,
         mobileWidth,
-        mobileColFlex,
-        desktopColFlex,
-
         mdWidth,
-        mdColFlex,
+        desktopWidth,
+        // mobileColFlex,
+        // mdColFlex,
+        // desktopColFlex,
       );
     }
 

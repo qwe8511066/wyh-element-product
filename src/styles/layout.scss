@@ -1,6 +1,8 @@
 @import "./variables.scss";
+
 .container-public {
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
   position: relative;
   padding-left: 10px;
   padding-right: 10px;
@@ -8,6 +10,10 @@
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+.container{
+  @extend .container-public;
 }
 
 .container-lg {

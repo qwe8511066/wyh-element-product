@@ -146,7 +146,21 @@ export const styleFlexDirection = [
     label: '纵向反向',
     value: 'flex-col-reverse',
   },
+]
 
+export const styleFlexWrap = [
+  {
+    label: '不换行',
+    value: 'flex-nowrap',
+  },
+  {
+    label: '常规换行',
+    value: 'flex-wrap',
+  },
+  {
+    label: '反向换行',
+    value: 'flex-wrap-reverse',
+  },
 ]
 
 export const borderList = [
@@ -755,6 +769,13 @@ export const showList = [
   },
 ]
 
+export const customDirectiveList = [
+  {
+    label: '占据剩余高度',
+    value: 'theRemainingHighly',
+  },
+]
+
 export const textDecorationList = [
   {
     label: '去除装饰',
@@ -939,4 +960,6 @@ export default {
   styleHeightList,
   forFieldList,
   gradientList,
+  customDirectiveList,
+  styleFlexWrap,
 }

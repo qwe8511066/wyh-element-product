@@ -9,18 +9,18 @@
         ></el-color-picker>
       </el-form-item>
 
-      <el-form-item label="伪类背景颜色渐变色"> 
-      <el-radio-group v-model="form.styleClass['gradient']">
-        <el-radio
-          border
-          :label="item.value"
-          :class="item.label" 
-          v-for="(item, index) in gradientList"
-          :key="'gradient' + index"
-          >{{ item.label }}</el-radio
-        >
-      </el-radio-group>
-    </el-form-item>
+      <el-form-item label="伪类背景颜色渐变色">
+        <el-radio-group v-model="form.styleClass['gradient']">
+          <el-radio
+            border
+            :label="item.value"
+            :class="item.label"
+            v-for="(item, index) in gradientList"
+            :key="'gradient' + index"
+            >{{ item.label }}</el-radio
+          >
+        </el-radio-group>
+      </el-form-item>
     </el-collapse-item>
 
     <el-collapse-item title="文本">
@@ -358,7 +358,7 @@
           </el-radio-group>
         </div>
       </div>
-    </el-collapse-item> 
+    </el-collapse-item>
 
     <el-collapse-item title="溢出" v-if="judgePrefixField()">
       <div class="el-form-item">
@@ -372,6 +372,22 @@
               >{{ item.label }}</el-radio-button
             >
           </el-radio-group>
+        </div>
+      </div>
+    </el-collapse-item>
+
+    <el-collapse-item title="指令" v-if="judgePrefixField()">
+      <div class="el-form-item">
+        <label class="el-form-item__label w-180">指令</label>
+        <div class="el-form-item__content">
+          <el-checkbox-group v-model="form.styleClass['customDirective']">
+            <el-checkbox-button
+              :label="item.value"
+              v-for="(item, index) in customDirectiveList"
+              :key="'customDirective' + index"
+              >{{ item.label }}</el-checkbox-button
+            >
+          </el-checkbox-group>
         </div>
       </div>
     </el-collapse-item>
@@ -446,7 +462,7 @@ export default {
   },
   data() {
     return {
-      gradientList:this.$style.gradientList,
+      gradientList: this.$style.gradientList,
       stylePulbicColor: this.$style.stylePulbicColor,
       textAlign: this.$style.textAlign,
       styleSpacingModel: this.$style.styleSpacingModel,
@@ -464,7 +480,8 @@ export default {
       opacityList: this.$style.opacityList,
       showList: this.$style.showList,
       textDecorationList: this.$style.textDecorationList,
-      overflowList:this.$style.overflowList,
+      overflowList: this.$style.overflowList,
+      customDirectiveList: this.$style.customDirectiveList,
     };
   },
   created() {},

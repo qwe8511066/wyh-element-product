@@ -1,6 +1,9 @@
 <template>
   <el-skeleton :loading="value.skeleton" :throttle="500" animated>
-    <div class="" :style="[value.style]">
+    <div class="guideComponentImageParent" :style="[value.style]">
+      <div class="test">
+
+      
       <a
         v-if="value.link"
         :href="value.link"
@@ -9,6 +12,7 @@
         <imgaeDefault :value="value"></imgaeDefault>
       </a>
       <imgaeDefault v-else :value="value"></imgaeDefault>
+      </div>
     </div>
   </el-skeleton>
 </template>

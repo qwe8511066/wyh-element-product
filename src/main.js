@@ -13,6 +13,7 @@ import publicComponents from "@/utils/publicComponents";
 import '@/directive/dialogDrag.js' //全局弹窗拖拽
 import '@/directive/enterForm.js' //全局表单回车事件
 import '@/directive/customePageContainer.js' //全局表单回车事件
+import '@/directive/guideComponentDirective.js' //全局表单回车事件
 
 import service from '@/utils/request'
 import lodash from "lodash";

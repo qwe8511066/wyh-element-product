@@ -29,12 +29,13 @@
             v-aos-animation:{value}="item.row.animation"
             :style="[item.row.style]"
             :class="[
+            cobyGuideComponentStyleClass(item.row),
+              item.row.classes,
               {
                 'layout-row pt-40 overflow-auto': layout
                 //'flex-wrap': !layout
-              },
-              cobyGuideComponentStyleClass(item.row),
-              item.row.classes
+              }
+              
             ]"
             v-customePageContainer="layout"
           >
@@ -54,9 +55,9 @@
               ]"
               v-customePageContainer="layout"
             >
-
-            <!-- 布局套布局 start -->
+              <!-- 布局套布局 start -->
               <customePage
+                v-if="col.layouts && col.layouts.length > 0"
                 :data="col.layouts"
                 :layout="layout"
                 :key="'component' + col.layouts"
@@ -64,7 +65,7 @@
                 :originalData="data"
               ></customePage>
               <!-- 布局套布局 end -->
-
+              
               <draggable
                 handle=".el-icon-s-unfold"
                 v-bind="dragOptions"
@@ -74,60 +75,58 @@
                 :clone="cloneDog"
                 @end="onEndClone"
               >
-                <template
+                <div
                   v-for="(box, index_1) in col.colList"
-                  
-                >
-                  <div
                   :key="'component' + index_1"
-                    :class="[
-                      {
-                        'mt-20': index_1 != 0 && layout,
-                        'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout,
-                        'border-pink-600': box.controlType === 'float' && layout,
-                      }
-                    ]"
+                  class="guideComponentParent"
+                  :class="[
+                    {
+                      'mt-20': index_1 != 0 && layout,
+                      'space-y-20 layout-col-component py-40 px-30 border-blue-400 border-2 border-dashed relative ': layout,
+                      'border-pink-600': box.controlType === 'float' && layout
+                    }
+                  ]"
+                >
+                  <!-- 通用组件 start -->
+                  <guideComponent
+                  v-guideComponentDirective="box.styleClass['customDirective']"
+                    :component-type="box.controlType"
+                    v-aos-animation:{value}="box.animation"
+                    :class="[cobyGuideComponentStyleClass(box)]"
+                    :layout="layout"
+                    :value="box"
+                    ref="guideComponent"
+                  ></guideComponent>
+                  <!-- 通用组件 end -->
+
+                  <!-- 设置ColComponent start -->
+                  <div
+                    v-if="layout"
+                    style="margin-top: 0px"
+                    class="set-attributes-col-component hidden place-items-center absolute top-5 left-5 space-x-10"
                   >
-                    <!-- 通用组件 start -->
-                    <guideComponent
-                      :component-type="box.controlType"
-                      v-aos-animation:{value}="box.animation"
-                      :class="[cobyGuideComponentStyleClass(box)]"
-                      :layout="layout"
-                      :value="box"
-                      ref="guideComponent"
-                    ></guideComponent>
-                    <!-- 通用组件 end -->
-
-                    <!-- 设置ColComponent start -->
-                    <div
-                      v-if="layout"
-                      style="margin-top: 0px"
-                      class="set-attributes-col-component hidden place-items-center absolute top-5 left-5 space-x-10"
-                    >
-                      <span>{{ box.controlType }}</span>
-                      <i
-                        class="el-icon-s-tools text-lg cursor-pointer"
-                        @click="setColComponent(box, index_1, col)"
-                      ></i>
-                      <i
-                        class="el-icon-close text-lg cursor-pointer"
-                        @click="
-                          deleteContainerRow(
-                            col,
-                            index_1,
-                            'component',
-                            '删除组件',
-                            '是否删除该组件'
-                          )
-                        "
-                      ></i>
-                      <i class="el-icon-s-unfold text-lg cursor-pointer"></i>
-                    </div>
-
-                    <!-- 设置ColComponent end -->
+                    <span>{{ box.controlType }}</span>
+                    <i
+                      class="el-icon-s-tools text-lg cursor-pointer"
+                      @click="setColComponent(box, index_1, col)"
+                    ></i>
+                    <i
+                      class="el-icon-close text-lg cursor-pointer"
+                      @click="
+                        deleteContainerRow(
+                          col,
+                          index_1,
+                          'component',
+                          '删除组件',
+                          '是否删除该组件'
+                        )
+                      "
+                    ></i>
+                    <i class="el-icon-s-unfold text-lg cursor-pointer"></i>
                   </div>
-                </template>
+
+                  <!-- 设置ColComponent end -->
+                </div>
               </draggable>
               <!-- 设置Col start -->
               <div

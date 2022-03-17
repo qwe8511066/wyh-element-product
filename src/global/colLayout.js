@@ -52,6 +52,11 @@ const _row = {
     mobileSpaceY: 0,
     mdSpaceY: 0,
     desktopSpaceY: -1,
+
+    mobileFlexWrap:'flex-wrap', 
+    mdFlexWrap:'flex-wrap',
+    desktopFlexWrap:'flex-wrap',
+
   },
   animation: {},
 }
@@ -108,7 +113,7 @@ export function initLayoutList() {
             break;
 
           case 'flex':
-            cobyCol.styleClass.mobileColFlex = 'flex-1';
+            cobyCol.styleClass.mobileColFlex = '';
             cobyCol.styleClass.mdColFlex = 'flex-1';
             cobyCol.styleClass.desktopColFlex = 'flex-1';
             break;
