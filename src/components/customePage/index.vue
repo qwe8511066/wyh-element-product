@@ -156,9 +156,14 @@
                 ></i>
 
                 <i
+                      class="el-icon-copy-document text-lg cursor-pointer"
+                      @click="cobyComponent(col)"
+                    ></i>
+
+                <i
                   class="el-icon-document-add text-lg cursor-pointer"
                   slot="reference"
-                  @click="pasteCobyComponent(col)"
+                  @click="pasteCobyComponent(item,i)"
                 ></i>
 
                 <i
@@ -412,7 +417,7 @@
               @click="addPageLayout(box, i)"
               v-for="(box, i) in item.layoutList"
             >
-              <div class="w-300 space-x-10 flex">
+              <div class="w-200 space-x-10 flex">
                 <div
                   v-for="a in box.col.length"
                   :key="'layoutCol' + a"
@@ -541,7 +546,9 @@ export default {
             message: "请选择活动区域",
             trigger: "change"
           }
-        }
+        },
+        value:null,
+        index:null,
       },
       containerValue: "",
 
@@ -936,8 +943,9 @@ export default {
     },
 
     //粘贴
-    pasteCobyComponent(col) {
-      this.cobyCol = col;
+    pasteCobyComponent(value,index) {
+      this.pasteVisibleData.value = value;
+      this.pasteVisibleData.index = index;
       this.pasteVisibleData.visible = true;
     },
 
@@ -945,9 +953,16 @@ export default {
     determinePasteCompoent() {
       this.$refs["pasteVisibleDataForm"].validate(valid => {
         if (valid) {
-          this.cobyCol.colList.push(JSON.parse(this.pasteVisibleData.form.value));
-          this.pasteVisibleData.form.value = null;
+          const value = JSON.parse(this.pasteVisibleData.form.value)
+          if(value.controlType == 'col'){
+            this.pasteVisibleData.value.col[this.pasteVisibleData.index] = value
+          }else{
+            this.pasteVisibleData.value.col[this.pasteVisibleData.index].colList.push()
+          }
           this.pasteVisibleData.visible = false;
+          this.$nextTick(()=>{
+            this.pasteVisibleData.form.value = null;
+          })
         }
       });
     },
@@ -1014,5 +1029,6 @@ export default {
   background-color: #141414;
   height: auto !important;
   z-index: 2;
+  flex-wrap: wrap;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <el-form-item label="栅格宽度" prop="title">
       <div class="flex" v-for="(item, index) in fieldList" :key="index">
-        <label class="w-220">{{ item.title }}</label>
+        <label class="w-200">{{ item.title }}</label>
         <el-slider
           class="flex-1 px-20"
           :min="0"
