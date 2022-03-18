@@ -41,9 +41,9 @@ const _row = {
     mdJustifyContent: "justify-start",
     desktopJustifyContent: "justify-start",
 
-    mobileItemsContent: "items-start",
-    mdItemsContent: "items-start",
-    desktopItemsContent: "items-start",
+    mobileItemsContent: "items-stretch",
+    mdItemsContent: "items-stretch",
+    desktopItemsContent: "items-stretch",
 
     mobileSpaceX: 0,
     mdSpaceX: 0,

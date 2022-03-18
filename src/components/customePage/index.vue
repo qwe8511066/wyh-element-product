@@ -957,7 +957,7 @@ export default {
           if(value.controlType == 'col'){
             this.pasteVisibleData.value.col[this.pasteVisibleData.index] = value
           }else{
-            this.pasteVisibleData.value.col[this.pasteVisibleData.index].colList.push()
+            this.pasteVisibleData.value.col[this.pasteVisibleData.index].colList.push(value)
           }
           this.pasteVisibleData.visible = false;
           this.$nextTick(()=>{

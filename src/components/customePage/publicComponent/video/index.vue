@@ -1,6 +1,7 @@
 <template>
   <video
     class="w-full"
+    muted 
     :src="value.videoSrc"
     controls="controls"
     :poster="value.videoPoster"
