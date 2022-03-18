@@ -64,7 +64,7 @@ export default {
     initLayoutList();
 
     console.log(JSON.stringify(this.data))
-    console.log(this.pageList)
+    // console.log(this.pageList)
   },
 
   mounted() {},

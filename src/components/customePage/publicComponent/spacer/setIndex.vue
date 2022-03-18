@@ -4,7 +4,7 @@
       <el-slider
         class="flex-1 px-20"
         :min="0"
-        :max="1000"
+        :max="scssVariables._height"
         v-model="form.styleClass['mobileHeight']"
         show-input
       ></el-slider>
@@ -14,7 +14,7 @@
       <el-slider
         class="flex-1 px-20"
         :min="0"
-        :max="1000"
+        :max="scssVariables._height"
         v-model="form.styleClass['mdHeight']"
         show-input
       ></el-slider>
@@ -23,18 +23,23 @@
 </template>
 
 <script>
+import _scssVariables from "root/tailwind.variables.config.js"
 import setGuideComponentProperty from "@/components/customePage/componentsIntercept/setComponent/setGuideComponentProperty";
 export default {
   name: "customerPageSpacer",
   mixins: [setGuideComponentProperty],
   props: {},
   data() {
-    return {};
+    return {
+      scssVariables:_scssVariables
+    };
   },
   components: {
     
   },
-  created() {},
+  created() {
+    console.log(this.scssVariables)
+  },
   methods: {}
 };
 </script>

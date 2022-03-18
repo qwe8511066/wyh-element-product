@@ -1,10 +1,15 @@
 <template>
-  <div :class="[{
-                 'layoutNestLayoutRoot':!colLayout,
-                }]">
-    <div class="" :class="[{ 'md|space-y-30': layout ,
-              'layoutNestLayoutChild':!colLayout,
-            }]">
+  <div
+    :class="[
+      {
+        layoutNestLayoutRoot: !colLayout
+      }
+    ]"
+  >
+    <div
+      class=""
+      :class="[{ 'md|space-y-30': layout, layoutNestLayoutChild: !colLayout }]"
+    >
       <div class="mb-20" v-if="layout && colLayout">
         <el-button @click="addLayout(0)"> 添加布局 </el-button>
       </div>
@@ -13,9 +18,7 @@
         v-for="(item, index) in data"
         :style="[item.container.style]"
         :key="'container' + index"
-        :class="[
-            item.container.classes,
-        ]"
+        :class="[item.container.classes]"
       >
         <div
           class="relative"
@@ -35,12 +38,11 @@
             v-aos-animation:{value}="item.row.animation"
             :style="[item.row.style]"
             :class="[
-            cobyGuideComponentStyleClass(item.row),
+              cobyGuideComponentStyleClass(item.row),
               item.row.classes,
               {
                 'layout-row pt-40 overflow-auto md|flex-nowrap xl|flex-nowrap': layout
               }
-              
             ]"
             v-customePageContainer="layout"
           >
@@ -60,10 +62,8 @@
               ]"
               v-customePageContainer="layout"
             >
-              
-              
               <draggable
-              v-if="col.layouts.length == 0"
+                v-if="col.layouts.length == 0"
                 handle=".el-icon-s-unfold"
                 v-bind="dragOptions"
                 class="dragArea list-group"
@@ -86,7 +86,9 @@
                 >
                   <!-- 通用组件 start -->
                   <guideComponent
-                  v-guideComponentDirective="box.styleClass['customDirective']"
+                    v-guideComponentDirective="
+                      box.styleClass['customDirective']
+                    "
                     :component-type="box.controlType"
                     :layout-nest-type="!colLayout"
                     v-aos-animation:{value}="box.animation"
@@ -121,6 +123,10 @@
                       "
                     ></i>
                     <i class="el-icon-s-unfold text-lg cursor-pointer"></i>
+                    <i
+                      class="el-icon-copy-document text-lg cursor-pointer"
+                      @click="cobyComponent(box)"
+                    ></i>
                   </div>
 
                   <!-- 设置ColComponent end -->
@@ -148,6 +154,13 @@
                   class="el-icon-s-tools text-lg cursor-pointer"
                   @click="setContainerRowTools(item, 'col', i, 4)"
                 ></i>
+
+                <i
+                  class="el-icon-document-add text-lg cursor-pointer"
+                  slot="reference"
+                  @click="pasteCobyComponent(col)"
+                ></i>
+
                 <i
                   class="el-icon-close text-lg cursor-pointer"
                   @click="
@@ -251,6 +264,38 @@
             >关 闭</el-button
           >
           <el-button type="primary" class="w-full" @click="determineDelete"
+            >确 定</el-button
+          >
+        </div>
+      </div>
+    </el-drawer>
+    <!-- 删除Container或清空Row -->
+
+    <!-- 粘贴复制的组件 -->
+    <el-drawer
+      v-if="layout"
+      title="粘贴组件"
+      :visible.sync="pasteVisibleData.visible"
+      :wrapperClosable="false"
+    >
+      <div class="h-full flex-col flex  p-20">
+        <el-form
+          :model="pasteVisibleData.form"
+          :rules="pasteVisibleData.rules"
+          ref="pasteVisibleDataForm"
+        >
+          <el-form-item label="粘贴组件" prop="value">
+            <el-input type="textarea" :autosize="{ minRows: 4}" v-model="pasteVisibleData.form.value"></el-input>
+          </el-form-item>
+        </el-form>
+        <div class="flex">
+          <el-button @click="pasteVisibleData.visible = false" class="w-full"
+            >关 闭</el-button
+          >
+          <el-button
+            type="primary"
+            class="w-full"
+            @click="determinePasteCompoent"
             >确 定</el-button
           >
         </div>
@@ -379,8 +424,6 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-
-      <!--  -->
     </el-drawer>
     <!-- 添加布局弹窗 -->
   </div>
@@ -485,6 +528,20 @@ export default {
         // 0新增col  1修改col
         status: 0,
         component: ""
+      },
+      //粘贴弹窗
+      pasteVisibleData: {
+        visible: false,
+        form: {
+          value: ""
+        },
+        rules: {
+          value: {
+            required: true,
+            message: "请选择活动区域",
+            trigger: "change"
+          }
+        }
       },
       containerValue: "",
 
@@ -642,7 +699,7 @@ export default {
 
     //添加组件
     addPageColComponent(value) {
-      console.log(value);
+      // console.log(value);
       const id = uuid.v4();
       //判断是否是tabs的子组件
       if (this.tabsContentComponentStatus) {
@@ -721,7 +778,7 @@ export default {
             });
           }
 
-          console.log(JSON.stringify(this.data));
+          // console.log(JSON.stringify(this.data));
         }
       });
     },
@@ -861,6 +918,38 @@ export default {
           });
         });
       }
+    },
+
+    //拷贝当前的组件
+    cobyComponent(currentComponent) {
+      const _self = this;
+      this.$copyText(JSON.stringify(currentComponent)).then(
+        () => {
+          _self.$message.success(
+            "复制" + currentComponent.controlType + "组件成功"
+          );
+        },
+        () => {
+          _self.$message.error("当前浏览器不支持复制");
+        }
+      );
+    },
+
+    //粘贴
+    pasteCobyComponent(col) {
+      this.cobyCol = col;
+      this.pasteVisibleData.visible = true;
+    },
+
+    //确定粘贴组件
+    determinePasteCompoent() {
+      this.$refs["pasteVisibleDataForm"].validate(valid => {
+        if (valid) {
+          this.cobyCol.colList.push(JSON.parse(this.pasteVisibleData.form.value));
+          this.pasteVisibleData.form.value = null;
+          this.pasteVisibleData.visible = false;
+        }
+      });
     },
 
     //校验container 的class

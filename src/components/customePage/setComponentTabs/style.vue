@@ -156,7 +156,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 11
-                    : 160
+                    : scssVariables._spacing
                 "
                 v-model="form.styleClass['' + prefixField + box.fieldName + '']"
                 show-input
@@ -198,7 +198,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 0
-                    : -160
+                    : -scssVariables._spacing
                 "
                 :step="
                   form.styleClass[
@@ -212,7 +212,7 @@
                     '' + prefixField + box.spacingFieldName + ''
                   ] === 'grid'
                     ? 11
-                    : 160
+                    : scssVariables._spacing
                 "
                 v-model="form.styleClass['' + prefixField + box.fieldName + '']"
                 show-input
@@ -450,6 +450,7 @@
 </template>
 
 <script>
+import _scssVariables from "root/tailwind.variables.config.js"
 import setGuideComponentProperty from "@/components/customePage/componentsIntercept/setComponent/setGuideComponentProperty";
 export default {
   name: "setGuideStyleComponent",
@@ -462,6 +463,7 @@ export default {
   },
   data() {
     return {
+      scssVariables:_scssVariables,
       gradientList: this.$style.gradientList,
       stylePulbicColor: this.$style.stylePulbicColor,
       textAlign: this.$style.textAlign,

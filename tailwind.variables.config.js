@@ -21,4 +21,8 @@ module.exports = {
   _lighter: '#f3f6f9',
   _link: '#F1676F',
   _white: '#FFF',
+
+  _height:200,
+  //间距
+  _spacing:160,
 }

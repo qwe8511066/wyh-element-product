@@ -62,14 +62,6 @@ module.exports = {
         '100': 100,
         'full': 9999,
       },
-      spacing: (function () {
-        const spacing = {}
-        for (let i = 5; i <= 160; i++) {
-          spacing[i] = i + 'px'
-          spacing[-i] = -i + 'px'
-        }
-        return spacing
-      })(),
       width: (function () {
         const spacing = {}
         for (let i = 5; i <= 200; i = i + 5) {
@@ -80,7 +72,7 @@ module.exports = {
       })(),
       height: (function () {
         const spacing = {}
-        for (let i = 5; i <= 200; i = i + 5) {
+        for (let i = 5; i <= scssVariables._height; i = i + 5) {
           spacing[i] = i + 'px'
           spacing[-i] = -i + 'px'
         }
@@ -157,6 +149,60 @@ module.exports = {
       xl: scssVariables._screen_xl,
       // => @media (min-width: 1470px) { ... }
     },
+    spacing: (function () {
+      const spacing = {}
+      for (let i = 0; i <= scssVariables._spacing; i++) {
+        spacing[i] = i + 'px'
+        spacing[-i] = -i + 'px'
+      }
+      return spacing
+    })(),
+  },
+
+  //禁用部分tailwindcss 
+  corePlugins: {
+   translate: false,
+   accessibility: false,
+   fill: false,
+   stroke: false,
+   strokeWidth: false,
+   appearance:false,
+   animation: false,
+   transitionDelay: false,
+   transitionTimingFunction: false,
+   transitionDuration: false,
+   transitionProperty: false,
+   tableLayout: false,
+   borderCollapse: false,
+   mixBlendMode:false,
+
+   backgroundBlendMode:false,
+   filter:false,
+   blur:false,
+   brightness:false,
+   contrast:false,
+   dropShadow:false,
+   grayscale:false,
+   hueRotate:false,
+   invert:false,
+   saturate:false,
+   sepia:false,
+   backdropFilter:false,
+   backdropBlur:false,
+   backdropBrightness:false,
+   backdropContrast:false,
+   backdropGrayscale:false,
+   backdropHueRotate:false,
+   backdropInvert:false,
+   backdropOpacity:false,
+   backdropSaturate:false,
+   backdropSepia:false,
+   ringWidth:false,
+   ringColor:false,
+   ringOpacity:false,
+   ringOffsetWidth:false,
+   ringOffsetColor:false,
+   fontVariantNumeric: false,
   },
   variants: {
     extend: {},
