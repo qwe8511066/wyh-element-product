@@ -43,6 +43,10 @@ export const gradientList = [
     label: 'bg-mask--f5fcff-15-to-b',
     value: 'bg-mask--f5fcff-15-to-b',
   },
+  {
+    label:'bg-mask-primary-to-b',
+    value:'bg-mask-primary-to-b',
+  }
 ]
 
 export const textAlign = [

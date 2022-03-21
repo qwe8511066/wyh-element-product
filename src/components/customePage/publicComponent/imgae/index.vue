@@ -1,7 +1,7 @@
 <template>
   <el-skeleton :loading="value.skeleton" :throttle="500" animated>
     <div class="guideComponentImageParent" :style="[value.style]">
-      <div class="test">
+      <div>
 
       
       <a

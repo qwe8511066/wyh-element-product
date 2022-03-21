@@ -64,7 +64,7 @@ module.exports = {
       },
       width: (function () {
         const spacing = {}
-        for (let i = 5; i <= 200; i = i + 5) {
+        for (let i = 5; i <= 250; i = i + 5) {
           spacing[i] = i + 'px'
           spacing[-i] = -i + 'px'
         }
@@ -170,12 +170,10 @@ module.exports = {
    animation: false,
    transitionDelay: false,
    transitionTimingFunction: false,
-   transitionDuration: false,
    transitionProperty: false,
    tableLayout: false,
    borderCollapse: false,
    mixBlendMode:false,
-
    backgroundBlendMode:false,
    filter:false,
    blur:false,

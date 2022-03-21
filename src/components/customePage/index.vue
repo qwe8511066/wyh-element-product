@@ -49,6 +49,9 @@
             <div
               v-for="(col, i) in item.col"
               :style="[col.style]"
+              v-guideComponentDirective="
+                      col.styleClass['customDirective']
+                    "
               class="relative col"
               :key="'col' + i"
               @click="clickRow(item, col, $event)"
@@ -417,7 +420,7 @@
               @click="addPageLayout(box, i)"
               v-for="(box, i) in item.layoutList"
             >
-              <div class="w-200 space-x-10 flex">
+              <div class="w-250 space-x-10 flex">
                 <div
                   v-for="a in box.col.length"
                   :key="'layoutCol' + a"

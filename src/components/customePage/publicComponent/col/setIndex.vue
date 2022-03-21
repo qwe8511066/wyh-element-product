@@ -2,7 +2,7 @@
   <div>
     <el-form-item label="栅格宽度" prop="title">
       <div class="flex" v-for="(item, index) in fieldList" :key="index">
-        <label class="w-200">{{ item.title }}</label>
+        <label class="w-250">{{ item.title }}</label>
         <el-slider
           class="flex-1 px-20"
           :min="0"
@@ -53,6 +53,22 @@
         </el-form-item>
       </el-collapse-item>
     </el-collapse>
+
+  <el-collapse accordion> 
+    <el-collapse-item title="col指令">
+      <div class="el-form-item">
+        <label class="el-form-item__label w-180">指令</label>
+        <div class="el-form-item__content">
+          <el-checkbox-group v-model="form.styleClass['customDirective']">
+            <el-checkbox-button
+              label="hoverColImgZoom"
+              >划过col图片缩放</el-checkbox-button
+            >
+          </el-checkbox-group>
+        </div>
+      </div>
+    </el-collapse-item>
+  </el-collapse>
   </div>
 </template>
 
