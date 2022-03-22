@@ -27,7 +27,7 @@ export default {
     eventTheParentInit() {
       let initForm = {
         styleClass: {
-          customDirective:[],
+          customDirective: []
         }
       };
       let initRules = {};
@@ -47,18 +47,26 @@ export default {
       }
 
       switch (controlType) {
+        case "row":
+          initForm.styleClass.gridModel = this.form.styleClass.gridModel?this.form.styleClass.gridModel:'';
+          
+          break;
         case "view":
           if (this.form.requestObject) {
             initForm.requestObject = this.form.requestObject;
           } else {
             initForm.requestObject = {
               pageSize: 1,
-              requestType: '',
+              requestType: "",
               dataTemplate: `<div class=""><div v-for="(item,index) in this.dataList" :key="index">{{ item }}</div></div>`
             };
           }
-          initRules['requestObject.requestType'] = [{ required: true, message: "请选择分类", trigger: "change" }];
-          initRules['requestObject.pageSize'] = [{ required: true, message: "请输入页码", trigger: "blur" }];
+          initRules["requestObject.requestType"] = [
+            { required: true, message: "请选择分类", trigger: "change" }
+          ];
+          initRules["requestObject.pageSize"] = [
+            { required: true, message: "请输入页码", trigger: "blur" }
+          ];
           break;
         case "iconfont":
           initForm.fontFamily = this.form.fontFamily

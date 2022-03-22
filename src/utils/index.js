@@ -520,22 +520,21 @@ export function guideComponentStyleClass(value) {
 
     if (value.controlType === "row") {
       const rowWidth = judgeStyleClass(styleClass, "rowWidth", "w-");
-      const rowAttributeList = [
+      let gridModel = judgeStyleClass(styleClass, "gridModel");
+      gridModel = gridModel?'grid':'';
+      let rowAttributeList = [
         { name: 'mobileFlexDirection', screensClassName: '', },
         { name: 'mdFlexDirection', screensClassName: mdFieldName },
         { name: 'desktopFlexDirection', screensClassName: pcFieldName },
         { name: 'mobileJustifyContent', screensClassName: '' },
         { name: 'mdJustifyContent', screensClassName: mdFieldName },
         { name: 'desktopJustifyContent', screensClassName: pcFieldName },
-
         { name: 'mobileItemsContent', screensClassName: '' },
         { name: 'mdItemsContent', screensClassName: mdFieldName },
         { name: 'desktopItemsContent', screensClassName: pcFieldName },
-
         { name: 'mobileFlexWrap', screensClassName: '' },
         { name: 'mdFlexWrap', screensClassName: mdFieldName },
         { name: 'desktopFlexWrap', screensClassName: pcFieldName },
-        
         { name: 'mobileSpaceX', screensClassName: '', className: 'space-x-' },
         { name: 'mdSpaceX', screensClassName: mdFieldName, className: 'space-x-' },
         { name: 'desktopSpaceX', screensClassName: pcFieldName, className: 'space-x-' },
@@ -543,6 +542,24 @@ export function guideComponentStyleClass(value) {
         { name: 'mdSpaceY', screensClassName: mdFieldName, className: 'space-y-' },
         { name: 'desktopSpaceY', screensClassName: pcFieldName, className: 'space-y-' },
       ]
+      
+      if(gridModel){
+        const gridList = [
+          { name: 'mobileGridCols', screensClassName: '', className: 'grid-cols-' },
+          { name: 'mdGridCols', screensClassName: mdFieldName, className: 'grid-cols-' },
+          { name: 'desktopGridCols', screensClassName: pcFieldName, className: 'grid-cols-' },
+
+          { name: 'mobileGridGapX', screensClassName: '', className: 'gap-x-' },
+          { name: 'mdGridGapX', screensClassName: mdFieldName, className: 'gap-x-' },
+          { name: 'desktopGridGapX', screensClassName: pcFieldName, className: 'gap-x-' },
+
+          { name: 'mobileGridGapY', screensClassName: '', className: 'gap-y-' },
+          { name: 'mdGridGapY', screensClassName: mdFieldName, className: 'gap-y-' },
+          { name: 'desktopGridGapY', screensClassName: pcFieldName, className: 'gap-y-' },
+        ]
+        rowAttributeList = [rowAttributeList,...gridList];
+        console.log(rowAttributeList)
+      }
 
       rowAttributeList.forEach(item => {
         let rowAttributeValue = styleClass[item.name]
@@ -556,6 +573,7 @@ export function guideComponentStyleClass(value) {
 
       list.push(
         rowWidth,
+        gridModel,
       );
     }
 

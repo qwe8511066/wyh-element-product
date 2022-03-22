@@ -116,12 +116,68 @@
           </el-radio-group>
         </el-form-item>
       </el-collapse-item>
+
+      <el-collapse-item title="网格">
+        <div class="el-form-item">
+          <label class="el-form-item__label w-180">网格模式</label>
+          <div class="el-form-item__content">
+            <el-checkbox-group v-model="form.styleClass['gridModel']">
+              <el-checkbox-button label="grid">是否开启网格模式</el-checkbox-button>
+            </el-checkbox-group>
+          </div>
+        </div>
+
+        <template v-if="form.styleClass['gridModel']">
+          <el-form-item
+            :label="item.title"
+            v-for="(item, index) in gridColsList"
+            :key="'gridColsList' + index"
+          >
+            <el-slider
+              class="flex-1 px-20"
+              :min="1"
+              :max="12"
+              v-model="form.styleClass[item.fieldName]"
+              show-input
+            ></el-slider>
+          </el-form-item>
+
+          <el-form-item
+            :label="item.title"
+            v-for="(item, index) in gridGapXList"
+            :key="'gridGapXList' + index"
+          >
+            <el-slider
+              class="flex-1 px-20"
+              :min="0"
+              :max="scssVariables._spacing"
+              v-model="form.styleClass[item.fieldName]"
+              show-input
+            ></el-slider>
+          </el-form-item>
+
+          <el-form-item
+            :label="item.title"
+            v-for="(item, index) in gridGapYList"
+            :key="'gridGapYList' + index"
+          >
+            <el-slider
+              class="flex-1 px-20"
+              :min="0"
+              :max="scssVariables._spacing"
+              v-model="form.styleClass[item.fieldName]"
+              show-input
+            ></el-slider>
+          </el-form-item>
+        </template>
+      </el-collapse-item> 
     </el-collapse>
   </div>
 </template>
 
 <script>
 import setGuideComponentProperty from "@/components/customePage/componentsIntercept/setComponent/setGuideComponentProperty";
+import _scssVariables from "root/tailwind.variables.config.js";
 export default {
   name: "setGuideRowComponent",
   mixins: [setGuideComponentProperty],
@@ -132,6 +188,7 @@ export default {
       styleJustifyContent: this.$style.styleJustifyContent,
       styleFlexAlignContent: this.$style.styleFlexAlignContent,
       styleFlexWrap: this.$style.styleFlexWrap,
+      scssVariables:_scssVariables,
       flexDirectionList: [
         {
           title: "col方向",
@@ -220,7 +277,49 @@ export default {
           title: "电脑pc模式下的col对齐方式(screens->xl)",
           fieldName: "desktopItemsContent"
         }
-      ]
+      ],
+      gridColsList: [
+        {
+          title: "网格布局中指定列",
+          fieldName: "mobileGridCols"
+        },
+        {
+          title: "md模式下的网格布局中指定列(screens->md)",
+          fieldName: "mdGridCols"
+        },
+        {
+          title: "电脑pc模式下的网格布局中指定列(screens->xl)",
+          fieldName: "desktopGridCols"
+        }
+      ],
+      gridGapXList: [
+        {
+          title: "网格布局的水平间距",
+          fieldName: "mobileGridGapX"
+        },
+        {
+          title: "md模式下的网格布局的水平间距(screens->md)",
+          fieldName: "mdGridGapX"
+        },
+        {
+          title: "电脑pc模式下的网格布局的水平间距(screens->xl)",
+          fieldName: "desktopGridGapX"
+        }
+      ],
+      gridGapYList: [
+        {
+          title: "网格布局的垂直间距",
+          fieldName: "mobileGridGapY"
+        },
+        {
+          title: "md模式下的网格布局的垂直间距(screens->md)",
+          fieldName: "mdGridGapY"
+        },
+        {
+          title: "电脑pc模式下的网格布局的垂直间距(screens->xl)",
+          fieldName: "desktopGridGapY"
+        }
+      ],
     };
   },
   computed: {},
