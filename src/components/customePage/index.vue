@@ -37,6 +37,9 @@
             class="row flex relative"
             v-aos-animation:{value}="item.row.animation"
             :style="[item.row.style]"
+            v-guideComponentDirective="
+                      item.row.styleClass['customDirective']
+                    "
             :class="[
               cobyGuideComponentStyleClass(item.row),
               item.row.classes,

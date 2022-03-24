@@ -128,6 +128,13 @@
         </div>
 
         <template v-if="form.styleClass['gridModel']">
+          <div class="el-form-item">
+          <label class="el-form-item__label w-180">追加col</label>
+          <div class="el-form-item__content">
+           <el-button @click="rolAddCol">添加网格col</el-button>
+          </div>
+        </div>
+
           <el-form-item
             :label="item.title"
             v-for="(item, index) in gridColsList"
@@ -171,6 +178,27 @@
           </el-form-item>
         </template>
       </el-collapse-item> 
+
+      <el-collapse-item title="row指令" v-if="form.styleClass['gridModel']">
+      <div class="el-form-item">
+        <label class="el-form-item__label w-180">指令</label>
+        <div class="el-form-item__content flex">
+          <el-checkbox-group v-model="form.styleClass['customDirective']">
+            <el-checkbox-button
+              label="rowCollapse"
+              >折叠面板</el-checkbox-button
+            >
+          </el-checkbox-group> 
+
+          <el-checkbox-group v-model="form.styleClass['customDirective']">
+            <el-checkbox-button
+              label="develop"
+              >逐步显示</el-checkbox-button
+            >
+          </el-checkbox-group> 
+        </div>
+      </div>
+    </el-collapse-item>
     </el-collapse>
   </div>
 </template>
@@ -324,7 +352,11 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {}
+  methods: {
+    rolAddCol(){
+      console.log(this.value)
+    },
+  }
 };
 </script>
 

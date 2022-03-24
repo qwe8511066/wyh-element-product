@@ -118,8 +118,8 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="文字方向" v-if="judgePrefixField()">
-        <el-radio-group v-model="form.styleClass['textAlign']">
+      <el-form-item label="文字方向">
+        <el-radio-group v-model="form.styleClass[prefixField + 'textAlign']">
           <el-radio-button
             :label="item.value"
             v-for="(item, index) in textAlign"

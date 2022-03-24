@@ -480,7 +480,7 @@ export function guideComponentStyleClass(value) {
     const styleClass = value.styleClass;
 
     const fontWeight = judgeStyleClass(styleClass, "fontWeight");
-    const textAlign = judgeStyleClass(styleClass, "textAlign");
+    // const textAlign = judgeStyleClass(styleClass, "textAlign");
     const textLimit = judgeStyleClass(styleClass, "textLimit", "limit-");
     const textTransform = judgeStyleClass(styleClass, "textTransform");
 
@@ -557,10 +557,8 @@ export function guideComponentStyleClass(value) {
           { name: 'mdGridGapY', screensClassName: mdFieldName, className: 'gap-y-' },
           { name: 'desktopGridGapY', screensClassName: pcFieldName, className: 'gap-y-' },
         ]
-        rowAttributeList = [rowAttributeList,...gridList];
-        console.log(rowAttributeList)
+        rowAttributeList = rowAttributeList.concat(gridList)
       }
-
       rowAttributeList.forEach(item => {
         let rowAttributeValue = styleClass[item.name]
         if (item.className) {
@@ -608,7 +606,7 @@ export function guideComponentStyleClass(value) {
 
     list.push(
       fontWeight,
-      textAlign,
+      // textAlign,
       textLimit,
       textTransform,
       borderLeft,
@@ -676,6 +674,12 @@ export function judgeStyleClassLgXl(styleClass) {
       "pl-",
       item
     );
+
+    const textAlign = judgeStyleClass(
+      styleClass,
+      item + "textAlign",
+      item
+    );
     const paddingTop = judgeStyleClass(
       styleClass,
       item + "paddingTop",
@@ -731,6 +735,7 @@ export function judgeStyleClassLgXl(styleClass) {
       marginTop,
       marginRight,
       marginBottom,
+      textAlign,
       show
     );
   });
