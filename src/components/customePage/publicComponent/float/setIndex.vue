@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form-item  label="纵轴对齐">
+    <el-form-item  label="水平对齐">
       <el-radio-group v-model="form.styleClass['justifyContent']">
         <el-radio-button
           :label="box.value"
@@ -11,7 +11,7 @@
       </el-radio-group>
     </el-form-item>
 
-    <el-form-item  label="横轴对齐">
+    <el-form-item  label="垂直对齐">
       <el-radio-group v-model="form.styleClass['justifyItems']">
         <el-radio-button
           :label="box.value"

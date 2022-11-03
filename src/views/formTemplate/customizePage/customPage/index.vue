@@ -36,7 +36,8 @@ import { uuid } from "vue-uuid";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import VueSlickCarousel from "vue-slick-carousel";
-import { initLayoutList } from "@/global/colLayout";
+import { initLayoutList,layoutArray } from "@/global/colLayout";
+import { checkArray } from '@/utils';
 export default {
   name: "customPage",
   components: {
@@ -61,10 +62,11 @@ export default {
       this.data.splice(index, 0, value);
     });
     this.init();
-    initLayoutList();
 
+    if(checkArray(layoutArray[0].layoutList) == 0){
+      initLayoutList();
+    }
     console.log(JSON.stringify(this.data))
-    // console.log(this.pageList)
   },
 
   mounted() {},

@@ -83,7 +83,7 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="col纵轴对齐">
+      <el-collapse-item title="col水平对齐">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in justifyContentList"
@@ -100,7 +100,7 @@
         </el-form-item>
       </el-collapse-item>
 
-      <el-collapse-item title="col横轴对齐">
+      <el-collapse-item title="col垂直对齐">
         <el-form-item
           :label="item.title"
           v-for="(item, index) in alignItemsList"
