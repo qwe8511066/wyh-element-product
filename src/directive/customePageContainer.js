@@ -1,5 +1,3 @@
-import { checkArrayStringObject } from '@/components/LbTable/forced';
-import { checkArray, checkArrayString } from '@/utils';
 import Vue from 'vue';
 
 // customePageContainer: 在设计模式下 隐藏dom 还能container row col设计

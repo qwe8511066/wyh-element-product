@@ -12,8 +12,8 @@ import * as filters from './filters' // global filters
 import publicComponents from "@/utils/publicComponents";
 import '@/directive/dialogDrag.js' //全局弹窗拖拽
 import '@/directive/enterForm.js' //全局表单回车事件
-import '@/directive/customePageContainer.js' //全局表单回车事件
-import '@/directive/guideComponentDirective.js' //全局表单回车事件
+import '@/directive/customePageContainer.js' //在设计模式下 隐藏dom 还能container row col设计
+import '@/directive/guideComponentDirective.js' //自定义页面的一些指令 如组件占据剩余的高度 鼠标划过col 缩放图片
 
 import service from '@/utils/request'
 import lodash from "lodash";
