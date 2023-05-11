@@ -139,16 +139,14 @@ module.exports = {
       },
     },
     //响应式
-    screens: {
-      md: scssVariables._screen_md,
-      // => @media (min-width: 992px) { ... }
-
-      lg: scssVariables._screen_lg,
-      // => @media (min-width: 1200px) { ... }
-
-      xl: scssVariables._screen_xl,
-      // => @media (min-width: 1470px) { ... }
-    },
+    screens: (function () {
+      let screens = {}
+      if(scssVariables._screen_sm) screens['sm'] = scssVariables._screen_sm;
+      if(scssVariables._screen_md) screens['md'] = scssVariables._screen_md;
+      if(scssVariables._screen_lg) screens['lg'] = scssVariables._screen_lg;
+      if(scssVariables._screen_xl) screens['xl'] = scssVariables._screen_xl;
+      return screens
+    })(),
     spacing: (function () {
       const spacing = {}
       for (let i = 0; i <= scssVariables._spacing; i++) {

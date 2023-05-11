@@ -1,12 +1,14 @@
 module.exports = {
   //响应式
-  _screen_sm: '768px',
+  _screen_sm: false,
+  //_screen_sm: '768px',
   // => @media (min-width: 768px) { ... }
 
   _screen_md: '992px',
   // => @media (min-width: 992px) { ... }
 
-  _screen_lg: '1200px',
+  _screen_lg: false,
+  //_screen_lg: '1200px',
   // => @media (min-width: 1200px) { ... }
 
   _screen_xl: '1470px',

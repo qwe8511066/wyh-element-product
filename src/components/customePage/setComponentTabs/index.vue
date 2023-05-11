@@ -14,7 +14,35 @@
         ></setGuideComponent>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="组件样式->手机模式" name="1" :lazy="true">
+
+    <el-tab-pane v-for="(item, index) in tabsNameList"
+          :key="'tabsNameList' + index"
+           :label="item.label +'--'+ item.value" :name="String(index+1)" :lazy="true">
+      <el-form
+        :rules="rules"
+        label-position="top"
+        :model="form"
+        
+      >
+        <setGuideStyleComponent :prefixField="item.value" :form="form"></setGuideStyleComponent>
+      </el-form>
+    </el-tab-pane>
+
+    <!-- <el-tab-pane label="组件样式->md模式(md)" name="2" :lazy="true">
+      <el-form
+        ref="setGuideStyleComponentFormLg"
+        :rules="rules"
+        label-position="top"
+        :model="form"
+      >
+        <setGuideStyleComponent
+          :form="form"
+          :prefixField="mdFieldName"
+        ></setGuideStyleComponent>
+      </el-form>
+    </el-tab-pane> -->
+
+    <!--  <el-tab-pane label="组件样式->手机模式" name="1" :lazy="true">
       <el-form
         ref="setGuideStyleComponentForm"
         :rules="rules"
@@ -39,7 +67,7 @@
       </el-form>
     </el-tab-pane>
 
-    <!-- <el-tab-pane label="组件样式->pad模式(lg)" name="3" :lazy="true">
+   <el-tab-pane label="组件样式->pad模式(lg)" name="3" :lazy="true">
       <el-form
         ref="setGuideStyleComponentFormMd"
         :rules="rules"
@@ -51,7 +79,7 @@
           :prefixField="ipadFieldName"
         ></setGuideStyleComponent>
       </el-form>
-    </el-tab-pane> -->
+    </el-tab-pane>
 
     <el-tab-pane label="组件样式->电脑pc模式(xl)" name="4" :lazy="true">
       <el-form
@@ -65,7 +93,7 @@
           :prefixField="pcFieldName"
         ></setGuideStyleComponent>
       </el-form>
-    </el-tab-pane>
+    </el-tab-pane> -->
   </el-tabs>
 </template>
 
@@ -73,6 +101,7 @@
 import setGuideComponent from "@/components/customePage/componentsIntercept/setComponent/index";
 import setGuideStyleComponent from "./style";
 import lodash from "lodash";
+import tailwind from 'root/tailwind.config'
 export default {
   name: "setGuidePublicComponent",
   props: {
@@ -90,6 +119,9 @@ export default {
       pcFieldName: this.$style.pcFieldName,
       ipadFieldName: this.$style.ipadFieldName,
       mdFieldName: this.$style.mdFieldName,
+
+      //tabsNameList 基于 forFieldList 这个
+      tabsNameList:[],
 
       form: {
         //用于直接设置style 背景颜色和字体颜色
@@ -132,6 +164,27 @@ export default {
       this.form = this.value ? { ...this.form, ...this.value } : this.form;
       this.setFieldPublicName();
       this.eventTheParentInit();
+      this.setTabsNameValue();
+    },
+
+    //设置选项卡name 和value 值
+    setTabsNameValue(){
+      this.$style.forFieldList.forEach(item => {
+        if(item || item === ''){
+          const tabName = item === ''?{
+            label:'组件样式',
+            value:'',
+          }:{
+            label:'组件样式->'+item.replace(tailwind.separator,"")+'模式',
+            value:item,
+          }
+          this.tabsNameList.push(tabName)
+          
+        }
+      })
+      console.log(this.tabsNameList)
+      console.log(this.pcFieldName);
+
     },
 
     //各种模式的默认值

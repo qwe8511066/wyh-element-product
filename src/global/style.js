@@ -5,16 +5,35 @@ let stylePulbicColorVariable = []
 let hoverTextColorListVariable = []
 
 //和tailwind.config.js->screens 相匹配
+export const smFieldName = 'sm' + tailwind.separator;
+export const mdFieldName = 'md' + tailwind.separator;
 export const ipadFieldName = 'lg' + tailwind.separator;
 export const pcFieldName = 'xl' + tailwind.separator;
-export const mdFieldName = 'md' + tailwind.separator;
 
-export const forFieldList = [
+
+//判断 tailwind.variables.config  开启哪些响应式 比如不要sm lg 这两个模式
+export let forFieldList = [
   "",
   // ipadFieldName,
-  pcFieldName,
-  mdFieldName,
+  // pcFieldName,
+  // mdFieldName,
 ]
+
+if(scssVariables._screen_sm){
+  forFieldList.push(smFieldName)
+}
+
+if(scssVariables._screen_md){
+  forFieldList.push(mdFieldName)
+}
+
+if(scssVariables._screen_lg){
+  forFieldList.push(ipadFieldName)
+}
+
+if(scssVariables._screen_xl){
+  forFieldList.push(pcFieldName)
+}
 
 Object.keys(colors).forEach(key => {
   stylePulbicColorVariable.push(colors[key]);

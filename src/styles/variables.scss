@@ -29,7 +29,12 @@ $headactiveBg:#1890ff;
 
 $mainPading:20px;
 
- 
+// $_screen_sm_type : false;
+
+// @if $_screen_sm {
+//   $_screen_sm_type: true;
+// }
+
 // 对应tailwind.config ->screens ->md
 $screen-sm: $_screen_sm;
 
