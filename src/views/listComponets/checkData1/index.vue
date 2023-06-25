@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { checkArray } from '@/utils'
 export default {
   name: 'checkData1',
   components: {},
@@ -93,6 +94,7 @@ export default {
       },
       column1: [
         {
+          iif: false,
           prop: 'user.id',
           label: '编号',
         },
