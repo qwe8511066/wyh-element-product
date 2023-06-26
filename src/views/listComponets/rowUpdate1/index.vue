@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-form :model="form" :rules="rules" ref="form" label-width="auto" class="autoForm">
-      <wyhElementTable ref="wyhElementTable" listServe="/getList5" :isPagination="false">
+    <el-form :model="form" :rules="rules" ref="rowUpdateForm" label-width="auto" class="autoForm">
+      <wyhElementTable ref="wyhElementTable" @onGetList="onGetList" listServe="/getList5" :isPagination="false">
         <template slot="item">
           <el-table-column label="操作" width="120">
             <template slot-scope="{row,$index}">
@@ -160,16 +160,6 @@ export default {
     }
   },
   created() {
-    for (let index = 0; index < 10; index++) {
-      this.form.list.push({
-        name: index,
-        date: new Date(),
-        status: this.getRandomInt(1, 5) + '',
-        type: this.getRandomInt(1, 2) == 1 ? true : false,
-        number: this.getRandomInt(1, 200),
-        updateType: false,
-      })
-    }
   },
   methods: {
     getRandomInt(min, max) {
@@ -179,7 +169,7 @@ export default {
       if (row.updateType) {
         this.$message(JSON.stringify(row) + ' ----下标：' + index)
       }
-      this.$refs.form.validate((valid) => {
+      this.$refs.rowUpdateForm.validate((valid) => {
         if (valid) {
           const value = this.$refs.wyhElementTable.data[index]
           this.$set(value, 'updateType', !value.updateType)
@@ -187,6 +177,10 @@ export default {
         }
       })
     },
+    onGetList(value){
+      const { list } = value.data.data
+      this.form.list = list;
+    }
   },
 }
 </script>

@@ -105,9 +105,9 @@ export default {
 
         {
           type: 'date',
-          prop: 'user.mtime',
+          prop: 'user.date',
           label: '年月日  超出宽度展示提示框',
-          width: 100,
+          width: 50,
           showOverflowTooltip: true,
         },
       ],
