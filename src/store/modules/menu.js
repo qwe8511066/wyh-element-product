@@ -10,7 +10,7 @@ const state = {
   //topApplication后菜单树每棵树必须要有一个顶级应用如：权限模块->权限菜单
   //                                   权限模块->用户权限
   //left:左侧菜单,top:顶部菜单  topApplication:顶部菜单应用布局
-  position: 'top',
+  position: 'topApplication',
 
   //判断顶部路由的切换  从而获取顶部路由下的缓存路由
   dynamicRoutes: [],

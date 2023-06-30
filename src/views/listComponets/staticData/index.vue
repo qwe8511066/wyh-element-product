@@ -43,6 +43,10 @@ export default {
           prop: 'name',
           label: '名称',
         },
+        {
+          prop: 'date',
+          label: '时间',
+        },
       ],
       list: [],
     }

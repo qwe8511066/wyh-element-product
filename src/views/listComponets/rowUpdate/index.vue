@@ -33,7 +33,7 @@
               >
                 <el-date-picker v-model="row.date" type="date" placeholder="选择日期"></el-date-picker>
               </el-form-item>
-              <div v-else>{{row.date+ "__下标="+$index}}</div>
+              <div v-else>{{row.date | timestampFormat}}</div>
             </template>
           </el-table-column>
 

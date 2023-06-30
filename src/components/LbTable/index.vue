@@ -156,7 +156,6 @@ export default {
     initColumn() {
       this.cobyColumn = [];
       lodash.cloneDeep(this.column).forEach(item => {
-        console.log(item.iif)
         if (item.iif && type(item.iif) === "function") {
           if (item.iif()) {
             this.cobyColumn.push(item);

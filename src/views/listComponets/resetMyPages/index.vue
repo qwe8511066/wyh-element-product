@@ -15,7 +15,13 @@
       </el-form-item>
     </el-form>
 
-    <wyhElementTable :myPages="myPages" ref="wyhElementTable" :column="column" listServe="/getList"></wyhElementTable>
+    <wyhElementTable :myPages="myPages" ref="wyhElementTable" :column="column" listServe="/getList">
+      <template slot="item">
+        <el-table-column label="日期001" width="320">
+          <template slot-scope="{row,$index}">{{ row.date,'HH:mm' | timestampFormat }}</template>
+        </el-table-column> 
+      </template>
+    </wyhElementTable>
 
     <div class="padding20">
       <el-card class="box-card">
@@ -63,6 +69,10 @@ export default {
         {
           prop: 'name',
           label: '名称',
+        },
+        {
+          prop: 'date',
+          label: '时间',
         },
       ],
     }

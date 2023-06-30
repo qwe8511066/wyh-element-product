@@ -6,6 +6,7 @@
       :column="column1"
       :checkboxAttribute="checkboxAttribute"
       listServe="/getList1"
+      :checkboxDeleteValue="true"
     ></wyhElementTable>
 
     <div class="padding20">

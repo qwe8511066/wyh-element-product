@@ -2,9 +2,6 @@ import { getMultistage, checkArray } from "@/utils/index"
 import moment from "moment";
 export default {
   img: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       const myColumn = scope._self.column
       const dateType = checkArrayStringObject(myColumn, 'imgWidth')
@@ -22,9 +19,6 @@ export default {
     sortable: false
   },
   radio: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       const myColumn = scope._self.column
       const radioType = checkArrayStringObject(myColumn, 'radioType')
@@ -38,9 +32,6 @@ export default {
     sortable: false
   },
   enum: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       const myColumn = scope._self.column
       const dateType = checkArrayStringObject(myColumn, 'enumValue')
@@ -62,9 +53,6 @@ export default {
     sortable: false
   },
   buttons: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       const myColumn = scope._self.column
       const dateType = checkArrayStringObject(myColumn, 'buttons')
@@ -136,9 +124,6 @@ export default {
     resizable: false
   },
   index: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || '#'}</span>
-    },
     renderCell: (h, { $index, column }) => {
       let i = $index + 1
       const index = column.index
@@ -155,9 +140,6 @@ export default {
   },
 
   boolean: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       let value = getMultistage(scope.row, scope.column.property);
       value = value && typeof (value) == 'object' ? '' : value;
@@ -170,9 +152,6 @@ export default {
     sortable: false
   },
   date: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, scope) => {
       const myColumn = scope._self.column
       const dateType = checkArrayStringObject(myColumn, 'dateType')
@@ -184,9 +163,6 @@ export default {
     sortable: false
   },
   expand: {
-    renderHeader: (h, scope) => {
-      return <span>{scope.column.label || ''}</span>
-    },
     renderCell: (h, { row, store }, proxy) => {
       const expanded = store.states.expandRows.indexOf(row) > -1
       return (
